@@ -1,19 +1,20 @@
 import React from 'react'
-import Sidebar from '../components/Sidebar'
-import Content from '../components/Content'
-import Profile from '../components/Profile'
+import HomePageNav from '../components/HomePageNav'
+import HomeText from '../components/HomeText'
+import ServiceCategory from '../components/ServiceCategory'
 
-
-function App() {
+function Home() {
   return (
-    <div className='dashboard'>
-       <Sidebar />
-       <div className="dashboard--content">
-        <Content />
-        <Profile />
-       </div>
+    <div className='app-container'>
+        <div className='intro'>
+            <div className='mask'>
+                <HomePageNav />
+                <HomeText />
+            </div>
+        </div>
+        <ServiceCategory />
     </div>
   )
 }
 
-export default App
+export default Home

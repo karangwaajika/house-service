@@ -1,8 +1,6 @@
-body{
+.dashboard{
     background: #dde6ed;
     padding: 20px;
-}
-.dashboard{
     display: flex;
     gap: 20px;
 }
