@@ -1,0 +1,23 @@
+import React from "react";
+
+function HomeText() {
+  return (
+    <div className="home-text">
+      <div className="sub-text">
+        <h3 className="">Search and Hire a Professional</h3>
+
+        <p style={{ fontSize: "14px" }}>
+          We link you to any pressional in any domain to assist you with your
+          issue. There are several experts on their domain to help your fix your
+          problem that you are facing in your house. All you need to do is to
+          search and book.
+        </p>
+        <p>
+          <i className="fa fa-heart fa-3x"></i>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+export default HomeText;
