@@ -1,11 +1,12 @@
 import React from 'react'
-
+import { useProtectPage } from '../hooks/useProtectPage'
 
 function Sidebar() {
+  const {logout} = useProtectPage()
   return (
     <div className='meu'>
       <div className='logo'>
-        <i className='fa fa-user logo-icon'></i>
+        <i className='fa fa-user logo-icon' onClick={logout}></i>
         <h2>EduFlex</h2>
       </div>
       <div className='menu--list'>

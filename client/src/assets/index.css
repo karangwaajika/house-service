@@ -204,6 +204,20 @@
     border: 1px solid #e0e0e0;
     color: #ffffff;
   }
+  button.btn-google{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #ffffff;
+    color: black;
+  }
+  .google-icon{
+    display: block;
+    width: 30px;
+    height: 18px;
+  }
   
   /* card */
   .card-a {

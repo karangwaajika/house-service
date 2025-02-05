@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "rest_framework.authtoken",
+    "rest_framework_simplejwt.token_blacklist",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -145,8 +146,8 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=3),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(minutes=2),
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -160,7 +161,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # we will create this end point later
-LOGIN_REDIRECT_URL = "/callback"
+LOGIN_REDIRECT_URL = "/callback/"
 # no need because we will handle logout in frontend
 # LOGOUT_REDIRECT_URL = "/"
 

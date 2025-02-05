@@ -16,11 +16,12 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
 from rest_framework import status
 
+
 # socialaccount
 from allauth.socialaccount.models import SocialToken, SocialAccount
 
 # custom packages (models, serializers, etc..)
-from .serializers import UserSerializer
+from .serializers import UserSerializer, LogoutUserSerializer
 
 
 User = get_user_model()
@@ -59,7 +60,7 @@ class CreateUserAPIView(generics.CreateAPIView):
     #     )
 
 
-class UserProfileAPIView(generics.GenericAPIView):
+class UserProfileAPIView(generics.RetrieveUpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
@@ -82,7 +83,7 @@ def google_login_callback(request):
         return redirect("http://localhost:5173/login/callback/?error=NoSocialAccount")
 
     token = SocialToken.objects.filter(
-        account=social_account, account__providers="google"
+        account=social_account, account__provider="google"
     ).first()
 
     if token:
@@ -119,3 +120,16 @@ def validate_google_token(request):
     return JsonResponse(
         {"detail": "Method not allowed"}, status=status.HTTP_405_METHOD_NOT_ALLOWED
     )
+
+
+class LogoutUserView(generics.CreateAPIView):
+    permission_classes = [IsAuthenticated]
+    
+    def post(self, request):
+        print("hello")
+        refresh_token = json.loads(request.body)
+        token = RefreshToken(refresh_token.get('refresh_token'))
+        token.blacklist()
+        return JsonResponse({"token":"refresh_token"}, status=status.HTTP_200_OK)
+    
+    
