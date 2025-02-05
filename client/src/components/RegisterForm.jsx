@@ -7,6 +7,8 @@ import loadingImg from "/images/n-loading.gif";
 import { useNavigate } from "react-router-dom";
 import FlashMessage from "./ui/FlashMessage";
 import googlePicture from "/images/google.png";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../utils/token";
+import api from "../utils/api";
 
 export default function RegisterForm() {
   const navigate = useNavigate();
@@ -28,42 +30,48 @@ export default function RegisterForm() {
       return { ...oldForm, [name]: value };
     });
   };
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    const isDevelopment = import.meta.env.MODE === "production";
-    const url = isDevelopment
-      ? import.meta.env.VITE_REACT_APP_LOGIN_USER_API_DEPLOY
-      : import.meta.env.VITE_REACT_APP_LOGIN_USER_API;
-    axios
-      .post(url, {
+    try {
+      const res = await api.post("/api/user/register/", {
         username: form.username,
         password: form.password,
-      })
-      .then((res) => {
-        if (res.data.success) {
-          localStorage.setItem(
-            import.meta.env.VITE_REACT_APP_TOKEN,
-            res.data.token
-          ); //store the token in a local storage
-          if (res.data.user.is_superuser) {
-            navigate("/dashboard/home");
-          } else {
-            navigate("/service/home");
-          }
+      });
+
+      setMessage({
+        success: true,
+        message: "User registered successfully, you can login",
+      });
+    } catch (error) {
+      console.error(error);
+      if (error.response) {
+        if (error.response.status == 400) {
+          setMessage({ success: false, message: "Username already exist!" });
         } else {
-          setMessage(res.data);
+          setMessage({
+            success: false,
+            message: "Something went wrong. Please try again",
+          });
         }
-      })
-      .catch((err) => {
+      } else if (error.request) {
         setMessage({
           success: false,
-          message: err.message,
+          message: "Network Error. Please check your internet connection",
         });
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+      } else {
+        setMessage({
+          success: false,
+          message: "Something went wrong. Please try again",
+        });
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = () => {
+    window.location.href = "http://127.0.0.1:8000/accounts/google/login/";
   };
   return (
     <div className="login-form">
@@ -77,7 +85,7 @@ export default function RegisterForm() {
           />
         )}
         <div className="card-body">
-          <form onSubmit={submitForm} className="login_form">
+          <form className="login_form">
             <div>
               Username:
               <InputField
@@ -110,11 +118,19 @@ export default function RegisterForm() {
                   img={loadingImg}
                 />
               ) : (
-                <Button text="Register" className="btn-dark" />
+                <Button
+                  text="Register"
+                  className="btn-dark"
+                  onClick={submitForm}
+                />
               )}
             </div>
             <div>
-              <button type="button" className="btn-google">
+              <button
+                type="button"
+                className="btn-google"
+                onClick={handleGoogleLogin}
+              >
                 <img
                   src={googlePicture}
                   alt="Google icon"
@@ -136,7 +152,7 @@ export default function RegisterForm() {
               fontStyle: "normal",
               cursor: "pointer",
             }}
-            onClick={()=>navigate('/login')}
+            onClick={() => navigate("/login")}
           >
             Login
           </i>
