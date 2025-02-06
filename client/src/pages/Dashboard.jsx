@@ -1,19 +1,21 @@
-import React from 'react'
-import Sidebar from '../components/Sidebar'
-import Content from '../components/Content'
-import Profile from '../components/Profile'
+import React from "react";
+import Sidebar from "../components/Sidebar";
+import { Outlet } from "react-router-dom";
+import { createContext, useState } from "react";
 
+export const userContext = createContext();
 
 function Dashboard() {
   return (
-    <div className='dashboard'>
-       <Sidebar />
-       <div className="dashboard--content">
-        <Content />
-        <Profile />
-       </div>
+    <div className="dashboard">
+      <Sidebar />
+      <userContext.Provider value={123}>
+        <div className="dashboard--content">
+          <Outlet />
+        </div>
+      </userContext.Provider>
     </div>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;

@@ -17,6 +17,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ProtectDashboard from "./utils/ProtectDashboard";
 import GoogleRedirectHandler from "./utils/GoogleRedirectHandler";
+import DashboardHome from "./pages/DashboardHome";
 
 const router = createBrowserRouter([
   {
@@ -44,8 +45,17 @@ const router = createBrowserRouter([
     element: <ProtectDashboard />,
     children: [
       {
-        path: "/dashboard",
         element: <Dashboard />,
+        children: [
+          {
+            path: "/dashboard",
+            element: <DashboardHome />,
+          },
+          {
+            path: "/dashboard/service-category",
+            element: <DashboardHome />,
+          },
+        ],
       },
     ],
   },
