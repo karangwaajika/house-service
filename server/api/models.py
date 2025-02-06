@@ -25,9 +25,26 @@ class CategoryImage(models.Model):
 
 class Service(models.Model):
     category = models.ForeignKey(
-        ServiceCategory, on_delete=models.CASCADE, related_name="services",default=None
+        ServiceCategory, on_delete=models.CASCADE, related_name="services", default=None
     )
     name = models.CharField(max_length=100, unique=True)
+    image = models.ImageField(upload_to="images", default="", null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Workers(models.Model):
+    service = models.ForeignKey(
+        Service, on_delete=models.CASCADE, related_name="workers", default=None
+    )
+    name = models.CharField(max_length=100, unique=True)
+    email = models.CharField(max_length=100, unique=True)
+    phone = models.IntegerField()
+    price = models.IntegerField()
+    address = models.CharField(max_length=50)
     image = models.ImageField(upload_to="images", default="", null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

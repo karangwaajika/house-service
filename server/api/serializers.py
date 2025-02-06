@@ -75,3 +75,25 @@ class ServiceSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             "category": {"write_only": True},
         }
+
+
+class WorkerSerializer(serializers.ModelSerializer):
+    service = Service
+    service_name = serializers.ReadOnlyField(source="service.name")
+
+    class Meta:
+        model = Workers
+        fields = (
+            "id",
+            "name",
+            "image",
+            "service",
+            "service_name",
+            "phone",
+            "email",
+            "address",
+            "price",
+        )
+        extra_kwargs = {
+            "service": {"write_only": True},
+        }

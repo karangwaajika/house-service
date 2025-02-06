@@ -8,4 +8,5 @@ urlpatterns = [
     path("logout_user/", LogoutUserView.as_view(), name="logout"),
     path("category/add/", CreateServiceCategoryAPIView.as_view(), name="add_category"),
     path("service/add/", CreateServiceAPIView.as_view(), name="add_service"),
+    path("worker/add/", CreateWorkerAPIView.as_view(), name="add_worker"),
 ]

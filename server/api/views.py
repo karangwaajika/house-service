@@ -139,3 +139,10 @@ class CreateServiceAPIView(generics.CreateAPIView):
     #     return JsonResponse(
     #         {"message": "added successfuly"}, status=status.HTTP_201_CREATED
     #     )
+
+
+class CreateWorkerAPIView(generics.CreateAPIView):
+    model = Workers
+    permission_classes = [AllowAny]
+    serializer_class = WorkerSerializer
+    parser_classes = (MultiPartParser, FormParser)
