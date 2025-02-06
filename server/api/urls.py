@@ -7,4 +7,5 @@ urlpatterns = [
     path("google/validate_token/", validate_google_token, name="validate_token"),
     path("logout_user/", LogoutUserView.as_view(), name="logout"),
     path("category/add/", CreateServiceCategoryAPIView.as_view(), name="add_category"),
+    path("service/add/", CreateServiceAPIView.as_view(), name="add_service"),
 ]

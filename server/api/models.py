@@ -24,6 +24,9 @@ class CategoryImage(models.Model):
 
 
 class Service(models.Model):
+    category = models.ForeignKey(
+        ServiceCategory, on_delete=models.CASCADE, related_name="services",default=None
+    )
     name = models.CharField(max_length=100, unique=True)
     image = models.ImageField(upload_to="images", default="", null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

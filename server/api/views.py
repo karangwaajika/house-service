@@ -118,17 +118,24 @@ class CreateServiceCategoryAPIView(generics.CreateAPIView):
     model = ServiceCategory
     serializer_class = ServiceCategorySerializer
     permission_classes = [AllowAny]
+    parser_classes = (MultiPartParser, FormParser)
 
 
 class CreateServiceAPIView(generics.CreateAPIView):
     model = Service
     serializer_class = ServiceSerializer
     parser_classes = (MultiPartParser, FormParser)
-    
+    permission_classes = [AllowAny]
+
     # for frontend
-    def create(self, request, *args, **kwargs):
-        name = request.data['name']
-        image = request.data['image']
-        Service.objects.create(name=name, image=image)
-        
-        return JsonResponse({"message": "added successfuly"}, status=status.HTTP_201_CREATED)
+    # def create(self, request):
+    #     name = request.data["name"]
+    #     image = request.data["image"]
+    #     category_id = request.data["category"]
+    #     category = ServiceCategory.objects.get(pk=category_id)
+
+    #     Service.objects.create(category=category, name=name, image=image)
+
+    #     return JsonResponse(
+    #         {"message": "added successfuly"}, status=status.HTTP_201_CREATED
+    #     )
