@@ -3,6 +3,7 @@ import "./assets/app.css";
 import "./assets/index.css";
 import "./assets/dashboard.css";
 import "./assets/login.css";
+import "./assets/animation.css";
 
 // react
 import React from "react";
