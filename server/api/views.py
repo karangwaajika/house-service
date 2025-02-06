@@ -121,6 +121,33 @@ class CreateServiceCategoryAPIView(generics.CreateAPIView):
     parser_classes = (MultiPartParser, FormParser)
 
 
+class ServiceCategoryList(generics.ListAPIView):
+    queryset = ServiceCategory.objects.all()
+    serializer_class = ServiceCategorySerializer
+    permission_classes = [AllowAny]
+
+
+class ServiceCategoryDetails(generics.RetrieveAPIView):
+    queryset = ServiceCategory.objects.all()
+    serializer_class = ServiceCategorySerializer
+    permission_classes = [AllowAny]
+    lookup_url_kwarg = "category_id"
+
+
+class ServiceCategoryUpdate(generics.RetrieveUpdateAPIView):
+    queryset = ServiceCategory.objects.all()
+    serializer_class = ServiceCategorySerializer
+    permission_classes = [AllowAny]
+    lookup_url_kwarg = "category_id"
+
+
+class ServiceCategoryDelete(generics.RetrieveDestroyAPIView):
+    queryset = ServiceCategory.objects.all()
+    serializer_class = ServiceCategorySerializer
+    permission_classes = [AllowAny]
+    lookup_url_kwarg = "category_id"
+
+
 class CreateServiceAPIView(generics.CreateAPIView):
     model = Service
     serializer_class = ServiceSerializer
