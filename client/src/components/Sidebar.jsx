@@ -33,11 +33,25 @@ function Sidebar() {
             ></i>
           </div>
           <div className="sidebar-content">
-            <NavLink to="#" className="item-sub">
+            <NavLink
+              to="#"
+              className={
+                openCategory
+                  ? "item-sub open animated slideInDown"
+                  : "animated slideInUp item-sub"
+              }
+            >
               <i className="fa-regular fa-square-plus icon"></i>
               Add
             </NavLink>
-            <NavLink to="#" className="item-sub">
+            <NavLink
+              to="#"
+              className={
+                openCategory
+                  ? "item-sub open animated slideInDown"
+                  : "animated slideInUp item-sub"
+              }
+            >
               <i className="fa-regular fa-eye icon"></i>
               View
             </NavLink>
@@ -54,11 +68,25 @@ function Sidebar() {
             ></i>
           </div>
           <div className="sidebar-content">
-            <NavLink to="#" className="item-sub">
+            <NavLink
+              to="#"
+              className={
+                openService
+                  ? "item-sub open animated slideInDown"
+                  : "animated slideInUp item-sub"
+              }
+            >
               <i className="fa-regular fa-square-plus icon"></i>
               Add
             </NavLink>
-            <NavLink to="#" className="item-sub">
+            <NavLink
+              to="#"
+              className={
+                openService
+                  ? "item-sub open animated slideInDown"
+                  : "animated slideInUp item-sub"
+              }
+            >
               <i className="fa-regular fa-eye icon"></i>
               View
             </NavLink>
@@ -75,11 +103,25 @@ function Sidebar() {
             ></i>
           </div>
           <div className="sidebar-content">
-            <NavLink to="#" className="item-sub">
+            <NavLink
+              to="#"
+              className={
+                openWorkers
+                  ? "item-sub open animated slideInDown"
+                  : "animated slideInUp item-sub"
+              }
+            >
               <i className="fa-regular fa-square-plus icon"></i>
               Add
             </NavLink>
-            <NavLink to="#" className="item-sub">
+            <NavLink
+              to="#"
+              className={
+                openWorkers
+                  ? "item-sub open animated slideInDown"
+                  : "animated slideInUp item-sub"
+              }
+            >
               <i className="fa-regular fa-eye icon"></i>
               View
             </NavLink>
@@ -96,11 +138,25 @@ function Sidebar() {
             ></i>
           </div>
           <div className="sidebar-content">
-            <NavLink to="#" className="item-sub">
+            <NavLink
+              to="#"
+              className={
+                openBookings
+                  ? "item-sub open animated slideInDown"
+                  : "animated slideInUp item-sub"
+              }
+            >
               <i className="fa-regular fa-square-plus icon"></i>
               Add
             </NavLink>
-            <NavLink to="#" className="item-sub">
+            <NavLink
+              to="#"
+              className={
+                openBookings
+                  ? "item-sub open animated slideInDown"
+                  : "animated slideInUp item-sub"
+              }
+            >
               <i className="fa-regular fa-eye icon"></i>
               View
             </NavLink>
@@ -117,11 +173,25 @@ function Sidebar() {
             ></i>
           </div>
           <div className="sidebar-content">
-            <NavLink to="#" className="item-sub">
+            <NavLink
+              to="#"
+              className={
+                openReports
+                  ? "item-sub open animated slideInDown"
+                  : "animated slideInUp item-sub"
+              }
+            >
               <i className="fa-regular fa-square-plus icon"></i>
               Add
             </NavLink>
-            <NavLink to="#" className="item-sub">
+            <NavLink
+              to="#"
+              className={
+                openReports
+                  ? "item-sub open animated slideInDown"
+                  : "animated slideInUp item-sub"
+              }
+            >
               <i className="fa-regular fa-eye icon"></i>
               View
             </NavLink>
@@ -138,11 +208,25 @@ function Sidebar() {
             ></i>
           </div>
           <div className="sidebar-content">
-            <NavLink to="#" className="item-sub">
+            <NavLink
+              to="#"
+              className={
+                openSettings
+                  ? "item-sub open animated slideInDown"
+                  : "animated slideInUp item-sub"
+              }
+            >
               <i className="fa-regular fa-square-plus icon"></i>
               Add
             </NavLink>
-            <NavLink to="#" className="item-sub">
+            <NavLink
+              to="#"
+              className={
+                openSettings
+                  ? "item-sub open animated slideInDown"
+                  : "animated slideInUp item-sub"
+              }
+            >
               <i className="fa-regular fa-eye icon"></i>
               View
             </NavLink>
