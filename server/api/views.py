@@ -15,13 +15,15 @@ from rest_framework.permissions import IsAdminUser, AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.parsers import FormParser, MultiPartParser
 
 
 # socialaccount
 from allauth.socialaccount.models import SocialToken, SocialAccount
 
 # custom packages (models, serializers, etc..)
-from .serializers import UserSerializer, LogoutUserSerializer
+from .serializers import *
+from .models import *
 
 
 User = get_user_model()
@@ -37,27 +39,6 @@ class CreateUserAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
-
-    # def post(self, request, format=None):
-
-    #     serializer = self.serializer_class(data=request.data)
-
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(
-    #             {
-    #                 "success": True,
-    #                 "message": "Successfuly added",
-    #             },
-    #             status=status.HTTP_201_CREATED,
-    #         )
-    #     return Response(
-    #         {
-    #             "success": False,
-    #             "message": serializer.errors,
-    #         },
-    #         status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION,
-    #     )
 
 
 class UserProfileAPIView(generics.RetrieveUpdateAPIView):
@@ -124,12 +105,30 @@ def validate_google_token(request):
 
 class LogoutUserView(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
-    
+
     def post(self, request):
         print("hello")
         refresh_token = json.loads(request.body)
-        token = RefreshToken(refresh_token.get('refresh_token'))
+        token = RefreshToken(refresh_token.get("refresh_token"))
         token.blacklist()
-        return JsonResponse({"token":"refresh_token"}, status=status.HTTP_200_OK)
+        return JsonResponse({"token": "refresh_token"}, status=status.HTTP_200_OK)
+
+
+class CreateServiceCategoryAPIView(generics.CreateAPIView):
+    model = ServiceCategory
+    serializer_class = ServiceCategorySerializer
+    permission_classes = [AllowAny]
+
+
+class CreateServiceAPIView(generics.CreateAPIView):
+    model = Service
+    serializer_class = ServiceSerializer
+    parser_classes = (MultiPartParser, FormParser)
     
-    
+    # for frontend
+    def create(self, request, *args, **kwargs):
+        name = request.data['name']
+        image = request.data['image']
+        Service.objects.create(name=name, image=image)
+        
+        return JsonResponse({"message": "added successfuly"}, status=status.HTTP_201_CREATED)
