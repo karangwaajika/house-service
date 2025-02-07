@@ -48,6 +48,10 @@
   background: #27374d;
   color: #dde6ed;
 }
+.sidebar-content a.active, .item.active {
+  background: #27374d;
+  color: #dde6ed;
+}
 .sidebar-item {
   transition: background-color 0.15s;
 }
@@ -269,3 +273,14 @@
   font-size: 10px;
 }
 /* ########## end home dashboard */
+
+/* common Dashboard content */
+.dashboard--content {
+  background: #fff;
+  flex: 1;
+  border-radius: 20px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

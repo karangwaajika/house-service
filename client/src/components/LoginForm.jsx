@@ -42,7 +42,7 @@ export default function LoginForm() {
       });
       localStorage.setItem(ACCESS_TOKEN, res.data.access);
       localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-      navigate("/dashboard/");
+      navigate("/dashboard/home");
       // window.location.reload();
     } catch (error) {
       console.error(error);

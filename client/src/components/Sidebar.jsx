@@ -18,7 +18,7 @@ function Sidebar() {
         <img src={logoPic} alt="logo-admin" height={100} width={100} />
       </div>
       <div className="menu--list">
-        <NavLink to="/dashboard/" className="item">
+        <NavLink to="/dashboard/home" className="item">
           <i className="fa fa-home icon "></i>
           Dashboard
         </NavLink>
@@ -34,7 +34,7 @@ function Sidebar() {
           </div>
           <div className="sidebar-content">
             <NavLink
-              to="#"
+              to="/dashboard/add-category"
               className={
                 openCategory
                   ? "item-sub open animated slideInDown"
@@ -45,7 +45,7 @@ function Sidebar() {
               Add
             </NavLink>
             <NavLink
-              to="#"
+              to="/dashboard/view-category"
               className={
                 openCategory
                   ? "item-sub open animated slideInDown"
@@ -233,7 +233,7 @@ function Sidebar() {
           </div>
         </div>
 
-        <NavLink to="#" className="item">
+        <NavLink to="/dashboard/add" className="item">
           <i className="fa-regular fa-circle-question icon"></i>
           Help
         </NavLink>
