@@ -194,8 +194,38 @@ class ServiceDelete(generics.RetrieveDestroyAPIView):
     permission_classes = [AllowAny]
     lookup_url_kwarg = "service_id"
 
+
 class CreateWorkerAPIView(generics.CreateAPIView):
-    model = Workers
+    model = Worker
     permission_classes = [AllowAny]
     serializer_class = WorkerSerializer
     parser_classes = (MultiPartParser, FormParser)
+
+
+class WorkerList(generics.ListAPIView):
+    queryset = Worker.objects.all()
+    serializer_class = WorkerSerializer
+    permission_classes = [AllowAny]
+
+
+class WorkerDetails(generics.RetrieveAPIView):
+    queryset = Worker.objects.all()
+    serializer_class = WorkerSerializer
+    permission_classes = [AllowAny]
+    lookup_url_kwarg = "worker_id"
+
+
+class WorkerUpdate(generics.RetrieveUpdateAPIView):
+    queryset = Worker.objects.all()
+    serializer_class = WorkerSerializer
+    permission_classes = [AllowAny]
+    lookup_url_kwarg = "worker_id"
+
+
+class WorkerDelete(generics.RetrieveDestroyAPIView):
+    queryset = Worker.objects.all()
+    serializer_class = WorkerSerializer
+    permission_classes = [AllowAny]
+    lookup_url_kwarg = "worker_id"
+
+

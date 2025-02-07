@@ -82,7 +82,7 @@ class WorkerSerializer(serializers.ModelSerializer):
     service_name = serializers.ReadOnlyField(source="service.name")
 
     class Meta:
-        model = Workers
+        model = Worker
         fields = (
             "id",
             "name",

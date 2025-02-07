@@ -36,7 +36,7 @@ class Service(models.Model):
         return self.name
 
 
-class Workers(models.Model):
+class Worker(models.Model):
     service = models.ForeignKey(
         Service, on_delete=models.CASCADE, related_name="workers", default=None
     )

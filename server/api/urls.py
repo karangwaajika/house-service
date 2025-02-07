@@ -16,5 +16,9 @@ urlpatterns = [
     path("services/<int:service_id>", ServiceDetails.as_view(), name="view_service"),
     path("services/delete/<int:service_id>", ServiceDelete.as_view(), name="delete_service"),
     path("services/update/<int:service_id>", ServiceUpdate.as_view(), name="update_service"),
-    path("worker/create/", CreateWorkerAPIView.as_view(), name="add_worker"),
+    path("workers/", WorkerList.as_view(), name="view_workers"),
+    path("workers/create/", CreateWorkerAPIView.as_view(), name="add_worker"),
+    path("workers/<int:worker_id>", WorkerDetails.as_view(), name="view_worker"),
+    path("workers/delete/<int:worker_id>", WorkerDelete.as_view(), name="delete_worker"),
+    path("workers/update/<int:worker_id>", WorkerUpdate.as_view(), name="update_worker"),
 ]
