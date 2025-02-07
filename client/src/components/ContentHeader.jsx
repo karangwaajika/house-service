@@ -7,10 +7,10 @@ function ContentHeader() {
       <div className="header--activity">
         <div className="search-box">
             <input type='text' placeholder='Search anything...' />
-            <i className='fa fa-user icon'>o</i>
+            <i className='fa fa-search icon'></i>
         </div>
         <div className="notify">
-            <i className='fa fa-user icon'>o</i>
+            <i className='fa fa-bell icon'></i>
         </div>
       </div> 
     </div>

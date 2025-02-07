@@ -5,21 +5,10 @@
   gap: 20px;
   height: 100vh;
 }
-.dashboard--content {
-  background: #fff;
-  flex: 1;
-  border-radius: 20px;
-  padding: 2rem;
-  display: flex;
-  gap: 1.5rem;
-  justify-content: space-between;
-}
 /* sidebaar */
 .menu {
   display: flex;
   flex-direction: column;
-  gap: 2.3rem;
-  height: 94vh;
 }
 .logos {
   display: flex;
@@ -116,7 +105,7 @@
   font-size: 0.9rem;
   text-decoration: none;
   font-weight: 500;
-  padding: 5px;
+  padding: 5px 10px;
   border-radius: 10px;
   transition: 0.3s ease-in-out;
   color: #27374d;
@@ -126,14 +115,28 @@
   color: #dde6ed;
 }
 
-/* content */
-.content {
-  width: 75%;
+/* ############################  Home Dashboard  */
+.dashboard-home--content {
+  background: #fff;
+  flex: 1;
+  border-radius: 20px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
+
+.content--dashboard {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
 .content--header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .header--title {
   color: #526db2;
@@ -142,6 +145,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  flex-wrap: wrap;
 }
 .search-box {
   background: #dde6ed;
@@ -183,13 +187,51 @@
 }
 /* card--container */
 
-.card--container {
+.card-home--container {
   display: flex;
   gap: 20px;
   align-items: center;
-  margin-top: 2rem;
 }
-.card {
+.side-graph {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  gap: 20px;
+}
+.profile {
+  flex: 1;
+}
+.user--profile {
+  background: #dde6ed;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.graph {
+  background: #dde6ed;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.user--detail {
+  width: 100%;
+  height: 530px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user--detail .username {
+  color: #526d82;
+}
+
+.card-home {
   flex: 1;
   background: #dde6ed;
   padding: 20px;
@@ -197,10 +239,12 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 20px;
+  gap: 60px;
   transition: 0.5s ease-in-out;
+  height: 230px;
 }
-.card:hover {
+
+.card-home:hover {
   transform: scale(1.04);
   cursor: pointer;
 }
@@ -222,4 +266,6 @@
   font-size: 14px;
   color: #526d82;
   border-radius: 10px;
+  font-size: 10px;
 }
+/* ########## end home dashboard */

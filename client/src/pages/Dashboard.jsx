@@ -10,9 +10,7 @@ function Dashboard() {
     <div className="dashboard">
       <Sidebar />
       <userContext.Provider value={123}>
-        <div className="dashboard--content">
-          <Outlet />
-        </div>
+        <Outlet />
       </userContext.Provider>
     </div>
   );

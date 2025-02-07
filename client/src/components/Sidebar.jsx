@@ -13,7 +13,7 @@ function Sidebar() {
   const [openSettings, setOpenSettings] = useState(false);
 
   return (
-    <div className="meu">
+    <div className="menu">
       <div className="logos">
         <img src={logoPic} alt="logo-admin" height={100} width={100} />
       </div>
