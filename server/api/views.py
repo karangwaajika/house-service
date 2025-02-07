@@ -168,6 +168,32 @@ class CreateServiceAPIView(generics.CreateAPIView):
     #     )
 
 
+class ServiceList(generics.ListAPIView):
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer
+    permission_classes = [AllowAny]
+
+
+class ServiceDetails(generics.RetrieveAPIView):
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer
+    permission_classes = [AllowAny]
+    lookup_url_kwarg = "service_id"
+
+
+class ServiceUpdate(generics.RetrieveUpdateAPIView):
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer
+    permission_classes = [AllowAny]
+    lookup_url_kwarg = "service_id"
+
+
+class ServiceDelete(generics.RetrieveDestroyAPIView):
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer
+    permission_classes = [AllowAny]
+    lookup_url_kwarg = "service_id"
+
 class CreateWorkerAPIView(generics.CreateAPIView):
     model = Workers
     permission_classes = [AllowAny]

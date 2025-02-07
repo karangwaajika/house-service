@@ -11,6 +11,10 @@ urlpatterns = [
     path("categories/<int:category_id>", ServiceCategoryDetails.as_view(), name="view_category"),
     path("categories/delete/<int:category_id>", ServiceCategoryDelete.as_view(), name="delete_category"),
     path("categories/update/<int:category_id>", ServiceCategoryUpdate.as_view(), name="update_category"),
-    path("service/create/", CreateServiceAPIView.as_view(), name="add_service"),
+    path("services/", ServiceList.as_view(), name="view_services"),
+    path("services/create/", CreateServiceAPIView.as_view(), name="add_service"),
+    path("services/<int:service_id>", ServiceDetails.as_view(), name="view_service"),
+    path("services/delete/<int:service_id>", ServiceDelete.as_view(), name="delete_service"),
+    path("services/update/<int:service_id>", ServiceUpdate.as_view(), name="update_service"),
     path("worker/create/", CreateWorkerAPIView.as_view(), name="add_worker"),
 ]
