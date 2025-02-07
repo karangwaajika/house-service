@@ -18,7 +18,7 @@ function Sidebar() {
         <img src={logoPic} alt="logo-admin" height={100} width={100} />
       </div>
       <div className="menu--list">
-        <NavLink to="/dashboard" className="item">
+        <NavLink to="/dashboard/" className="item">
           <i className="fa fa-home icon "></i>
           Dashboard
         </NavLink>
