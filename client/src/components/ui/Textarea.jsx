@@ -18,6 +18,7 @@ function Textarea({
       placeholder={placeholder}
       name={name}
       value={value}
+      className={errorfield && errorfield}
       onChange={handleChange}
       style={{ height: height, borderRadius: "5px", padding:"5px" }}
     />

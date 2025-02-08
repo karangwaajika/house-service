@@ -43,9 +43,12 @@ class CategoryImageSerializer(serializers.ModelSerializer):
 
 class ServiceCategorySerializer(serializers.ModelSerializer):
     images = CategoryImageSerializer(many=True, read_only=True)
-    uploaded_images = serializers.ImageField(
-        max_length=1000000, allow_empty_file=False, use_url=False, write_only=True
-    )
+    # uploaded_images = serializers.ImageField(
+    #     max_length=1000000, allow_empty_file=False, use_url=False, write_only=True
+    # )
+    uploaded_images = serializers.ListField(
+        child = serializers.ImageField(max_length = 1000000, allow_empty_file = False, use_url = False),
+        write_only=True)
 
     class Meta:
         model = ServiceCategory
@@ -58,10 +61,8 @@ class ServiceCategorySerializer(serializers.ModelSerializer):
         uploaded_images = validated_data.pop("uploaded_images")
         category = ServiceCategory.objects.create(**validated_data)
         # handle image model insert on itself, category will use the default insert
-
-        newcategory_image = CategoryImage.objects.create(
-            category=category, image=uploaded_images
-        )
+        for image in uploaded_images:
+            newcategory_image = CategoryImage.objects.create(category=category, image=image)
         return category
 
 

@@ -48,7 +48,8 @@
   background: #27374d;
   color: #dde6ed;
 }
-.sidebar-content a.active, .item.active {
+.sidebar-content a.active,
+.item.active {
   background: #27374d;
   color: #dde6ed;
 }
@@ -283,4 +284,12 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+.hr {
+  height: 1px;
+  background: #dde6ed;
+}
+.header--content{
+  color: #27374d;
+  font-weight: 800;
 }

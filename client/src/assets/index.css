@@ -67,8 +67,8 @@ button.btn-loading {
   padding: 0px;
 }
 .btn-loading.primary {
-  background: #4285f4;
-  border: 1px solid #4285f4;
+  background: #526db2;
+  border: 1px solid #526db2;
   color: #ffffff;
 }
 button .btn-img {
@@ -84,8 +84,8 @@ button {
 }
 
 button.btn-primary {
-  background: #4285f4;
-  border: 1px solid #4285f4;
+  background: #526db2;
+  border: 1px solid #526db2;
   color: #ffffff;
 }
 button.btn-primary-outline {
@@ -220,7 +220,8 @@ button.btn-google {
 }
 
 /* card */
-.card-a {
+.card {
+  border: 1px solid #dde6ed;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -511,4 +512,11 @@ article p {
   display: flex;
   justify-content: space-around;
   margin: auto;
+}
+.li-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
 }
