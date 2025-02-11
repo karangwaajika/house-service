@@ -66,6 +66,25 @@ button.btn-loading {
   min-width: 100%;
   padding: 0px;
 }
+.btn-icon {
+  border: 1px solid #808080;
+  border-radius: 1px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: #8eb49e; */
+}
+.btn-icon:hover {
+  background: #dde6ed;
+  cursor: pointer;
+  border: none;
+}
+.btn-icon:active {
+  cursor: pointer;
+  border: 1px solid black;
+  background: #ffffff;
+}
 .btn-loading.primary {
   background: #526db2;
   border: 1px solid #526db2;
@@ -239,6 +258,37 @@ button.btn-google {
 .card-header {
   text-align: center;
   border-bottom: 1px solid #80808080;
+}
+/* pagination card */
+.pagination--links {
+  display: flex;
+  justify-content: space-between;
+}
+.card-links--text {
+  flex: 1;
+}
+.card-links {
+  display: flex;
+  border: 1px solid #808080;
+  border-radius: 3px;
+  min-width: 100px;
+}
+
+.card-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid;
+  width: 50px;
+}
+.card-link .no-link:hover{
+  cursor: not-allowed;
+}
+.card-link:last-child{
+  border-left: 1px solid ;
+}
+.card-link:first-child{
+  border: none ;
 }
 /* form */
 .form {
@@ -513,7 +563,7 @@ article p {
   justify-content: space-around;
   margin: auto;
 }
-.li-row{
+.li-row {
   display: flex;
   justify-content: space-between;
   align-items: center;

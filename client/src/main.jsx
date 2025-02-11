@@ -21,6 +21,7 @@ import ProtectDashboard from "./utils/ProtectDashboard";
 import GoogleRedirectHandler from "./utils/GoogleRedirectHandler";
 import DashboardHome from "./pages/DashboardHome";
 import AddCategoy from "./pages/AddCategoy";
+import ViewCategory from "./pages/ViewCategory";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/add-category",
             element: <AddCategoy />,
+          },
+          {
+            path: "/dashboard/view-category",
+            element: <ViewCategory />,
           },
         ],
       },
