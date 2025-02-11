@@ -52,8 +52,6 @@ function AddCategoy() {
   const submitForm = () => {
     setIsLoading(true);
 
-    console.log("jwt", axiosHeader.jwt);
-    console.log("google", axiosHeader.google);
     axios.defaults.headers.common["Authorization"] = `Bearer ${
       axiosHeader.jwt ? axiosHeader.jwt : axiosHeader.google
     }`;
@@ -71,6 +69,7 @@ function AddCategoy() {
       .post(axiosHeader.url + "/api/categories/create/", data, config)
       .then((res) => {
         console.log(res);
+
         setMessage({
           success: true,
           message: "Category inserted successfuly",
@@ -79,17 +78,20 @@ function AddCategoy() {
         setFiles({});
       })
       .catch((err) => {
-        console.error(err);
-        // console.error(err.response.data);
-        if (err.code == "ERR_NETWORK") {
+        if (err.status == 401) {
           setMessage({
             success: false,
-            message: "Please check your internet connection",
+            message: "You need to login first!",
           });
-        } else if (err.response.data) {
+        } else if (err.status == 400) {
           setMessage({
             success: false,
             message: err.response.data,
+          });
+        } else if (err.code == "ERR_NETWORK") {
+          setMessage({
+            success: false,
+            message: "Please check your internet connection",
           });
         } else {
           setMessage({

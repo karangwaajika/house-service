@@ -117,7 +117,7 @@ class LogoutUserView(generics.CreateAPIView):
 class CreateServiceCategoryAPIView(generics.CreateAPIView):
     model = ServiceCategory
     serializer_class = ServiceCategorySerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     parser_classes = (MultiPartParser, FormParser)
 
 

@@ -7,7 +7,13 @@ export default function FlashMessage({ isSuccess, message, clearMessage }) {
   let errors = null;
   if (typeof message === "object") {
     const errorList = Object.entries(message);
+
+    console.log(errorList);
+    errorList.map((item, i) => {
+      console.log("item" + i, item[0]);
+    });
     errors = errorList.map((item) => {
+      console.log(typeof item[1]);
       return (
         <div>
           <h5>{item[0]} : </h5>
@@ -19,9 +25,13 @@ export default function FlashMessage({ isSuccess, message, clearMessage }) {
               lineHeight: "15px",
             }}
           >
-            {item[1].map((subItem, key) => {
-              return <li key={key}>{subItem}</li>;
-            })}
+            {typeof item[1] == "object"
+              ? Object.values(item[1]).map((subItem, key) => {
+                  return <li key={key}>{subItem}</li>;
+                })
+              : item[1].map((subItem, key) => {
+                  return <li key={key}>{subItem}</li>;
+                })}
           </ul>
         </div>
       );
