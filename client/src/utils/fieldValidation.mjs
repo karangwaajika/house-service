@@ -11,8 +11,8 @@ export default function fieldValidation({
       errorsValidation.name = "Use letters only";
     }
   }
-  if (arg.files.length == 0){
-    errorsValidation.files = "Please upload an image";
+  if (arg.files.length == 0 || Object.keys(arg.files).length == 0){
+    errorsValidation.files = "Please upload/Reupload an image";
   }
 
   if (arg.description !== undefined) {

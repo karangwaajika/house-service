@@ -36,14 +36,15 @@ export default function LoginForm() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const res = await api.post('/api/token/', {
+      const res = await api.post("/api/token/", {
         username: form.username,
         password: form.password,
       });
       localStorage.setItem(ACCESS_TOKEN, res.data.access);
       localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+
       navigate("/dashboard/home");
-      // window.location.reload();
+      window.location.reload();
     } catch (error) {
       console.error(error);
       if (error.response) {

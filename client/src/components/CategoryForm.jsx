@@ -2,7 +2,7 @@ import Button from "./ui/Button";
 import InputField from "./ui/InputField";
 import ButtonLoading from "./ui/ButtonLoading";
 import FlashMessage from "./ui/FlashMessage";
-import loadingImg from "/images/n-loading.gif";
+import loadingImg from "/images/b-loading-3.gif";
 import InputFile from "./ui/InputFile";
 import Textarea from "./ui/Textarea";
 

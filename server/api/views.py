@@ -18,7 +18,7 @@ from rest_framework import status
 from rest_framework.parsers import FormParser, MultiPartParser
 
 
-# socialaccount
+# social account
 from allauth.socialaccount.models import SocialToken, SocialAccount
 
 # custom packages (models, serializers, etc..)

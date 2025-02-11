@@ -51,6 +51,7 @@ function AddCategoy() {
   };
   const submitForm = () => {
     setIsLoading(true);
+
     console.log("jwt", axiosHeader.jwt);
     console.log("google", axiosHeader.google);
     axios.defaults.headers.common["Authorization"] = `Bearer ${
@@ -70,18 +71,32 @@ function AddCategoy() {
       .post(axiosHeader.url + "/api/categories/create/", data, config)
       .then((res) => {
         console.log(res);
-        if (res.data.success) {
-          setMessage(res.data);
-        } else {
-          setMessage(res.data);
-        }
+        setMessage({
+          success: true,
+          message: "Category inserted successfuly",
+        });
+        setForm({ name: "", description: "" });
+        setFiles({});
       })
       .catch((err) => {
         console.error(err);
-        setMessage({
-          success: false,
-          message: err.message,
-        });
+        // console.error(err.response.data);
+        if (err.code == "ERR_NETWORK") {
+          setMessage({
+            success: false,
+            message: "Please check your internet connection",
+          });
+        } else if (err.response.data) {
+          setMessage({
+            success: false,
+            message: err.response.data,
+          });
+        } else {
+          setMessage({
+            success: false,
+            message: err.message,
+          });
+        }
       })
       .finally(() => {
         setIsLoading(false);

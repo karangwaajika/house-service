@@ -320,3 +320,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+/server/images/
