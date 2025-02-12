@@ -1,6 +1,8 @@
+import { useState } from "react";
 import ProgressBar from "./ProgressBar";
 
 export default function FlashMessage({ isSuccess, message, clearMessage }) {
+  const [ani, setAni] = useState('')
   const className = isSuccess
     ? "success-message animated bounce"
     : "error-message animated shake";
@@ -8,14 +10,10 @@ export default function FlashMessage({ isSuccess, message, clearMessage }) {
   if (typeof message === "object") {
     const errorList = Object.entries(message);
 
-    console.log(errorList);
-    errorList.map((item, i) => {
-      console.log("item" + i, item[0]);
-    });
     errors = errorList.map((item) => {
       console.log(typeof item[1]);
       return (
-        <div>
+        <div className={className}>
           <h5>{item[0]} : </h5>
           <ul
             style={{
@@ -41,7 +39,7 @@ export default function FlashMessage({ isSuccess, message, clearMessage }) {
   }
 
   return (
-    <div className={className}>
+    <div className={`${className} ${ani}`}>
       <div style={{ padding: "5px" }}>
         {isSuccess ? <p>{message}</p> : errors}
       </div>
@@ -49,6 +47,7 @@ export default function FlashMessage({ isSuccess, message, clearMessage }) {
       <ProgressBar
         color={isSuccess ? "#b16e0a" : "#665252c7"}
         clearMessage={clearMessage}
+        setAni = {setAni}
       />
     </div>
   );

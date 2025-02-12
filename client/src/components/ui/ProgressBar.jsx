@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-export default function ProgressBar({ color, clearMessage }) {
+export default function ProgressBar({ color, clearMessage, setAni }) {
   const [percentage, setPercentage] = useState(0);
   let count = useRef(0);
 
@@ -8,14 +8,19 @@ export default function ProgressBar({ color, clearMessage }) {
       count.current = count.current + 1;
       setPercentage(Math.round((count.current * 100) / 24));
     }, 200);
-
+    
     const timeoutId = setTimeout(() => {
-      clearMessage();
+      // clearMessage();
+      setAni("fadeOut")
       clearInterval(intervalId);
     }, 5000);
+    const timeoutId1 = setTimeout(() => {
+      clearMessage();
+    }, 5500);
     return () => {
       clearInterval(intervalId);
       clearTimeout(timeoutId);
+      clearTimeout(timeoutId1);
     };
   }, []);
   const styles = {
