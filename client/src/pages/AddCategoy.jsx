@@ -1,7 +1,6 @@
 import React from "react";
 import ContentHeader from "../components/ContentHeader";
 import CategoryForm from "../components/CategoryForm";
-import { useState } from "react";
 import axios from "axios";
 import fieldValidation from "../utils/fieldValidation.mjs";
 import { axiosHeader } from "../utils/axiosHeader";

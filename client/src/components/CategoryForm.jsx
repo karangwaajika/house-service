@@ -41,7 +41,7 @@ export default function CategoryForm({
             id="name"
             errorfield={fieldError.name && "error-field"}
             label="Name"
-            icon="fa-solid fa-cutlery"
+            icon="fa-solid fa-layer-group"
             placeholder="Name"
             handleChange={handleChange}
             value={form.name}

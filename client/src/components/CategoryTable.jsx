@@ -26,8 +26,7 @@ export default function CategoyTable({
               let end_index = description.indexOf(" ", 20) + 1;
               description = description.slice(0, end_index) + "...";
             }
-            let date = String(category.created_at);
-            console.log(category.created_at);
+
             return (
               <tr key={index + 1}>
                 <td data-cell="#">{index + 1}</td>

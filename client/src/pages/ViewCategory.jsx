@@ -1,19 +1,20 @@
 import React from "react";
 import ContentHeader from "../components/ContentHeader";
 import InputField from "../components/ui/InputField";
-import { useState } from "react";
+import { useState, createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import CategoyTable from "../components/CategoryTable";
 import FlashMessage from "../components/ui/FlashMessage";
 import useFetchPagination from "../hooks/useFetchPagination";
 import PaginationLinks from "../components/ui/PaginationLinks";
 import loaderPicture from "/images/loading-3.gif";
-
+import EditCategoryModal from "../components/EditCategoryModal";
+export const categoryContext = createContext();
 function ViewCategory() {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-  console.log("myPAge", page);
+
   const {
     data,
     links,
@@ -25,6 +26,31 @@ function ViewCategory() {
     setIsLoading,
     clearMessage,
   } = useFetchPagination("/api/categories/" + `?page=${page}`, page);
+
+  // handle modals
+  const [animation, setAnimation] = useState("animated fadeIn");
+  const [clickedRow, setClickedRow] = useState(null);
+
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+
+  const handleModal = (index, typeOfModal) => {
+    // get the targeted item id
+    setClickedRow(index);
+
+    if (typeOfModal == "edit") {
+      setAnimation(openEditModal ? "animated fadeOut" : "animated fadeIn");
+      setTimeout(() => {
+        setOpenEditModal((oldModalState) => !oldModalState);
+      }, 1000);
+    } else {
+      setAnimation(openDeleteModal ? "animated fadeOut" : "animated fadeIn");
+      setTimeout(() => {
+        setOpenDeleteModal((oldModalState) => !oldModalState);
+      }, 1000);
+    }
+  };
+
   return (
     <div className="dashboard--content category">
       <ContentHeader />
@@ -57,12 +83,22 @@ function ViewCategory() {
           clearMessage={clearMessage}
         />
       )}
-      <CategoyTable categories={data} />
+      <CategoyTable categories={data} openEditModal={handleModal} />
       {isLoading && (
         <div className="loader">
           <img src={loaderPicture} width={100} height={100} />
         </div>
       )}
+      <categoryContext.Provider value={{ setData, setIsLoading, setMessage }}>
+        {openEditModal && (
+          <EditCategoryModal
+            allCategories={data}
+            categoryIndex={clickedRow}
+            closeModal={handleModal}
+            animate={animation}
+          />
+        )}
+      </categoryContext.Provider>
       <PaginationLinks
         count={links.count}
         next={links.next}
