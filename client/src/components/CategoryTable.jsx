@@ -13,7 +13,7 @@ export default function CategoyTable({
           <th>#</th>
           <th>Name</th>
           <th>Description</th>
-          <th>Photo</th>
+          <th>Photos</th>
           <th>Date Created</th>
           <th>Action</th>
         </tr>
@@ -21,15 +21,23 @@ export default function CategoyTable({
       <tbody>
         {categories.length > 0 ? (
           categories.map((category, index) => {
+            let description = category.description;
+            if (description.length > 20) {
+              let end_index = description.indexOf(" ", 20) + 1;
+              description = description.slice(0, end_index) + "...";
+            }
+            let date = String(category.created_at);
+            console.log(category.created_at);
             return (
               <tr key={index + 1}>
                 <td data-cell="#">{index + 1}</td>
                 <td data-cell="Name">{category.name}</td>
-                <td data-cell="Category">{category.description}</td>
-                <td data-cell="Price">-</td>
+                <td data-cell="Category">{description}</td>
+                <td data-cell="Photo">
+                  <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                </td>
                 <td data-cell="Date">
-                    -
-                  {/* {convertToDateTime(category.created_at)} */}
+                  {convertToDateTime(category.created_at)}
                 </td>
                 <td data-cell="Action">
                   <div className="action-btns">
@@ -38,7 +46,7 @@ export default function CategoyTable({
                       onClick={() => openEditModal(index, "edit")}
                     ></i>{" "}
                     <i
-                      className="fa fa-trash-can"
+                      className="fa fa-trash-can text-danger"
                       onClick={() => openDeleteModal(index, "delete")}
                     ></i>
                   </div>

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { axiosHeader } from "../utils/axiosHeader";
 
-export default function useFetchPagination(url, page, refreshData) {
+export default function useFetchPagination(url) {
   const [data, setData] = useState([]);
   const [links, setLinks] = useState({ count: 0, next: "", previous: "" });
   const [isLoading, setIsLoading] = useState(false);
@@ -23,6 +23,7 @@ export default function useFetchPagination(url, page, refreshData) {
       })
       .then((res) => {
         console.log(res.data);
+        console.log(res.data.results);
         setData(res.data.results);
         let next_page = null;
         let prev_page = null;
@@ -75,7 +76,7 @@ export default function useFetchPagination(url, page, refreshData) {
     return () => {
       cancelToken.cancel();
     };
-  }, [url, refreshData]);
+  }, [url]);
 
   return {
     data,

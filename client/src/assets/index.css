@@ -371,8 +371,8 @@ button.btn-google {
 .loader {
   width: 40%;
   position: absolute;
-  top: 32%;
-  left: 25%;
+  top: 20%;
+  left: 38%;
 }
 .loader img {
   width: 100%;

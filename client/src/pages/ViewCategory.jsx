@@ -4,17 +4,16 @@ import InputField from "../components/ui/InputField";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CategoyTable from "../components/CategoryTable";
-import useFetchAutoComplete from "../hooks/useFetchAutoComplete";
 import FlashMessage from "../components/ui/FlashMessage";
 import useFetchPagination from "../hooks/useFetchPagination";
-import { use } from "react";
 import PaginationLinks from "../components/ui/PaginationLinks";
+import loaderPicture from "/images/loading-3.gif";
 
 function ViewCategory() {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-  console.log("myPAge",page)
+  console.log("myPAge", page);
   const {
     data,
     links,
@@ -25,13 +24,13 @@ function ViewCategory() {
     setMessage,
     setIsLoading,
     clearMessage,
-  } = useFetchPagination("/api/categories/"+`?page=${page}`, page);
+  } = useFetchPagination("/api/categories/" + `?page=${page}`, page);
   return (
     <div className="dashboard--content category">
       <ContentHeader />
       <div className="hr"></div>
       <div className="header--content">
-        <span>List Serice Category</span>
+        <span>List Service Category</span>
       </div>
       <div className="view-category-header">
         <div className="search-btn">
@@ -59,12 +58,17 @@ function ViewCategory() {
         />
       )}
       <CategoyTable categories={data} />
+      {isLoading && (
+        <div className="loader">
+          <img src={loaderPicture} width={100} height={100} />
+        </div>
+      )}
       <PaginationLinks
         count={links.count}
         next={links.next}
         previous={links.previous}
         setPage={setPage}
-        page = {page}
+        page={page}
       />
     </div>
   );

@@ -47,12 +47,16 @@ class ServiceCategorySerializer(serializers.ModelSerializer):
     #     max_length=1000000, allow_empty_file=False, use_url=False, write_only=True
     # )
     uploaded_images = serializers.ListField(
-        child = serializers.ImageField(max_length = 1000000, allow_empty_file = False, use_url = False),
-        write_only=True)
+        child=serializers.ImageField(
+            max_length=1000000, allow_empty_file=False, use_url=False
+        ),
+        write_only=True,
+    )
 
     class Meta:
         model = ServiceCategory
-        fields = ("id", "name", "description", "images", "uploaded_images")
+        fields = "__all__"
+        # fields = ("id", "name", "description", "images", "uploaded_images", "created_at")
 
     def create(self, validated_data):
         # when we can to edit inserting we use this function instead of default
@@ -62,7 +66,9 @@ class ServiceCategorySerializer(serializers.ModelSerializer):
         category = ServiceCategory.objects.create(**validated_data)
         # handle image model insert on itself, category will use the default insert
         for image in uploaded_images:
-            newcategory_image = CategoryImage.objects.create(category=category, image=image)
+            newcategory_image = CategoryImage.objects.create(
+                category=category, image=image
+            )
         return category
 
 
