@@ -64,6 +64,7 @@ function ViewCategory() {
         next={links.next}
         previous={links.previous}
         setPage={setPage}
+        page = {page}
       />
     </div>
   );

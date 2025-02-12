@@ -6,7 +6,29 @@
   flex-direction: column;
   gap: 10px;
 }
-.view-category-header{
+.view-category-header {
   display: flex;
   justify-content: space-between;
+}
+/* table */
+table.dashboard-content-table {
+  border: 1px solid #c6cdc9;
+  font-size: 13px;
+}
+table.dashboard-content-table caption,
+table.dashboard-content-table th {
+  color: black;
+  border: 1px solid #c6ccc9;
+  /* background-color:; */
+}
+table.dashboard-content-table tr {
+  border-top: 1px solid #c6ccc9;
+}
+table.dashboard-content-table tr:nth-of-type(2n) {
+  background-color: #f2f4f5;
+}
+table.dashboard-content-table .far,
+table.dashboard-content-table .fa-regular,
+table.dashboard-content-table .fa {
+  font-size: 18px;
 }

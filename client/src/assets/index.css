@@ -263,6 +263,7 @@ button.btn-google {
 .pagination--links {
   display: flex;
   justify-content: space-between;
+  margin-top: auto;
 }
 .card-links--text {
   flex: 1;
@@ -278,17 +279,40 @@ button.btn-google {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-left: 1px solid;
-  width: 50px;
+  border-left: 1px solid #808080;
+  width: 40px;
+  height: 28px;
 }
-.card-link .no-link:hover{
+.card-links .card-link:hover {
+  cursor: pointer;
+  background-color: #e3e9eb;
+  color: black;
+}
+.card-link.current {
+  background: #082fddde;
+  border: none;
+  color: white;
+}
+.card-link.current:hover {
+  background: #082fddde;
+  border: none;
+  color: white;
+}
+.fa-angles-left,
+.fa-angles-right {
+  font-size: 8px;
+}
+.link-text {
+  font-size: 13px;
+}
+.card-link.no-link:hover {
   cursor: not-allowed;
 }
-.card-link:last-child{
-  border-left: 1px solid ;
+.card-link:last-child {
+  border-left: 1px solid;
 }
-.card-link:first-child{
-  border: none ;
+.card-link:first-child {
+  border: none;
 }
 /* form */
 .form {
