@@ -332,13 +332,16 @@ button.btn-google {
 .text-primary {
   color: #3c5df1;
 }
-.fa-pen-to-square {
+.fa-pen-to-square, .fa-trash-can {
   cursor: pointer;
 }
 .fa-pen-to-square:active {
   color: white;
 }
-.fa-pencil {
+.fa-trash-can:active {
+  color: white;
+}
+.fa-pencil,.fa-trash-can {
   cursor: pointer;
 }
 .fa-pencil:active {

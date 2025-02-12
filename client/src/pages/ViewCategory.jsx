@@ -9,10 +9,12 @@ import useFetchPagination from "../hooks/useFetchPagination";
 import PaginationLinks from "../components/ui/PaginationLinks";
 import loaderPicture from "/images/loading-3.gif";
 import EditCategoryModal from "../components/EditCategoryModal";
+import DeleteCategoryModal from "../components/DeleteCategoryModal";
 export const categoryContext = createContext();
 function ViewCategory() {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
+  const [reload, setReload] = useState(false);
   const [page, setPage] = useState(1);
 
   const {
@@ -25,7 +27,7 @@ function ViewCategory() {
     setMessage,
     setIsLoading,
     clearMessage,
-  } = useFetchPagination("/api/categories/" + `?page=${page}`, page);
+  } = useFetchPagination("/api/categories/" + `?page=${page}`, page, reload);
 
   // handle modals
   const [animation, setAnimation] = useState("animated fadeIn");
@@ -83,15 +85,34 @@ function ViewCategory() {
           clearMessage={clearMessage}
         />
       )}
-      <CategoyTable categories={data} openEditModal={handleModal} />
+      <CategoyTable
+        categories={data}
+        openEditModal={handleModal}
+        openDeleteModal={handleModal}
+      />
       {isLoading && (
         <div className="loader">
           <img src={loaderPicture} width={100} height={100} />
         </div>
       )}
-      <categoryContext.Provider value={{ setData, setIsLoading, setMessage }}>
+      <categoryContext.Provider
+        value={{ setData, setIsLoading, setMessage, setReload }}
+      >
         {openEditModal && (
           <EditCategoryModal
+            allCategories={data}
+            categoryIndex={clickedRow}
+            closeModal={handleModal}
+            animate={animation}
+          />
+        )}
+      </categoryContext.Provider>
+
+      <categoryContext.Provider
+        value={{ setData, setIsLoading, setMessage, setReload }}
+      >
+        {openDeleteModal && (
+          <DeleteCategoryModal
             allCategories={data}
             categoryIndex={clickedRow}
             closeModal={handleModal}
