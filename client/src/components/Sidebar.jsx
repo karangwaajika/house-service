@@ -69,7 +69,7 @@ function Sidebar() {
           </div>
           <div className="sidebar-content">
             <NavLink
-              to="#"
+              to="/dashboard/add-service"
               className={
                 openService
                   ? "item-sub open animated slideInDown"
@@ -80,7 +80,7 @@ function Sidebar() {
               Add
             </NavLink>
             <NavLink
-              to="#"
+              to="/dashboard/view-service"
               className={
                 openService
                   ? "item-sub open animated slideInDown"

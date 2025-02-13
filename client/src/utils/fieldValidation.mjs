@@ -20,9 +20,21 @@ export default function fieldValidation({
     }
 }
 
+if (arg.file !== undefined) {
+  if (arg.file.length == 0 || Object.keys(arg.file).length == 0){
+    errorsValidation.file = "Please upload/Reupload an image";
+  }
+  
+}
+
   if (arg.description !== undefined) {
     if (!arg.description.trim()) {
       errorsValidation.description = "Description field is required";
+    }
+  }
+  if (arg.category !== undefined) {
+    if (!arg.category.trim()) {
+      errorsValidation.category = "Category field is required";
     }
   }
 

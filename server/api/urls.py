@@ -7,6 +7,7 @@ urlpatterns = [
     path("google/validate_token/", validate_google_token, name="validate_token"),
     path("logout_user/", LogoutUserView.as_view(), name="logout"),
     path("categories/", ServiceCategoryList.as_view(), name="view_categories"),
+    path("categories/no_pagination/", ServiceCategoryListNoPagination.as_view(), name="view_categories_no_pagination"),
     path("categories/create/", CreateServiceCategoryAPIView.as_view(), name="add_category"),
     path("categories/<int:category_id>", ServiceCategoryDetails.as_view(), name="view_category"),
     path("categories/delete/<int:category_id>", ServiceCategoryDelete.as_view(), name="delete_category"),

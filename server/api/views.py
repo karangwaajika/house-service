@@ -16,7 +16,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.parsers import FormParser, MultiPartParser
-from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.pagination import LimitOffsetPagination, PageNumberPagination
 
 
 # social account
@@ -126,7 +126,13 @@ class ServiceCategoryList(generics.ListAPIView):
     queryset = ServiceCategory.objects.all()
     serializer_class = ServiceCategorySerializer
     permission_classes = [AllowAny]
-    pagination_class = LimitOffsetPagination
+    
+    
+class ServiceCategoryListNoPagination(generics.ListAPIView):
+    queryset = ServiceCategory.objects.all()
+    serializer_class = ServiceCategorySerializer
+    permission_classes = [AllowAny]
+    pagination_class = None
 
 
 class ServiceCategoryDetails(generics.RetrieveAPIView):

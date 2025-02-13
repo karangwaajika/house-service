@@ -1,0 +1,74 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { axiosHeader } from "../utils/axiosHeader";
+
+export default function useFetchAll(url) {
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const clearMessage = () => {
+    setMessage();
+  };
+  useEffect(() => {
+    const cancelToken = axios.CancelToken.source();
+    setIsLoading(true);
+    axios.defaults.headers.common["Authorization"] = `Bearer ${
+      axiosHeader.jwt ? axiosHeader.jwt : axiosHeader.google
+    }`;
+    console.log("NURL", axiosHeader.url + url);
+    axios
+      .get(axiosHeader.url + url, {
+        cancelToken: cancelToken.token,
+      })
+      .then((res) => {
+        console.log(res.data);
+        console.log(res.data.results);
+        setData(res.data);
+      })
+      .catch((err) => {
+        if (err.message !== "canceled") {
+          setMessage({
+            success: false,
+            message: err.message,
+          });
+        }
+        if (err.status == 401) {
+          setMessage({
+            success: false,
+            message: "You need to login first!, Token Expired!",
+          });
+        } else if (err.status == 400) {
+          setMessage({
+            success: false,
+            message: err.response.data,
+          });
+        } else if (err.code == "ERR_NETWORK") {
+          setMessage({
+            success: false,
+            message: "Please check your internet connection",
+          });
+        } else {
+          setMessage({
+            success: false,
+            message: err.message,
+          });
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+    return () => {
+      cancelToken.cancel();
+    };
+  }, [url]);
+
+  return {
+    data,
+    isLoading,
+    message,
+    setData,
+    setIsLoading,
+    setMessage,
+    clearMessage,
+  };
+}

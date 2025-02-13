@@ -5,6 +5,7 @@ import "./assets/dashboard.css";
 import "./assets/login.css";
 import "./assets/animation.css";
 import "./assets/category.css";
+import "./assets/service.css";
 
 // react
 import React from "react";
@@ -22,6 +23,8 @@ import GoogleRedirectHandler from "./utils/GoogleRedirectHandler";
 import DashboardHome from "./pages/DashboardHome";
 import AddCategoy from "./pages/AddCategoy";
 import ViewCategory from "./pages/ViewCategory";
+import AddService from "./pages/AddService";
+import ViewService from "./pages/ViewService";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +65,14 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/view-category",
             element: <ViewCategory />,
+          },
+          {
+            path: "/dashboard/add-service",
+            element: <AddService />,
+          },
+          {
+            path: "/dashboard/view-service",
+            element: <ViewService />,
           },
         ],
       },
