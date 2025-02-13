@@ -4,6 +4,7 @@ export default function CategoyTable({
   categories,
   openEditModal,
   openDeleteModal,
+  openPhotosModal,
 }) {
   return (
     <table className="dashboard-content-table">
@@ -37,7 +38,10 @@ export default function CategoyTable({
                 <td data-cell="Name">{category.name}</td>
                 <td data-cell="Category">{description}</td>
                 <td data-cell="Photo">
-                  <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                  <i
+                    className="fa-solid fa-arrow-up-right-from-square"
+                    onClick={() => openPhotosModal(index, "photos")}
+                  ></i>
                 </td>
                 <td data-cell="Date">
                   {convertToDateTime(category.created_at)}

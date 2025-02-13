@@ -22,14 +22,16 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("api.urls")),
-    path("",  views.home),
+    path("", views.home),
     path("api-auth/", include("rest_framework.urls")),
     path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("accounts/", include("allauth.urls")),
     path("callback/", views.google_login_callback, name="callback"),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -10,6 +10,7 @@ import PaginationLinks from "../components/ui/PaginationLinks";
 import loaderPicture from "/images/loading-3.gif";
 import EditCategoryModal from "../components/EditCategoryModal";
 import DeleteCategoryModal from "../components/DeleteCategoryModal";
+import PhotosModal from "../components/PhotosModal";
 export const categoryContext = createContext();
 function ViewCategory() {
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ function ViewCategory() {
 
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openPhotosModal, setOpenPhotosModal] = useState(false);
 
   const handleModal = (index, typeOfModal) => {
     // get the targeted item id
@@ -44,10 +46,15 @@ function ViewCategory() {
       setTimeout(() => {
         setOpenEditModal((oldModalState) => !oldModalState);
       }, 1000);
-    } else {
+    } else if (typeOfModal == "delete") {
       setAnimation(openDeleteModal ? "animated fadeOut" : "animated fadeIn");
       setTimeout(() => {
         setOpenDeleteModal((oldModalState) => !oldModalState);
+      }, 1000);
+    } else {
+      setAnimation(openPhotosModal ? "animated fadeOut" : "animated fadeIn");
+      setTimeout(() => {
+        setOpenPhotosModal((oldModalState) => !oldModalState);
       }, 1000);
     }
   };
@@ -88,6 +95,7 @@ function ViewCategory() {
         categories={data}
         openEditModal={handleModal}
         openDeleteModal={handleModal}
+        openPhotosModal={handleModal}
       />
       {isLoading && (
         <div className="loader">
@@ -105,11 +113,20 @@ function ViewCategory() {
         )}
       </categoryContext.Provider>
 
-      <categoryContext.Provider
-        value={{ setData, setIsLoading, setMessage }}
-      >
+      <categoryContext.Provider value={{ setData, setIsLoading, setMessage }}>
         {openDeleteModal && (
           <DeleteCategoryModal
+            allCategories={data}
+            categoryIndex={clickedRow}
+            closeModal={handleModal}
+            animate={animation}
+          />
+        )}
+      </categoryContext.Provider>
+
+      <categoryContext.Provider value={{ setData, setIsLoading, setMessage }}>
+        {openPhotosModal && (
+          <PhotosModal
             allCategories={data}
             categoryIndex={clickedRow}
             closeModal={handleModal}
