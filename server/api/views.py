@@ -150,6 +150,13 @@ class ServiceCategoryDelete(generics.RetrieveDestroyAPIView):
     lookup_url_kwarg = "category_id"
 
 
+class CategoryImageUpdate(generics.RetrieveUpdateAPIView):
+    queryset = CategoryImage.objects.all()
+    serializer_class = CategoryImageSerializer
+    permission_classes = [AllowAny]
+    lookup_url_kwarg = "image_id"
+
+
 class CreateServiceAPIView(generics.CreateAPIView):
     model = Service
     serializer_class = ServiceSerializer
@@ -229,5 +236,3 @@ class WorkerDelete(generics.RetrieveDestroyAPIView):
     serializer_class = WorkerSerializer
     permission_classes = [AllowAny]
     lookup_url_kwarg = "worker_id"
-
-

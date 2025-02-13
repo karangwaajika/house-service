@@ -16,6 +16,7 @@ function ViewCategory() {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
+  const [reload, setReload] = useState(false)
 
   const {
     data,
@@ -27,7 +28,7 @@ function ViewCategory() {
     setMessage,
     setIsLoading,
     clearMessage,
-  } = useFetchPagination("/api/categories/" + `?page=${page}`);
+  } = useFetchPagination("/api/categories/" + `?page=${page}`,reload);
 
   // handle modals
   const [animation, setAnimation] = useState("animated fadeIn");
@@ -124,7 +125,7 @@ function ViewCategory() {
         )}
       </categoryContext.Provider>
 
-      <categoryContext.Provider value={{ setData, setIsLoading, setMessage }}>
+      <categoryContext.Provider value={{ setData, setIsLoading, setMessage, setReload }}>
         {openPhotosModal && (
           <PhotosModal
             allCategories={data}

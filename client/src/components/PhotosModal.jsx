@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "./ui/Button";
 import InputFile from "./ui/InputFile";
+import useUpdatePhoto from "../hooks/useUpdatePhoto";
 
 function PhotosModal({ closeModal, allCategories, categoryIndex, animate }) {
-  const category = allCategories[categoryIndex];
   const handleCloseModal = (e) => {
     if (e.target.className == `modal ${animate}`) {
       closeModal(categoryIndex, "photos");
     }
   };
+
+  const category = allCategories[categoryIndex];
+  const {
+    file,
+    fieldError,
+    handleFile,
+    validateSubmitForm: submitForm,
+  } = useUpdatePhoto(closeModal, categoryIndex);
+  
+  const handleSubmit = (photo_id) => {
+    submitForm(photo_id);
+  };
+
   return (
     <div className={`modal ${animate}`} onClick={handleCloseModal}>
       <div className="modal-pics-contents">
@@ -31,22 +44,24 @@ function PhotosModal({ closeModal, allCategories, categoryIndex, animate }) {
                 <div className="card-body">
                   <span className="photo-name">Photo {i + 1}</span>
                   <div className="buttons" style={{ gap: "5px" }}>
-                    {/* {fieldError.files && (
-                  <i className="error-text">{fieldError.files}</i>
-                )} */}
+                    {fieldError["file" + item.id] && (
+                      <i className="error-text">
+                        {fieldError["file" + item.id]}
+                      </i>
+                    )}
                     <InputFile
                       name={`file${i}`}
                       id={`file${i}`}
-                      //   errorfield={fieldError.files && "error-field"}
+                      errorfield={fieldError["file" + item.id] && "error-field"}
                       label={`file${i}`}
                       icon="fa fa-upload"
                       placeholder="file"
-                      //   handleChange={handleFile}
+                      handleChange={handleFile}
                     />
                     <Button
                       text="Update"
                       className="btn-dark"
-                      onClick={handleCloseModal}
+                      onClick={() => handleSubmit(item.id)}
                     />
                   </div>
                 </div>
