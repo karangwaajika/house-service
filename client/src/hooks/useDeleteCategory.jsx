@@ -23,15 +23,14 @@ export default function useDeleteCategory(category, closeModal, categoryIndex) {
           success: false,
           message: "Category deleted successfuly",
         });
-        update.setReload((old) => !old);
 
-        //update categories' List
-        // update.setData((oldData) => {
-        //   const newList = oldData.filter((item, i) => {
-        //     return item.id !== category.id;
-        //   });
-        //   return newList;
-        // });
+        // update categories' List
+        update.setData((oldData) => {
+          const newList = oldData.filter((item, i) => {
+            return item.id !== category.id;
+          });
+          return newList;
+        });
       })
       .catch((err) => {
         if (err.message !== "canceled") {

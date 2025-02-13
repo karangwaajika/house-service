@@ -9,7 +9,13 @@ export default function DeleteCategoryModal({
   categoryIndex,
   animate,
 }) {
-  const category = allCategories[categoryIndex];
+  const category = allCategories[categoryIndex]
+    ? allCategories[categoryIndex]
+    : {
+        name: "",
+        description: "",
+        created_at: "",
+      };
   const { submitForm } = useDeleteCategory(category, closeModal, categoryIndex);
 
   const handleCloseModal = (e) => {
@@ -39,9 +45,7 @@ export default function DeleteCategoryModal({
 
           <div className="info">
             <span style={{ fontWeight: "bold" }}>Description: </span>
-            <span>
-              {category.description}
-            </span>
+            <span>{category.description}</span>
           </div>
           <div className="info">
             <span style={{ fontWeight: "bold" }}>Created date</span>

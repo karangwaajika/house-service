@@ -24,12 +24,16 @@ export default function CategoyTable({
             let description = category.description;
             if (description.length > 20) {
               let end_index = description.indexOf(" ", 20) + 1;
-              description = description.slice(0, end_index) + "...";
+              if (end_index) {
+                description = description.slice(0, end_index) + "...";
+              } else {
+                description = category.description + "...";
+              }
             }
 
             return (
               <tr key={index + 1}>
-                <td data-cell="#">{index + 1}</td>
+                <td data-cell="#">{index + 1}.</td>
                 <td data-cell="Name">{category.name}</td>
                 <td data-cell="Category">{description}</td>
                 <td data-cell="Photo">

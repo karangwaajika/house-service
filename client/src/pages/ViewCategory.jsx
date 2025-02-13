@@ -14,7 +14,6 @@ export const categoryContext = createContext();
 function ViewCategory() {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
-  const [reload, setReload] = useState(false);
   const [page, setPage] = useState(1);
 
   const {
@@ -27,7 +26,7 @@ function ViewCategory() {
     setMessage,
     setIsLoading,
     clearMessage,
-  } = useFetchPagination("/api/categories/" + `?page=${page}`, page, reload);
+  } = useFetchPagination("/api/categories/" + `?page=${page}`);
 
   // handle modals
   const [animation, setAnimation] = useState("animated fadeIn");
@@ -95,9 +94,7 @@ function ViewCategory() {
           <img src={loaderPicture} width={100} height={100} />
         </div>
       )}
-      <categoryContext.Provider
-        value={{ setData, setIsLoading, setMessage, setReload }}
-      >
+      <categoryContext.Provider value={{ setData, setIsLoading, setMessage }}>
         {openEditModal && (
           <EditCategoryModal
             allCategories={data}
@@ -109,7 +106,7 @@ function ViewCategory() {
       </categoryContext.Provider>
 
       <categoryContext.Provider
-        value={{ setData, setIsLoading, setMessage, setReload }}
+        value={{ setData, setIsLoading, setMessage }}
       >
         {openDeleteModal && (
           <DeleteCategoryModal
