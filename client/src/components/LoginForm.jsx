@@ -44,6 +44,7 @@ export default function LoginForm() {
       localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
 
       navigate("/dashboard/home");
+      window.location.reload();
     } catch (error) {
       console.error(error);
       if (error.response) {
@@ -68,7 +69,7 @@ export default function LoginForm() {
       }
     } finally {
       setIsLoading(false);
-      window.location.reload();
+      
     }
   };
 

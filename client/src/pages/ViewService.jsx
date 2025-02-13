@@ -7,9 +7,9 @@ import FlashMessage from "../components/ui/FlashMessage";
 import useFetchPagination from "../hooks/useFetchPagination";
 import PaginationLinks from "../components/ui/PaginationLinks";
 import loaderPicture from "/images/loading-3.gif";
-import EditCategoryModal from "../components/EditCategoryModal";
+import EditServiceModal from "../components/EditServiceModal";
 import DeleteCategoryModal from "../components/DeleteCategoryModal";
-import PhotosModal from "../components/PhotosModal";
+import PhotoModal from "../components/PhotoModal";
 import ServiceTable from "../components/ServiceTable";
 
 export const serviceContext = createContext();
@@ -38,7 +38,7 @@ function ViewService() {
 
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const [openPhotosModal, setOpenPhotosModal] = useState(false);
+  const [openPhotoModal, setOpenPhotosModal] = useState(false);
 
   const handleModal = (index, typeOfModal) => {
     // get the targeted item id
@@ -55,7 +55,7 @@ function ViewService() {
         setOpenDeleteModal((oldModalState) => !oldModalState);
       }, 1000);
     } else {
-      setAnimation(openPhotosModal ? "animated fadeOut" : "animated fadeIn");
+      setAnimation(openPhotoModal ? "animated fadeOut" : "animated fadeIn");
       setTimeout(() => {
         setOpenPhotosModal((oldModalState) => !oldModalState);
       }, 1000);
@@ -98,18 +98,20 @@ function ViewService() {
         services={data}
         openEditModal={handleModal}
         openDeleteModal={handleModal}
-        openPhotosModal={handleModal}
+        openPhotoModal={handleModal}
       />
       {isLoading && (
         <div className="loader">
           <img src={loaderPicture} width={100} height={100} />
         </div>
       )}
-      <serviceContext.Provider value={{ setData, setIsLoading, setMessage }}>
+      <serviceContext.Provider
+        value={{ setData, setIsLoading, setMessage, setReload }}
+      >
         {openEditModal && (
-          <EditCategoryModal
+          <EditServiceModal
             allServices={data}
-            categoryIndex={clickedRow}
+            serviceIndex={clickedRow}
             closeModal={handleModal}
             animate={animation}
           />
@@ -120,7 +122,7 @@ function ViewService() {
         {openDeleteModal && (
           <DeleteCategoryModal
             allServices={data}
-            categoryIndex={clickedRow}
+            serviceIndex={clickedRow}
             closeModal={handleModal}
             animate={animation}
           />
@@ -130,12 +132,13 @@ function ViewService() {
       <serviceContext.Provider
         value={{ setData, setIsLoading, setMessage, setReload }}
       >
-        {openPhotosModal && (
-          <PhotosModal
-            allServices={data}
-            categoryIndex={clickedRow}
+        {openPhotoModal && (
+          <PhotoModal
+            allItems={data}
+            itemIndex={clickedRow}
             closeModal={handleModal}
             animate={animation}
+            pageName="service"
           />
         )}
       </serviceContext.Provider>

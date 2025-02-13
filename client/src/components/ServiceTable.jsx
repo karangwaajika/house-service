@@ -4,7 +4,7 @@ export default function ServiceTable({
   services,
   openEditModal,
   openDeleteModal,
-  openPhotosModal,
+  openPhotoModal,
 }) {
   return (
     <table className="dashboard-content-table">
@@ -30,7 +30,7 @@ export default function ServiceTable({
                 <td data-cell="Photo">
                   <i
                     className="fa-solid fa-arrow-up-right-from-square"
-                    onClick={() => openPhotosModal(index, "photos")}
+                    onClick={() => openPhotoModal(index, "photos")}
                   ></i>
                 </td>
                 <td data-cell="Date">
