@@ -78,9 +78,10 @@ class ServiceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Service
-        fields = ("id", "name", "image", "category", "category_name")
+        fields = ("id", "name", "image", "category", "category_name", "created_at")
         extra_kwargs = {
             "category": {"write_only": True},
+            "created_at": {"read_only": True},
         }
 
 
