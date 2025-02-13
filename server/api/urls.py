@@ -12,6 +12,7 @@ urlpatterns = [
     path("categories/delete/<int:category_id>", ServiceCategoryDelete.as_view(), name="delete_category"),
     path("categories/update/<int:category_id>", ServiceCategoryUpdate.as_view(), name="update_category"),
     path("category/image/update/<int:image_id>", CategoryImageUpdate.as_view(), name="update_category_image"),
+    path("category/image/add/", CategoryImageAdd.as_view(), name="add_category_image"),
     path("services/", ServiceList.as_view(), name="view_services"),
     path("services/create/", CreateServiceAPIView.as_view(), name="add_service"),
     path("services/<int:service_id>", ServiceDetails.as_view(), name="view_service"),

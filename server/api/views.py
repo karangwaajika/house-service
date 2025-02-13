@@ -120,13 +120,13 @@ class CreateServiceCategoryAPIView(generics.CreateAPIView):
     serializer_class = ServiceCategorySerializer
     permission_classes = [IsAuthenticated]
     parser_classes = (MultiPartParser, FormParser)
-    pagination_class = LimitOffsetPagination
 
 
 class ServiceCategoryList(generics.ListAPIView):
     queryset = ServiceCategory.objects.all()
     serializer_class = ServiceCategorySerializer
     permission_classes = [AllowAny]
+    pagination_class = LimitOffsetPagination
 
 
 class ServiceCategoryDetails(generics.RetrieveAPIView):
@@ -148,6 +148,13 @@ class ServiceCategoryDelete(generics.RetrieveDestroyAPIView):
     serializer_class = ServiceCategorySerializer
     permission_classes = [AllowAny]
     lookup_url_kwarg = "category_id"
+
+
+class CategoryImageAdd(generics.CreateAPIView):
+    model = CategoryImage
+    serializer_class = CategoryImageSerializer
+    permission_classes = [IsAuthenticated]
+    parser_classes = (MultiPartParser, FormParser)
 
 
 class CategoryImageUpdate(generics.RetrieveUpdateAPIView):

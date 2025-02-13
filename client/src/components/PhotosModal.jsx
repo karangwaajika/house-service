@@ -16,17 +16,17 @@ function PhotosModal({ closeModal, allCategories, categoryIndex, animate }) {
     fieldError,
     handleFile,
     validateSubmitForm: submitForm,
-  } = useUpdatePhoto(closeModal, categoryIndex);
-  
-  const handleSubmit = (photo_id) => {
-    submitForm(photo_id);
+  } = useUpdatePhoto(closeModal, categoryIndex, category.id);
+
+  const handleSubmit = (submit_type, photo_id) => {
+    submitForm(submit_type, photo_id);
   };
 
   return (
     <div className={`modal ${animate}`} onClick={handleCloseModal}>
       <div className="modal-pics-contents">
         <div className="modal-header">
-          <h4>Update {category.name}'s photos</h4>
+          <h4>Update {category.name}'s photos / Add new</h4>
           <div
             className="modal-close-button"
             onClick={() => closeModal(categoryIndex, "photos")}
@@ -58,11 +58,16 @@ function PhotosModal({ closeModal, allCategories, categoryIndex, animate }) {
                       placeholder="file"
                       handleChange={handleFile}
                     />
-                    <Button
-                      text="Update"
-                      className="btn-dark"
-                      onClick={() => handleSubmit(item.id)}
-                    />
+                    <div className="category-btn-type">
+                      <i
+                        className="fa fa-pencil"
+                        onClick={() => handleSubmit("update_photo", item.id)}
+                      ></i>
+                      <i
+                        className="fa fa-plus"
+                        onClick={() => handleSubmit("add_photo", item.id)}
+                      ></i>
+                    </div>
                   </div>
                 </div>
               </div>
