@@ -15,6 +15,9 @@ export default function fieldValidation({
     if (arg.files.length == 0 || Object.keys(arg.files).length == 0){
       errorsValidation.files = "Please upload/Reupload an image";
     }
+    if(arg.files.length > 6){
+      errorsValidation.files = "You can't upload files more than six";
+    }
 }
 
   if (arg.description !== undefined) {

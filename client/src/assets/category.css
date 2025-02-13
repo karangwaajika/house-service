@@ -82,6 +82,9 @@ table.dashboard-content-table .fa {
 .category-btn-type .fa:hover {
   cursor: pointer;
 }
+.category-btn-type .fa.avoid:hover {
+  cursor: not-allowed;
+}
 .category-btn-type .fa:active {
   color: white;
 }
