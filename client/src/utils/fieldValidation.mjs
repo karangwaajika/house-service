@@ -67,9 +67,9 @@ if (arg.file !== undefined) {
     }
   }
   if (arg.phone !== undefined) {
-    if (!arg.phone.trim()) {
+    if (arg.phone=="") {
       errorsValidation.phone = "phone is required";
-    } else if (arg.phone.length < 9) {
+    } else if (arg.phone.toString().length < 9) {
       errorsValidation.phone = "digits are incomplete";
     } else if (!/^[0-9 +]+$/.test(arg.phone)) {
       errorsValidation.phone = "Use numbers only";

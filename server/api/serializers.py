@@ -101,7 +101,9 @@ class WorkerSerializer(serializers.ModelSerializer):
             "email",
             "address",
             "price",
+            "created_at",
         )
         extra_kwargs = {
             "service": {"write_only": True},
+            "created_at": {"read_only": True},
         }

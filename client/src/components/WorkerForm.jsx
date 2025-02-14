@@ -95,7 +95,7 @@ export default function WorkerForm({
               <InputField
                 // type="text"
                 name="phone"
-                type="number"
+                type="text"
                 id="phone"
                 errorfield={fieldError.phone && "error-field"}
                 label="Phone"
