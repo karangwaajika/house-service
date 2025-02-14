@@ -8,7 +8,7 @@ import useFetchPagination from "../hooks/useFetchPagination";
 import PaginationLinks from "../components/ui/PaginationLinks";
 import loaderPicture from "/images/loading-3.gif";
 import EditWorkerModal from "../components/EditWorkerModal";
-import DeleteServiceModal from "../components/DeleteServiceModal";
+import DeleteWorkerModal from "../components/DeleteWorkerModal";
 import PhotoModal from "../components/PhotoModal";
 import WorkerTable from "../components/WorkerTable";
 
@@ -120,9 +120,9 @@ function ViewWorker() {
 
       <workerContext.Provider value={{ setData, setIsLoading, setMessage }}>
         {openDeleteModal && (
-          <DeleteServiceModal
-            allServices={data}
-            serviceIndex={clickedRow}
+          <DeleteWorkerModal
+            allWorkers={data}
+            workerIndex={clickedRow}
             closeModal={handleModal}
             animate={animation}
           />

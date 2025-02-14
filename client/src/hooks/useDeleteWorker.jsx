@@ -1,14 +1,14 @@
 import { useState, useContext } from "react";
 import axios from "axios";
-import { serviceContext } from "../pages/ViewService";
+import { workerContext } from "../pages/ViewWorker";
 import { axiosHeader } from "../utils/axiosHeader";
-export default function useDeleteService(service, closeModal, serviceIndex) {
-  const update = useContext(serviceContext);
+export default function useDeleteWorker(worker, closeModal, workerIndex) {
+  const update = useContext(workerContext);
 
   const submitForm = (e) => {
     // close the modal when button clicked
     e.preventDefault();
-    closeModal(serviceIndex, "delete");
+    closeModal(workerIndex, "delete");
 
     // display loading icon
     update.setIsLoading(true);
@@ -17,17 +17,17 @@ export default function useDeleteService(service, closeModal, serviceIndex) {
     }`;
 
     axios
-      .delete(axiosHeader.url + `/api/services/delete/${service.id}`)
+      .delete(axiosHeader.url + `/api/workers/delete/${worker.id}`)
       .then((res) => {
         update.setMessage({
           success: false,
           message: "Service deleted successfuly",
         });
 
-        // update categories' List
+        // update worker's List
         update.setData((oldData) => {
           const newList = oldData.filter((item, i) => {
-            return item.id !== service.id;
+            return item.id !== worker.id;
           });
           return newList;
         });
