@@ -16,9 +16,16 @@ export const serviceContext = createContext();
 
 function ViewService() {
   const navigate = useNavigate();
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(null);
   const [page, setPage] = useState(1);
   const [reload, setReload] = useState(false);
+
+  let url = "";
+  if (search) {
+    url = `/api/services/${search}/?page=${page}`;
+  } else {
+    url = `/api/services/null/?page=${page}`;
+  }
 
   const {
     data,
@@ -30,7 +37,7 @@ function ViewService() {
     setMessage,
     setIsLoading,
     clearMessage,
-  } = useFetchPagination("/api/services/" + `?page=${page}`, reload);
+  } = useFetchPagination(url, reload, search);
 
   // handle modals
   const [animation, setAnimation] = useState("animated fadeIn");

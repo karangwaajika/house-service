@@ -16,10 +16,15 @@ export const workerContext = createContext();
 
 function ViewWorker() {
   const navigate = useNavigate();
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(null);
   const [page, setPage] = useState(1);
   const [reload, setReload] = useState(false);
-
+  let url = "";
+  if (search) {
+    url = `/api/workers/${search}/?page=${page}`;
+  } else {
+    url = `/api/workers/null/?page=${page}`;
+  }
   const {
     data,
     links,
@@ -30,7 +35,7 @@ function ViewWorker() {
     setMessage,
     setIsLoading,
     clearMessage,
-  } = useFetchPagination("/api/workers/" + `?page=${page}`, reload);
+  } = useFetchPagination(url, reload, search);
 
   // handle modals
   const [animation, setAnimation] = useState("animated fadeIn");
@@ -72,7 +77,7 @@ function ViewWorker() {
       <div className="view-category-header">
         <div className="search-btn">
           <InputField
-            type="search"
+            type="text"
             name="search"
             id="search"
             label="Search"

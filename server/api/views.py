@@ -127,6 +127,16 @@ class ServiceCategoryList(generics.ListAPIView):
     serializer_class = ServiceCategorySerializer
     permission_classes = [AllowAny]
 
+    def get(self, request, search):
+        self.search_key = search
+        return super().get(request, search)
+
+    def get_queryset(self):
+        queryset = self.queryset
+        if not self.search_key == "null":
+            queryset = self.queryset.filter(name__icontains=self.search_key)
+        return queryset
+
 
 class ServiceCategoryListNoPagination(generics.ListAPIView):
     queryset = ServiceCategory.objects.all()
@@ -182,6 +192,16 @@ class ServiceList(generics.ListAPIView):
     serializer_class = ServiceSerializer
     permission_classes = [AllowAny]
 
+    def get(self, request, search):
+        self.search_key = search
+        return super().get(request, search)
+
+    def get_queryset(self):
+        queryset = self.queryset
+        if not self.search_key == "null":
+            queryset = self.queryset.filter(name__icontains=self.search_key)
+        return queryset
+
 
 class ServiceListNoPagination(generics.ListAPIView):
     queryset = Service.objects.all()
@@ -222,6 +242,17 @@ class WorkerList(generics.ListAPIView):
     queryset = Worker.objects.all()
     serializer_class = WorkerSerializer
     permission_classes = [AllowAny]
+    search_key = None
+
+    def get(self, request, search):
+        self.search_key = search
+        return super().get(request, search)
+
+    def get_queryset(self):
+        queryset = self.queryset
+        if not self.search_key == "null":
+            queryset = self.queryset.filter(name__icontains=self.search_key)
+        return queryset
 
 
 class WorkerDetails(generics.RetrieveAPIView):

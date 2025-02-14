@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { axiosHeader } from "../utils/axiosHeader";
+import { useNavigate } from "react-router-dom";
 
-export default function useFetchPagination(url, reload) {
+export default function useFetchPagination(url, reload, search) {
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [links, setLinks] = useState({ count: 0, next: "", previous: "" });
   const [isLoading, setIsLoading] = useState(false);
@@ -42,17 +44,14 @@ export default function useFetchPagination(url, reload) {
         });
       })
       .catch((err) => {
-        if (err.message !== "canceled") {
-          setMessage({
-            success: false,
-            message: err.message,
-          });
-        }
         if (err.status == 401) {
           setMessage({
             success: false,
             message: "You need to login first!, Token Expired!",
           });
+          setTimeout(() => {
+            navigate("/");
+          }, 6000);
         } else if (err.status == 400) {
           setMessage({
             success: false,
@@ -64,10 +63,12 @@ export default function useFetchPagination(url, reload) {
             message: "Please check your internet connection",
           });
         } else {
-          setMessage({
-            success: false,
-            message: err.message,
-          });
+          if (err.message !== "canceled") {
+            setMessage({
+              success: false,
+              message: err.message,
+            });
+          }
         }
       })
       .finally(() => {
@@ -76,7 +77,7 @@ export default function useFetchPagination(url, reload) {
     return () => {
       cancelToken.cancel();
     };
-  }, [url, reload]);
+  }, [url, reload, search]);
 
   return {
     data,

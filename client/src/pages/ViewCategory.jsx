@@ -14,9 +14,16 @@ import PhotosModal from "../components/PhotosModal";
 export const categoryContext = createContext();
 function ViewCategory() {
   const navigate = useNavigate();
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(null);
   const [page, setPage] = useState(1);
-  const [reload, setReload] = useState(false)
+  const [reload, setReload] = useState(false);
+
+  let url = "";
+  if (search) {
+    url = `/api/categories/${search}/?page=${page}`;
+  } else {
+    url = `/api/categories/null/?page=${page}`;
+  }
 
   const {
     data,
@@ -28,7 +35,7 @@ function ViewCategory() {
     setMessage,
     setIsLoading,
     clearMessage,
-  } = useFetchPagination("/api/categories/" + `?page=${page}`,reload);
+  } = useFetchPagination(url, reload);
 
   // handle modals
   const [animation, setAnimation] = useState("animated fadeIn");
@@ -125,7 +132,9 @@ function ViewCategory() {
         )}
       </categoryContext.Provider>
 
-      <categoryContext.Provider value={{ setData, setIsLoading, setMessage, setReload }}>
+      <categoryContext.Provider
+        value={{ setData, setIsLoading, setMessage, setReload }}
+      >
         {openPhotosModal && (
           <PhotosModal
             allCategories={data}
