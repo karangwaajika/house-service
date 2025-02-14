@@ -138,7 +138,7 @@ function ViewWorker() {
             itemIndex={clickedRow}
             closeModal={handleModal}
             animate={animation}
-            pageName="service"
+            pageName="worker"
           />
         )}
       </workerContext.Provider>
