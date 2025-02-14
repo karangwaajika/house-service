@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import api from "../utils/api";
+import { axiosHeader } from "../utils/axiosHeader";
+
 import {
   ACCESS_TOKEN,
   REFRESH_TOKEN,
@@ -10,7 +12,9 @@ import axios from "axios";
 
 export const useProtectPage = () => {
   const [isAuthenticated, setIsAuthenticated] = useState({});
+  const [userData, setUserData] = useState({});
 
+  // ##################### checking token to return authentication status #############
   useEffect(() => {
     const auth = async () => {
       const token = localStorage.getItem(ACCESS_TOKEN);
@@ -23,15 +27,17 @@ export const useProtectPage = () => {
         const tokenExpiration = decoded.exp;
         const now = Date.now() / 1000;
         if (tokenExpiration < now) {
-          await REFRESH_TOKEN();
+          await refreshToken();
         } else {
           setIsAuthenticated({ status: true });
+          getUserInfo();
         }
       } else if (googleAccessToken) {
         const isGoogleTokenValid = await validateGoogleToken(googleAccessToken);
         console.log("google toke is valid", isGoogleTokenValid);
         if (isGoogleTokenValid) {
           setIsAuthenticated({ status: true });
+          getUserInfo();
         } else {
           setIsAuthenticated({ status: false });
         }
@@ -41,7 +47,9 @@ export const useProtectPage = () => {
     };
     auth().catch(() => setIsAuthenticated({ status: false }));
   }, []);
+  // ###################### End token checking ############################
 
+  // ##### refresh token form jwt #######
   const refreshToken = async () => {
     const refreshToken = localStorage.getItem(REFRESH_TOKEN);
     try {
@@ -51,6 +59,7 @@ export const useProtectPage = () => {
       if (res.status == 200) {
         localStorage.setItem(ACCESS_TOKEN, res.data.access);
         setIsAuthenticated({ status: true });
+        getUserInfo()
       } else {
         setIsAuthenticated({ status: false });
       }
@@ -60,6 +69,7 @@ export const useProtectPage = () => {
     }
   };
 
+  // ################ check google token validity
   const validateGoogleToken = async (googleAccessToken) => {
     try {
       const res = await api.post(
@@ -80,35 +90,23 @@ export const useProtectPage = () => {
       return false;
     }
   };
-
+  // ########## authenticated user info ######################
+  const getUserInfo = () => {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${
+      axiosHeader.jwt ? axiosHeader.jwt : axiosHeader.google
+    }`;
+    axios
+      .get(axiosHeader.url + "/api/auth/user/")
+      .then((res) => {
+        console.log("user", res.data);
+        console.log(res);
+        setUserData(res.data)
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
   const logout = () => {
-    // const google_access = localStorage.getItem(GOOGLE_ACCESS_TOKEN);
-    // const jwt_access = localStorage.getItem(ACCESS_TOKEN);
-    // const refresh_access = localStorage.getItem(REFRESH_TOKEN);
-    // axios.defaults.headers.common["Authorization"] = `Bearer ${
-    //   jwt_access ? jwt_access : google_access
-    // }`;
-    // axios
-    //   .post("http://127.0.0.1:8000/api/logout_user/", {
-    //     refresh_token: refresh_access,
-    //   })
-    //   .then((response) => {
-    //     console.log("User data", response.data);
-    //     localStorage.removeItem(ACCESS_TOKEN);
-    //     localStorage.removeItem(GOOGLE_ACCESS_TOKEN);
-    //     setIsAuthenticated({ status: false });
-
-    //     localStorage.clear();
-    //     axios.defaults.headers.common["Authorization"] = null;
-    //     window.location.reload();
-    //   })
-    //   .catch((error) => {
-    //     console.error(
-    //       "error verify token",
-    //       error.response ? error.response.data : error.message
-    //     );
-    //     // navigate('/login')
-    //   });
     localStorage.removeItem(ACCESS_TOKEN);
     localStorage.removeItem(GOOGLE_ACCESS_TOKEN);
     setIsAuthenticated({ status: false });

@@ -9,12 +9,16 @@ import FlashMessage from "./ui/FlashMessage";
 import googlePicture from "/images/google.png";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../utils/token";
 import api from "../utils/api";
+import fieldValidation from "../utils/fieldValidation.mjs";
 
 export default function RegisterForm() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     username: "",
     password: "",
+    email: "",
+    last_name: "",
+    first_name: "",
   });
 
   const [message, setMessage] = useState();
@@ -30,19 +34,42 @@ export default function RegisterForm() {
       return { ...oldForm, [name]: value };
     });
   };
-  const submitForm = async (e) => {
-    e.preventDefault();
+  // handle form input error
+  const [fieldError, setFieldError] = useState({});
+  const validateSubmitForm = async (e) => {
+    e.preventDefault()
+    const inputFields = {
+      username: form.username,
+      password: form.password,
+      email: form.email,
+      last_name: form.last_name,
+      first_name: form.first_name,
+    };
+    const validatedFields = fieldValidation(inputFields);
+    setFieldError(validatedFields);
+    console.log(Object.keys(validatedFields).length);
+    if (Object.keys(validatedFields).length == 0) {
+      submitForm();
+    }
+  };
+  const submitForm = async () => {
     setIsLoading(true);
     try {
       const res = await api.post("/api/user/register/", {
         username: form.username,
         password: form.password,
+        email: form.email,
+        last_name: form.last_name,
+        first_name: form.first_name,
       });
 
       setMessage({
         success: true,
         message: "User registered successfully, you can login",
       });
+      setTimeout(() => {
+        navigate("/login");
+      }, 6000);
     } catch (error) {
       console.error(error);
       if (error.response) {
@@ -75,7 +102,7 @@ export default function RegisterForm() {
   };
   return (
     <div className="login-form">
-      <div className="card-a">
+      <div className="card-a" style={{ width: "600px" }}>
         <div className="card-header">Sign up</div>
         {message && (
           <FlashMessage
@@ -85,19 +112,80 @@ export default function RegisterForm() {
           />
         )}
         <div className="card-body">
-          <form className="login_form">
-            <div>
-              Username:
-              <InputField
-                type="text"
-                name="username"
-                id="username"
-                label="Username"
-                icon="fa-solid fa-user"
-                placeholder="username"
-                handleChange={handleChange}
-              />
+          <form className="login_form" onSubmit = {validateSubmitForm}>
+            <div className="form-row">
+              <div className="form-col">
+                {fieldError.first_name && (
+                  <i className="error-text">{fieldError.first_name}</i>
+                )}
+                <InputField
+                  // type="text"
+                  name="first_name"
+                  type="text"
+                  id="first_name"
+                  errorfield={fieldError.first_name && "error-field--register"}
+                  label="first_name"
+                  icon="fa-solid fa-user"
+                  placeholder="first_name"
+                  handleChange={handleChange}
+                  value={form.first_name}
+                />
+              </div>
+              <div className="form-col">
+                {fieldError.last_name && (
+                  <i className="error-text">{fieldError.last_name}</i>
+                )}
+                <InputField
+                  // type="text"
+                  name="last_name"
+                  type="text"
+                  id="last_name"
+                  errorfield={fieldError.last_name && "error-field--register"}
+                  label="last_name"
+                  icon="fa-solid fa-user"
+                  placeholder="last_name"
+                  handleChange={handleChange}
+                  value={form.last_name}
+                />
+              </div>
             </div>
+            <div className="form-row">
+              <div className="form-col">
+                {fieldError.username && (
+                  <i className="error-text">{fieldError.username}</i>
+                )}
+                <InputField
+                  // type="text"
+                  name="username"
+                  type="text"
+                  id="username"
+                  errorfield={fieldError.username && "error-field--register"}
+                  label="username"
+                  icon="fa-solid fa-user"
+                  placeholder="username "
+                  handleChange={handleChange}
+                  value={form.username}
+                />
+              </div>
+              <div className="form-col">
+                {fieldError.email && (
+                  <i className="error-text">{fieldError.email}</i>
+                )}
+                <InputField
+                  // type="text"
+                  name="email"
+                  type="email"
+                  id="email"
+                  errorfield={fieldError.email && "error-field--register"}
+                  label="Email"
+                  icon="fa-solid fa-envelope"
+                  placeholder="Email"
+                  handleChange={handleChange}
+                  value={form.email}
+                />
+              </div>
+            </div>
+
             <div>
               Password:
               <InputField
@@ -121,7 +209,7 @@ export default function RegisterForm() {
                 <Button
                   text="Register"
                   className="btn-dark"
-                  onClick={submitForm}
+                  
                 />
               )}
             </div>

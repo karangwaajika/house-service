@@ -53,6 +53,10 @@
   border: 1px solid #ff3547;
   color: #ff3547;
 }
+.error-field--register{
+  border: 1px solid green;
+  color: #faa7ae;
+}
 .error-text {
   color: #dd2e2e;
   font-size: 13px;

@@ -42,7 +42,7 @@ class CreateUserAPIView(generics.CreateAPIView):
     permission_classes = [AllowAny]
 
 
-class UserProfileAPIView(generics.RetrieveUpdateAPIView):
+class UserProfileAPIView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
@@ -52,6 +52,7 @@ class UserProfileAPIView(generics.RetrieveUpdateAPIView):
         # return Response(self.request.user, status=status.HTTP_200_OK)
         return self.request.user
 
+# create user detail class
 
 @login_required
 def google_login_callback(request):

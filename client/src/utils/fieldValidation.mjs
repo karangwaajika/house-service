@@ -11,6 +11,42 @@ export default function fieldValidation({
       errorsValidation.name = "Use letters only";
     }
   }
+  if (arg.last_name !== undefined) {
+    if (!arg.last_name.trim()) {
+      errorsValidation.last_name = "last_name is required";
+    } else if (arg.last_name.length < 3) {
+      errorsValidation.last_name = "Characters should be greater than 3";
+    } else if (!/^[a-zA-Z -]+$/.test(arg.last_name)) {
+      errorsValidation.last_name = "Use letters only";
+    }
+  }
+  if (arg.first_name !== undefined) {
+    if (!arg.first_name.trim()) {
+      errorsValidation.first_name = "first_name is required";
+    } else if (arg.first_name.length < 3) {
+      errorsValidation.first_name = "Characters should be greater than 3";
+    } else if (!/^[a-zA-Z -]+$/.test(arg.first_name)) {
+      errorsValidation.first_name = "Use letters only";
+    }
+  }
+  if (arg.username !== undefined) {
+    if (!arg.username.trim()) {
+      errorsValidation.username = "username is required";
+    } else if (arg.username.length < 3) {
+      errorsValidation.username = "Characters should be greater than 3";
+    } else if (!/^[a-zA-Z0-9 -]+$/.test(arg.username)) {
+      errorsValidation.username = "Use letters and numbers only";
+    }
+  }
+  if (arg.password !== undefined) {
+    if (!arg.password.trim()) {
+      errorsValidation.password = "password is required";
+    } else if (arg.password.length < 3) {
+      errorsValidation.password = "Characters should be greater than 3";
+    } else if (!/^[a-zA-Z -]+$/.test(arg.password)) {
+      errorsValidation.password = "Use letters only";
+    }
+  }
   if (arg.files !== undefined) {
     if (arg.files.length == 0 || Object.keys(arg.files).length == 0){
       errorsValidation.files = "Please upload/Reupload an image";
