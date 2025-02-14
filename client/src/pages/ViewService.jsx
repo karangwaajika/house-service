@@ -8,7 +8,7 @@ import useFetchPagination from "../hooks/useFetchPagination";
 import PaginationLinks from "../components/ui/PaginationLinks";
 import loaderPicture from "/images/loading-3.gif";
 import EditServiceModal from "../components/EditServiceModal";
-import DeleteCategoryModal from "../components/DeleteCategoryModal";
+import DeleteServiceModal from "../components/DeleteServiceModal";
 import PhotoModal from "../components/PhotoModal";
 import ServiceTable from "../components/ServiceTable";
 
@@ -84,7 +84,7 @@ function ViewService() {
 
         <i
           className="btn-icon fa fa-plus"
-          onClick={() => navigate("/dashboard/add-category")}
+          onClick={() => navigate("/dashboard/add-service")}
         ></i>
       </div>
       {message && (
@@ -120,7 +120,7 @@ function ViewService() {
 
       <serviceContext.Provider value={{ setData, setIsLoading, setMessage }}>
         {openDeleteModal && (
-          <DeleteCategoryModal
+          <DeleteServiceModal
             allServices={data}
             serviceIndex={clickedRow}
             closeModal={handleModal}
