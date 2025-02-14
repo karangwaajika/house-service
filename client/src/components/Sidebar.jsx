@@ -104,7 +104,7 @@ function Sidebar() {
           </div>
           <div className="sidebar-content">
             <NavLink
-              to="#"
+              to="/dashboard/add-worker"
               className={
                 openWorkers
                   ? "item-sub open animated slideInDown"
@@ -115,7 +115,7 @@ function Sidebar() {
               Add
             </NavLink>
             <NavLink
-              to="#"
+              to="/dashboard/view-worker"
               className={
                 openWorkers
                   ? "item-sub open animated slideInDown"

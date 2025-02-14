@@ -6,6 +6,7 @@ import "./assets/login.css";
 import "./assets/animation.css";
 import "./assets/category.css";
 import "./assets/service.css";
+import "./assets/worker.css";
 
 // react
 import React from "react";
@@ -25,6 +26,8 @@ import AddCategoy from "./pages/AddCategoy";
 import ViewCategory from "./pages/ViewCategory";
 import AddService from "./pages/AddService";
 import ViewService from "./pages/ViewService";
+import AddWorker from "./pages/AddWorker";
+import ViewWorker from "./pages/ViewWorker";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +76,14 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/view-service",
             element: <ViewService />,
+          },
+          {
+            path: "/dashboard/add-worker",
+            element: <AddWorker />,
+          },
+          {
+            path: "/dashboard/view-worker",
+            element: <ViewWorker />,
           },
         ],
       },
