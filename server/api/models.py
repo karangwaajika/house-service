@@ -40,7 +40,7 @@ class Worker(models.Model):
     service = models.ForeignKey(
         Service, on_delete=models.CASCADE, related_name="workers", default=None
     )
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
     email = models.CharField(max_length=100, unique=True)
     phone = models.IntegerField()
     price = models.IntegerField()

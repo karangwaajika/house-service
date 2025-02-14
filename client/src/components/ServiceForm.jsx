@@ -73,7 +73,7 @@ export default function ServiceForm({
             id="name"
             errorfield={fieldError.name && "error-field"}
             label="Name"
-            icon="fa-solid fa-layer-group"
+            icon="fa-solid fa-toolbox"
             placeholder="Name"
             handleChange={handleChange}
             value={form.name}

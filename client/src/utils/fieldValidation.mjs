@@ -37,6 +37,44 @@ if (arg.file !== undefined) {
       errorsValidation.category = "Category field is required";
     }
   }
+  if (arg.service !== undefined) {
+    if (!arg.service.trim()) {
+      errorsValidation.service = "service field is required";
+    }
+  }
+  if (arg.address !== undefined) {
+    if (!arg.address.trim()) {
+      errorsValidation.address = "address field is required";
+    }
+  }
+  if (arg.address !== undefined) {
+    if (!arg.address.trim()) {
+      errorsValidation.address = "address field is required";
+    }
+  }
+  if (arg.email !== undefined) {
+    if (!arg.email.trim()) {
+      errorsValidation.email = "email field is required";
+    }
+  }
+  if (arg.price !== undefined) {
+    if (arg.price == 0) {
+      errorsValidation.price = "Price is required";
+    } else if (price < 100) {
+      errorsValidation["price"] = "Price can't be less than 100";
+    } else if (!/^[0-9]+$/.test(arg.price)) {
+      errorsValidation.price = "Only digits are allowed";
+    }
+  }
+  if (arg.phone !== undefined) {
+    if (!arg.phone.trim()) {
+      errorsValidation.phone = "phone is required";
+    } else if (arg.phone.length < 9) {
+      errorsValidation.phone = "digits are incomplete";
+    } else if (!/^[0-9 +]+$/.test(arg.phone)) {
+      errorsValidation.phone = "Use numbers only";
+    }
+  }
 
   return errorsValidation;
 }

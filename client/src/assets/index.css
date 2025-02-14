@@ -319,6 +319,17 @@ button.btn-google {
   display: flex;
   flex-direction: column;
 }
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+.form-col{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 400px;
+}
 /* text */
 .text-danger {
   color: #ff3547;

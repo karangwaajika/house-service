@@ -183,6 +183,13 @@ class ServiceList(generics.ListAPIView):
     permission_classes = [AllowAny]
 
 
+class ServiceListNoPagination(generics.ListAPIView):
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer
+    permission_classes = [AllowAny]
+    pagination_class = None
+
+
 class ServiceDetails(generics.RetrieveAPIView):
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
