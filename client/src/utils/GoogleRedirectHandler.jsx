@@ -34,11 +34,12 @@ function GoogleRedirectHandler() {
         });
     } else {
       console.log("no token found");
-      navigate("/login");
+      navigate("/login/?error=true");
+      
     }
   }, [navigate]);
 
-  return <div>Logging in .....</div>;
+  return <div className="callback">Logging in .....</div>;
 }
 
 export default GoogleRedirectHandler;
