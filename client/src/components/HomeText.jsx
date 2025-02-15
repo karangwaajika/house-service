@@ -13,7 +13,7 @@ function HomeText() {
           search and book.
         </p>
         <p>
-          <i className="fa fa-heart fa-3x"></i>
+          <i className="fa-regular fa-comments fa-3x"></i>
         </p>
       </div>
     </div>

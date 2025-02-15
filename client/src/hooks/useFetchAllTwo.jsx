@@ -3,9 +3,9 @@ import axios from "axios";
 import { axiosHeader } from "../utils/axiosHeader";
 import { useNavigate } from "react-router-dom";
 
-export default function useFetchAll(url) {
+export default function useFetchAllTwo(url) {
   const [data, setData] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
   const clearMessage = () => {
@@ -14,10 +14,7 @@ export default function useFetchAll(url) {
   useEffect(() => {
     const cancelToken = axios.CancelToken.source();
     setIsLoading(true);
-    // axios.defaults.headers.common["Authorization"] = `Bearer ${
-    //   axiosHeader.jwt ? axiosHeader.jwt : axiosHeader.google
-    // }`;
-    // console.log("NURL", axiosHeader.url + url);
+
     axios
       .get(axiosHeader.url + url, {
         cancelToken: cancelToken.token,

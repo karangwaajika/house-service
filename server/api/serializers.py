@@ -7,7 +7,15 @@ from .models import *
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ("id", "username", "password","email", "is_superuser", "first_name", "last_name")
+        fields = (
+            "id",
+            "username",
+            "password",
+            "email",
+            "is_superuser",
+            "first_name",
+            "last_name",
+        )
         extra_kwargs = {
             "password": {"write_only": True},
             "is_superuser": {"read_only": True},
@@ -73,19 +81,6 @@ class ServiceCategorySerializer(serializers.ModelSerializer):
         return category
 
 
-class ServiceSerializer(serializers.ModelSerializer):
-    category = ServiceCategory
-    category_name = serializers.ReadOnlyField(source="category.name")
-
-    class Meta:
-        model = Service
-        fields = ("id", "name", "image", "category", "category_name", "created_at")
-        extra_kwargs = {
-            "category": {"write_only": True},
-            "created_at": {"read_only": True},
-        }
-
-
 class WorkerSerializer(serializers.ModelSerializer):
     service = Service
     service_name = serializers.ReadOnlyField(source="service.name")
@@ -106,5 +101,27 @@ class WorkerSerializer(serializers.ModelSerializer):
         )
         extra_kwargs = {
             "service": {"write_only": True},
+            "created_at": {"read_only": True},
+        }
+
+
+class ServiceSerializer(serializers.ModelSerializer):
+    category = ServiceCategory
+    category_name = serializers.ReadOnlyField(source="category.name")
+    workers = WorkerSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = Service
+        fields = (
+            "id",
+            "name",
+            "image",
+            "category",
+            "category_name",
+            "created_at",
+            "workers",
+        )
+        extra_kwargs = {
+            "category": {"write_only": True},
             "created_at": {"read_only": True},
         }

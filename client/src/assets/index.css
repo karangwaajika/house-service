@@ -401,6 +401,19 @@ button.btn-google {
   opacity: 0.5;
   border-radius: 80%;
 }
+.loader--category {
+  width: 10%;
+  position: absolute;
+  top: 70%;
+  left: 10%;
+}
+.loader--category img {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 1;
+  border-radius: 80%;
+}
 
 /* avoid wrapping text */
 a,

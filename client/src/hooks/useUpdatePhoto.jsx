@@ -70,6 +70,9 @@ export default function useUpdatePhoto(closeModal, categoryIndex, categoryId) {
             success: false,
             message: "You need to login first!, Token Expired!",
           });
+          setTimeout(() => {
+            navigate("/login");
+          }, 6000);
         } else if (err.status == 400) {
           update.setMessage({
             success: false,

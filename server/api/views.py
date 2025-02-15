@@ -198,6 +198,14 @@ class ServiceListNoPagination(generics.ListAPIView):
     permission_classes = [AllowAny]
     pagination_class = None
 
+class ServiceListFilter(generics.ListAPIView):
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer
+    permission_classes = [AllowAny]
+    filter_backends = [DjangoFilterBackend]
+    pagination_class = None
+    filterset_fields = ["category"]    
+
 
 class ServiceDetails(generics.RetrieveAPIView):
     queryset = Service.objects.all()

@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import picture from "/images/google.png";
+import loaderPicture from "/images/loading-3.gif";
 import useFetchAll from "../hooks/useFetchAll";
+import FlashMessage from "./ui/FlashMessage";
 
-function ServiceCategory() {
-  const { data } = useFetchAll("/api/categories/no_pagination/");
-  const [isClicked, setIsClicked] = useState({ id: null, status: false });
-  const handleClicked = (id) => {
-    setIsClicked({ id: id, status: true });
-  };
+function ServiceCategory({
+  data,
+  isLoading,
+  message,
+  clearMessage,
+  handleClicked,
+  isClicked
+}) {
   return (
     <div className="service-category">
       <div className="category-header">
@@ -15,7 +18,28 @@ function ServiceCategory() {
         <h3 className="category-h3">Service Category</h3>
         <i className="line"></i>
       </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {message && (
+          <FlashMessage
+            message={message.message}
+            isSuccess={message.success}
+            clearMessage={clearMessage}
+          />
+        )}
+      </div>
       <div className="category-section">
+        {isLoading && (
+          <div className="loader--category">
+            <img src={loaderPicture} width={100} height={100} />
+          </div>
+        )}
+
         <div className="category-list">
           {data.length > 0 &&
             data.map((item, i) => {
