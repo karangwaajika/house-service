@@ -1,4 +1,5 @@
 import { formatToDateString, convertToDateTime } from "../utils/dateFormat.mjs";
+import {addComma} from "../utils/addComma.mjs"
 
 export default function WorkerTable({
   workers,
@@ -32,7 +33,7 @@ export default function WorkerTable({
                 <td data-cell="contact">
                   {worker.email} || {worker.phone}
                 </td>
-                <td data-cell="price">{worker.price}</td>
+                <td data-cell="price">{addComma(worker.price)} Rwf</td>
                 <td data-cell="service">{worker.service_name}</td>
                 <td data-cell="Photo">
                   <i
