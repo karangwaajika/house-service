@@ -12,7 +12,7 @@ function ServiceCategory({
   isClicked
 }) {
   return (
-    <div className="service-category">
+    <div className="service-category" style={{marginTop:"1%"}}>
       <div className="category-header">
         <i className="line"></i>
         <h3 className="category-h3">Service Category</h3>
@@ -56,7 +56,7 @@ function ServiceCategory({
                       ? "grid active"
                       : "grid"
                   }
-                  onClick={() => handleClicked(item.id)}
+                  onClick={() => handleClicked(item.id, item.name)}
                   key={i}
                 >
                   <img
