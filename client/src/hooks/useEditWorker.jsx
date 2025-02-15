@@ -3,8 +3,10 @@ import axios from "axios";
 import fieldValidation from "../utils/fieldValidation.mjs";
 import { workerContext } from "../pages/ViewWorker";
 import { axiosHeader } from "../utils/axiosHeader";
+import { useNavigate } from "react-router-dom";
 export default function useEditWorker(worker, closeModal, workerIndex) {
   const update = useContext(workerContext);
+  const navigate = useNavigate()
   const [form, setForm] = useState(
     worker
       ? {
@@ -92,6 +94,9 @@ export default function useEditWorker(worker, closeModal, workerIndex) {
             success: false,
             message: "You need to login first!, Token Expired!",
           });
+          setTimeout(() => {
+            navigate("/login");
+          }, 6000);
         } else if (err.status == 400) {
           update.setMessage({
             success: false,

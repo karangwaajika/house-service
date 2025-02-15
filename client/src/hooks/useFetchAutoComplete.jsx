@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { axiosHeader } from "../utils/axiosHeader";
+import { useNavigate } from "react-router-dom";
 
 export default function useFetchAutoComplete(url, search, refreshData) {
   const [data, setData] = useState([]);
+  const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
   const clearMessage = () => {
@@ -34,6 +36,9 @@ export default function useFetchAutoComplete(url, search, refreshData) {
             message: err.message,
           });
         }
+        setTimeout(() => {
+          navigate("/login");
+        }, 6000);
       })
       .finally(() => {
         setIsLoading(false);

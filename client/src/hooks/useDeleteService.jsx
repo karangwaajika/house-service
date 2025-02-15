@@ -2,9 +2,10 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import { serviceContext } from "../pages/ViewService";
 import { axiosHeader } from "../utils/axiosHeader";
+import { useNavigate } from "react-router-dom";
 export default function useDeleteService(service, closeModal, serviceIndex) {
   const update = useContext(serviceContext);
-
+  const navigate = useNavigate()
   const submitForm = (e) => {
     // close the modal when button clicked
     e.preventDefault();
@@ -44,6 +45,9 @@ export default function useDeleteService(service, closeModal, serviceIndex) {
             success: false,
             message: "You need to login first!, Token Expired!",
           });
+          setTimeout(() => {
+            navigate("/login");
+          }, 6000);
         } else if (err.status == 400) {
           update.setMessage({
             success: false,

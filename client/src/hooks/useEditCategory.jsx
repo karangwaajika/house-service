@@ -3,8 +3,10 @@ import axios from "axios";
 import fieldValidation from "../utils/fieldValidation.mjs";
 import { categoryContext } from "../pages/ViewCategory";
 import { axiosHeader } from "../utils/axiosHeader";
+import { useNavigate } from "react-router-dom";
 export default function useEditCategory(category, closeModal, categoryIndex) {
   const update = useContext(categoryContext);
+  const navigate = useNavigate()
   const [form, setForm] = useState(
     category
       ? {
@@ -87,6 +89,9 @@ export default function useEditCategory(category, closeModal, categoryIndex) {
             success: false,
             message: "You need to login first!, Token Expired!",
           });
+          setTimeout(() => {
+            navigate("/login");
+          }, 6000);
         } else if (err.status == 400) {
           update.setMessage({
             success: false,

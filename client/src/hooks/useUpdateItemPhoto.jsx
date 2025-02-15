@@ -3,12 +3,14 @@ import axios from "axios";
 import { serviceContext } from "../pages/ViewService";
 import { workerContext } from "../pages/ViewWorker";
 import { axiosHeader } from "../utils/axiosHeader";
+import { useNavigate } from "react-router-dom";
 export default function useUpdateItemPhoto(
   closeModal,
   itemIndex,
   itemId,
   pageName
 ) {
+  const navigate = useNavigate()
   let update = "";
   if (pageName == "service") {
     update = useContext(serviceContext);
@@ -76,6 +78,9 @@ export default function useUpdateItemPhoto(
             success: false,
             message: "You need to login first!, Token Expired!",
           });
+          setTimeout(() => {
+            navigate("/login");
+          }, 6000);
         } else if (err.status == 400) {
           update.setMessage({
             success: false,
@@ -133,6 +138,9 @@ export default function useUpdateItemPhoto(
             success: false,
             message: "You need to login first!, Token Expired!",
           });
+          setTimeout(() => {
+            navigate("/login");
+          }, 6000);
         } else if (err.status == 400) {
           update.setMessage({
             success: false,
@@ -191,6 +199,9 @@ export default function useUpdateItemPhoto(
             success: false,
             message: "You need to login first!, Token Expired!",
           });
+          setTimeout(() => {
+            navigate("/login");
+          }, 6000);
         } else if (err.status == 400) {
           update.setMessage({
             success: false,

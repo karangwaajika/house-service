@@ -50,7 +50,7 @@ export default function useFetchPagination(url, reload, search) {
             message: "You need to login first!, Token Expired!",
           });
           setTimeout(() => {
-            navigate("/");
+            navigate("/login");
           }, 6000);
         } else if (err.status == 400) {
           setMessage({

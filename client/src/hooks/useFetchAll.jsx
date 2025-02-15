@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { axiosHeader } from "../utils/axiosHeader";
+import { useNavigate } from "react-router-dom";
 
 export default function useFetchAll(url) {
   const [data, setData] = useState([]);
+  const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
   const clearMessage = () => {
@@ -37,6 +39,9 @@ export default function useFetchAll(url) {
             success: false,
             message: "You need to login first!, Token Expired!",
           });
+          setTimeout(() => {
+            navigate("/login");
+          }, 6000);
         } else if (err.status == 400) {
           setMessage({
             success: false,

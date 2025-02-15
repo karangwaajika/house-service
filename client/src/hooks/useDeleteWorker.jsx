@@ -2,9 +2,10 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import { workerContext } from "../pages/ViewWorker";
 import { axiosHeader } from "../utils/axiosHeader";
+import { useNavigate } from "react-router-dom";
 export default function useDeleteWorker(worker, closeModal, workerIndex) {
   const update = useContext(workerContext);
-
+  const navigate = useNavigate()
   const submitForm = (e) => {
     // close the modal when button clicked
     e.preventDefault();
@@ -44,6 +45,9 @@ export default function useDeleteWorker(worker, closeModal, workerIndex) {
             success: false,
             message: "You need to login first!, Token Expired!",
           });
+          setTimeout(() => {
+            navigate("/login");
+          }, 6000);
         } else if (err.status == 400) {
           update.setMessage({
             success: false,
