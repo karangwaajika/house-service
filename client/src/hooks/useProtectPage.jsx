@@ -12,7 +12,12 @@ import axios from "axios";
 
 export const useProtectPage = () => {
   const [isAuthenticated, setIsAuthenticated] = useState({});
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({
+    email: "",
+    is_superuser: false,
+    last_name: "",
+    first_name: "",
+  });
 
   // ##################### checking token to return authentication status #############
   useEffect(() => {
@@ -59,7 +64,7 @@ export const useProtectPage = () => {
       if (res.status == 200) {
         localStorage.setItem(ACCESS_TOKEN, res.data.access);
         setIsAuthenticated({ status: true });
-        getUserInfo()
+        getUserInfo();
       } else {
         setIsAuthenticated({ status: false });
       }
@@ -100,7 +105,7 @@ export const useProtectPage = () => {
       .then((res) => {
         console.log("user", res.data);
         console.log(res);
-        setUserData(res.data)
+        setUserData(res.data);
       })
       .catch((err) => {
         console.error(err);
@@ -113,5 +118,5 @@ export const useProtectPage = () => {
     window.location.reload();
   };
   console.log(isAuthenticated);
-  return { isAuthenticated, logout };
+  return { isAuthenticated, logout, userData };
 };

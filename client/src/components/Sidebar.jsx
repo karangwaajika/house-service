@@ -4,7 +4,7 @@ import { useProtectPage } from "../hooks/useProtectPage";
 import logoPic from "/images/logo.png";
 
 function Sidebar() {
-  const { logout } = useProtectPage();
+  const { logout,userData } = useProtectPage();
   const [openCategory, setOpenCategory] = useState(false);
   const [openService, setOpenService] = useState(false);
   const [openWorkers, setOpenWorkers] = useState(false);
@@ -208,28 +208,36 @@ function Sidebar() {
             ></i>
           </div>
           <div className="sidebar-content">
-            <NavLink
-              to="#"
+            <div
               className={
                 openSettings
                   ? "item-sub open animated slideInDown"
                   : "animated slideInUp item-sub"
               }
             >
-              <i className="fa-regular fa-square-plus icon"></i>
-              Add
-            </NavLink>
-            <NavLink
-              to="#"
+              <i className="fa-regular fa-envelope icon"></i>
+              <span style={{ fontSize: "10px" }}>{userData.email}</span>
+            </div>
+            <div
               className={
                 openSettings
                   ? "item-sub open animated slideInDown"
                   : "animated slideInUp item-sub"
               }
             >
-              <i className="fa-regular fa-eye icon"></i>
-              View
-            </NavLink>
+              <i className="fa-solid fa-pen-to-square icon"></i>
+              update
+            </div>
+            <div
+              className={
+                openSettings
+                  ? "item-sub open animated slideInDown"
+                  : "animated slideInUp item-sub"
+              }
+            >
+              <i className="fa-solid fa-right-from-bracket icon" onClick={logout}></i>
+              logout
+            </div>
           </div>
         </div>
 

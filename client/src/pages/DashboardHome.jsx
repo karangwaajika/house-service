@@ -4,8 +4,10 @@ import Profile from "../components/Profile";
 import ContentHeader from "../components/ContentHeader";
 import Card from "../components/Card";
 import logoImage from "/images/logo.png";
+import { useProtectPage } from "../hooks/useProtectPage";
 
 function DashboardHome() {
+  const { userData } = useProtectPage();
   return (
     <div className="dashboard-home--content">
       <ContentHeader />
