@@ -17,6 +17,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.pagination import LimitOffsetPagination, PageNumberPagination
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 
 # social account
@@ -52,7 +54,9 @@ class UserProfileAPIView(generics.RetrieveAPIView):
         # return Response(self.request.user, status=status.HTTP_200_OK)
         return self.request.user
 
+
 # create user detail class
+
 
 @login_required
 def google_login_callback(request):
@@ -119,7 +123,7 @@ class LogoutUserView(generics.CreateAPIView):
 class CreateServiceCategoryAPIView(generics.CreateAPIView):
     model = ServiceCategory
     serializer_class = ServiceCategorySerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     parser_classes = (MultiPartParser, FormParser)
 
 
@@ -127,16 +131,8 @@ class ServiceCategoryList(generics.ListAPIView):
     queryset = ServiceCategory.objects.all()
     serializer_class = ServiceCategorySerializer
     permission_classes = [AllowAny]
-
-    def get(self, request, search):
-        self.search_key = search
-        return super().get(request, search)
-
-    def get_queryset(self):
-        queryset = self.queryset
-        if not self.search_key == "null":
-            queryset = self.queryset.filter(name__icontains=self.search_key)
-        return queryset
+    filter_backends = [filters.SearchFilter]
+    search_fields = ["name"]
 
 
 class ServiceCategoryListNoPagination(generics.ListAPIView):
@@ -192,16 +188,8 @@ class ServiceList(generics.ListAPIView):
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
     permission_classes = [AllowAny]
-
-    def get(self, request, search):
-        self.search_key = search
-        return super().get(request, search)
-
-    def get_queryset(self):
-        queryset = self.queryset
-        if not self.search_key == "null":
-            queryset = self.queryset.filter(name__icontains=self.search_key)
-        return queryset
+    filter_backends = [filters.SearchFilter]
+    search_fields = ["name"]
 
 
 class ServiceListNoPagination(generics.ListAPIView):
@@ -243,17 +231,8 @@ class WorkerList(generics.ListAPIView):
     queryset = Worker.objects.all()
     serializer_class = WorkerSerializer
     permission_classes = [AllowAny]
-    search_key = None
-
-    def get(self, request, search):
-        self.search_key = search
-        return super().get(request, search)
-
-    def get_queryset(self):
-        queryset = self.queryset
-        if not self.search_key == "null":
-            queryset = self.queryset.filter(name__icontains=self.search_key)
-        return queryset
+    filter_backends = [filters.SearchFilter]
+    search_fields = ["name"]
 
 
 class WorkerDetails(generics.RetrieveAPIView):

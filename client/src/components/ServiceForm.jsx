@@ -56,7 +56,7 @@ export default function ServiceForm({
               <option value="" key={0}>
                 Select Category............
               </option>
-              {data.map((category, _) => {
+              {data.length> 0 && data.map((category, _) => {
                 return (
                   <option value={category.id} key={category.id}>
                     {category.name}

@@ -21,9 +21,9 @@ function ViewWorker() {
   const [reload, setReload] = useState(false);
   let url = "";
   if (search) {
-    url = `/api/workers/${search}/?page=${page}`;
+    url = `/api/workers/?search=${search}&?page=${page}`;
   } else {
-    url = `/api/workers/null/?page=${page}`;
+    url = `/api/workers/?page=${page}`;
   }
   const {
     data,
