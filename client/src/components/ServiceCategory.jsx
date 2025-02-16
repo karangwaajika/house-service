@@ -9,10 +9,10 @@ function ServiceCategory({
   message,
   clearMessage,
   handleClicked,
-  isClicked
+  isClicked,
 }) {
   return (
-    <div className="service-category" style={{marginTop:"1%"}}>
+    <div className="service-category" style={{ marginTop: "1%" }}>
       <div className="category-header">
         <i className="line"></i>
         <h3 className="category-h3">Service Category</h3>
@@ -43,12 +43,12 @@ function ServiceCategory({
         <div className="category-list">
           {data.length > 0 &&
             data.map((item, i) => {
-              // let style = {
-              //   backgroundImage: `url(${item.images[0].image})`,
-              //   backgroundSize: "contain",
-              //   backgroundRepeat: "no-repeat",
-              //   backgroundPosition: "top",
-              // };
+              let style = {
+                backgroundImage: `url(${item.images[0].image})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              };
               return (
                 <div
                   className={
@@ -59,12 +59,15 @@ function ServiceCategory({
                   onClick={() => handleClicked(item.id, item.name)}
                   key={i}
                 >
-                  <img
+                  <div className="cate-image" style={style}>
+                    <div className="cate-mask"></div>
+                  </div>
+                  {/* <img
                     src={item.images[0].image}
                     alt={`photo${i}`}
                     width={100}
                     height={100}
-                  />
+                  /> */}
                   <span className="cate--text">{item.name}</span>
                 </div>
               );

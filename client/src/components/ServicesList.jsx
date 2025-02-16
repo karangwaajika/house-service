@@ -19,30 +19,49 @@ function ServicesList({ data, isLoading, category_name }) {
         )}
         {data.length > 0 ? (
           data.map((item, i) => {
+            //  swing  bounceIn bouceInDown biLeft, Right1
+            // bouceInUp2 fadeInDown3 fadeInDownBig1a rotateIn rotateInDownLeft1aa
+            let style = {
+              backgroundImage: `url(${item.image})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            };
             return (
-              <div className="grid--service" key={i}>
-                <img src={item.image} alt="home" width={100} height={100} />
+              <div className="grid--service animated rotateInDownLeft" key={i}>
+                <div className="grid-image" style={style}>
+                  <div className="grid-mask"></div>
+                </div>
+                {/* <img src={item.image} alt="home" width={100} height={100} /> */}
                 <div className="grid-service-body">
                   <div className="category-header">
                     <i className="line-grid"></i>
-                    <span> {category_name}</span>
+                    <span> {item.category_name}</span>
                     <i className="line-grid"></i>
                   </div>
                   <div className="grid-header">{item.name}</div>
-                  <ul>
-                    <li>
-                      <i className="fa fa-user"></i>{" "}
-                      <span>{item.workers[0].name}</span>
-                    </li>
-                    <li>
-                      <i className="fa fa-envelope"></i>
-                      <span>{item.workers[0].email}</span>
-                    </li>
-                    <li>
-                      <i className="fa fa-location-dot"></i>
-                      <span>{item.workers[0].address}</span>
-                    </li>
-                  </ul>
+                  {item.workers.length > 0 ? (
+                    <ul>
+                      <li>
+                        <i className="fa fa-user"></i>{" "}
+                        <span>{item.workers[0].name}</span>
+                      </li>
+                      <li>
+                        <i className="fa fa-envelope"></i>
+                        <span>{item.workers[0].email}</span>
+                      </li>
+                      <li>
+                        <i className="fa fa-location-dot"></i>
+                        <span>{item.workers[0].address}</span>
+                      </li>
+                    </ul>
+                  ) : (
+                    <div style={{ fontSize: "12px" }}>
+                      No worker set for this service. we are looking for a
+                      proffesional for this domain. Sorry for any incovenience
+                    </div>
+                  )}
+
                   <div className="btn-grid">Book Now</div>
                 </div>
               </div>

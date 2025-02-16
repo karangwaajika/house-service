@@ -10,6 +10,7 @@ import googlePicture from "/images/google.png";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../utils/token";
 import api from "../utils/api";
 import fieldValidation from "../utils/fieldValidation.mjs";
+import { axiosHeader } from "../utils/axiosHeader";
 
 export default function RegisterForm() {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ export default function RegisterForm() {
   // handle form input error
   const [fieldError, setFieldError] = useState({});
   const validateSubmitForm = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const inputFields = {
       username: form.username,
       password: form.password,
@@ -54,47 +55,52 @@ export default function RegisterForm() {
   };
   const submitForm = async () => {
     setIsLoading(true);
-    try {
-      const res = await api.post("/api/user/register/", {
+    axios
+      .post(axiosHeader.url + "/api/user/register/", {
         username: form.username,
         password: form.password,
         email: form.email,
         last_name: form.last_name,
         first_name: form.first_name,
-      });
-
-      setMessage({
-        success: true,
-        message: "User registered successfully, you can login",
-      });
-      setTimeout(() => {
-        navigate("/login");
-      }, 6000);
-    } catch (error) {
-      console.error(error);
-      if (error.response) {
-        if (error.response.status == 400) {
-          setMessage({ success: false, message: "Username already exist!" });
+      })
+      .then((res) => {
+        console.log(res);
+        setMessage({
+          success: true,
+          message: "Registered successfuly, now you can login",
+        });
+        setTimeout(() => {
+          navigate("/login");
+        }, 6000);
+        setForm({
+          username: "",
+          password: "",
+          email: "",
+          last_name: "",
+          first_name: "",
+        });
+      })
+      .catch((err) => {
+        if (err.status == 400) {
+          setMessage({
+            success: false,
+            message: err.response.data,
+          });
+        } else if (err.code == "ERR_NETWORK") {
+          setMessage({
+            success: false,
+            message: "Please check your internet connection",
+          });
         } else {
           setMessage({
             success: false,
-            message: "Something went wrong. Please try again",
+            message: err.message,
           });
         }
-      } else if (error.request) {
-        setMessage({
-          success: false,
-          message: "Network Error. Please check your internet connection",
-        });
-      } else {
-        setMessage({
-          success: false,
-          message: "Something went wrong. Please try again",
-        });
-      }
-    } finally {
-      setIsLoading(false);
-    }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const handleGoogleLogin = () => {
@@ -112,7 +118,7 @@ export default function RegisterForm() {
           />
         )}
         <div className="card-body">
-          <form className="login_form" onSubmit = {validateSubmitForm}>
+          <form className="login_form" onSubmit={validateSubmitForm}>
             <div className="form-row">
               <div className="form-col">
                 {fieldError.first_name && (
@@ -206,11 +212,7 @@ export default function RegisterForm() {
                   img={loadingImg}
                 />
               ) : (
-                <Button
-                  text="Register"
-                  className="btn-dark"
-                  
-                />
+                <Button text="Register" className="btn-dark" />
               )}
             </div>
             <div>

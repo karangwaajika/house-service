@@ -19,7 +19,7 @@ export default function WorkerTable({
           <th>service</th>
           <th>Photos</th>
           <th>Address</th>
-          <th>Date Created</th>
+          {/* <th>Date Created</th> */}
           <th>Action</th>
         </tr>
       </thead>
@@ -42,7 +42,7 @@ export default function WorkerTable({
                   ></i>
                 </td>
                 <td data-cell="address">{worker.address}</td>
-                <td data-cell="Date">{convertToDateTime(worker.created_at)}</td>
+                {/* <td data-cell="Date">{convertToDateTime(worker.created_at)}</td> */}
                 <td data-cell="Action">
                   <div className="action-btns">
                     <i
