@@ -28,6 +28,11 @@ import AddService from "./pages/AddService";
 import ViewService from "./pages/ViewService";
 import AddWorker from "./pages/AddWorker";
 import ViewWorker from "./pages/ViewWorker";
+import ProtectHouseHolder from "./utils/ProtectHouseHolder";
+import RootHouseHolder from "./pages/house-holder/RootHouseHolder";
+import HomeHouseHolder from "./pages/house-holder/HomeHouseHolder";
+import ViewCategoryService from "./pages/house-holder/ViewCategoryService";
+import ViewCategoryServices from "./pages/house-holder/ViewCategoryServices";
 
 const router = createBrowserRouter([
   {
@@ -84,6 +89,30 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/view-worker",
             element: <ViewWorker />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    element: <ProtectHouseHolder />,
+    children: [
+      {
+        element: <RootHouseHolder />,
+        path: "/house-holder/",
+        children: [
+          {
+            element: <HomeHouseHolder />,
+            path: "/house-holder/",
+            index:true
+          },
+          {
+            element: <ViewCategoryServices />,
+            path: "/house-holder/service-category/:id",
+          },
+          {
+            element: <ViewCategoryService />,
+            path: "/house-holder/service/:id",
           },
         ],
       },

@@ -12,14 +12,14 @@
   box-sizing: border-box;
 }
 /* tailwind css */
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @layer base {
   :root {
     --radius: 0.5rem;
   }
-}
+} */
 
 .app-container {
   display: flex;

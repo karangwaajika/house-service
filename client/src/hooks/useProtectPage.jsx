@@ -17,6 +17,7 @@ export const useProtectPage = () => {
     is_superuser: false,
     last_name: "",
     first_name: "",
+    username: "",
   });
 
   // ##################### checking token to return authentication status #############
