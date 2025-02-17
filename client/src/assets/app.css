@@ -247,6 +247,16 @@ ul.links {
 .grid-service-body li span {
   display: block;
 }
+.grid-service-body .service-list--left{
+  margin-left: auto;
+  font-weight: 600;
+  font-size: 10px;
+  color: grey
+}
+.service-list--left .green{
+  color: #077c07;
+  display: inline;
+}
 .btn-grid {
   background-color: #3882f6;
   color: white;

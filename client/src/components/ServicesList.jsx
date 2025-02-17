@@ -2,6 +2,7 @@ import React from "react";
 import picture from "/images/download (1).jpeg";
 import Button from "../components/ui/Button";
 import loaderPicture from "/images/loading-3.gif";
+import { addComma } from "@/utils/addComma.mjs";
 
 function ServicesList({ data, isLoading, category_name }) {
   return (
@@ -45,6 +46,12 @@ function ServicesList({ data, isLoading, category_name }) {
                       <li>
                         <i className="fa fa-user"></i>{" "}
                         <span>{item.workers[0].name}</span>
+                        <span className="service-list--left">
+                          <i className="green">
+                            {addComma(item.workers[0].price)}
+                          </i>{" "}
+                          rwf/session
+                        </span>
                       </li>
                       <li>
                         <i className="fa fa-envelope"></i>
@@ -62,7 +69,13 @@ function ServicesList({ data, isLoading, category_name }) {
                     </div>
                   )}
 
-                  <div className="btn-grid">Book Now</div>
+                  <div
+                    className={
+                      item.workers.length > 0 ? "btn-grid" : "btn-grid avoid"
+                    }
+                  >
+                    Book Now
+                  </div>
                 </div>
               </div>
             );
