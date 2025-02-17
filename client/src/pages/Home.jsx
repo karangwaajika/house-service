@@ -10,7 +10,7 @@ function Home() {
   const { data, isLoading, message, clearMessage } = useFetchAll(
     "/api/categories/no_pagination/"
   );
-  const [categoryId, setCategoryId] = useState({id:null, name:null});
+  const [categoryId, setCategoryId] = useState({ id: null, name: null });
   let url = "";
   if (categoryId.id) {
     url = `/api/services/filter/?category=${categoryId.id}`;
@@ -47,7 +47,11 @@ function Home() {
         handleClicked={handleClicked}
         isClicked={isClicked}
       />
-      <ServicesList data={serviceData} isLoading={serviceIsLoading} category_name={categoryId.name} />
+      <ServicesList
+        data={serviceData}
+        isLoading={serviceIsLoading}
+        category_name={categoryId.name}
+      />
     </div>
   );
 }

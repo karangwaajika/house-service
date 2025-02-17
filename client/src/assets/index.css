@@ -11,6 +11,16 @@
   padding: 0;
   box-sizing: border-box;
 }
+/* tailwind css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}
+
 .app-container {
   display: flex;
   flex-direction: column;
