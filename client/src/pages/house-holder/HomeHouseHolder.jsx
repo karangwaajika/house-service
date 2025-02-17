@@ -1,16 +1,10 @@
-import ServiceCategory from "@/components/house-holder/ServiceCategory";
-import ServicesList from "@/components/house-holder/ServicesList";
-import CategoryHeader from "@/components/house-holder/CategoryHeader";
+import logoPic from "/images/logo.png";
 import React from "react";
+import useFetchAll from "@/hooks/useFetchAll";
 
 function HomeHouseHolder() {
-  return (
-    <div>
-      <CategoryHeader name="All" />
-      <ServiceCategory />
-      <ServicesList />
-    </div>
-  );
+
+  return <div className="house-content">ok</div>;
 }
 
 export default HomeHouseHolder;

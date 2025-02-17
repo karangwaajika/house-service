@@ -6,13 +6,12 @@ import ButtonLoading from "./ui/ButtonLoading";
 import loadingImg from "/images/n-loading.gif";
 import { useNavigate } from "react-router-dom";
 import FlashMessage from "./ui/FlashMessage";
-import googlePicture from "/images/google.png";
 
 // api
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../utils/token";
 import api from "../utils/api";
 
-export default function LoginForm() {
+export default function LoginAdminForm() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     username: "",
@@ -42,7 +41,7 @@ export default function LoginForm() {
       });
       localStorage.setItem(ACCESS_TOKEN, res.data.access);
       localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-      navigate("/house-holder");
+      navigate("/dashboard/home");
       window.location.reload();
     } catch (error) {
       console.error(error);
@@ -77,7 +76,7 @@ export default function LoginForm() {
 
   return (
     <div className="login-form">
-      <div className="card-a">
+      <div className="card-admin">
         <div className="card-header">Sign in</div>
         {message && (
           <FlashMessage
@@ -127,37 +126,8 @@ export default function LoginForm() {
                 />
               )}
             </div>
-            <div>
-              <button
-                type="button"
-                className="btn-google"
-                onClick={handleGoogleLogin}
-              >
-                <img
-                  src={googlePicture}
-                  alt="Google icon"
-                  className="google-icon"
-                  height={100}
-                  width={100}
-                />{" "}
-                Login with google
-              </button>
-            </div>
+            <div></div>
           </form>
-        </div>
-        <div className="card-footer-login">
-          Don't have an account?{" "}
-          <i
-            style={{
-              color: "#0e0ed1",
-              fontWeight: "bolder",
-              fontStyle: "normal",
-              cursor: "pointer",
-            }}
-            onClick={() => navigate("/register")}
-          >
-            Register
-          </i>
         </div>
       </div>
     </div>

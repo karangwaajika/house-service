@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import api from "../utils/api";
 import { axiosHeader } from "../utils/axiosHeader";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import {
   ACCESS_TOKEN,
@@ -11,14 +12,9 @@ import {
 import axios from "axios";
 
 export const useProtectPage = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState({});
-  const [userData, setUserData] = useState({
-    email: "",
-    is_superuser: false,
-    last_name: "",
-    first_name: "",
-    username: "",
-  });
+  const navigate = useNavigate();
+  const [isAuthenticated, setIsAuthenticated] = useState({ status: false });
+  const [userData, setUserData] = useState({});
 
   // ##################### checking token to return authentication status #############
   useEffect(() => {
@@ -116,8 +112,10 @@ export const useProtectPage = () => {
     localStorage.removeItem(ACCESS_TOKEN);
     localStorage.removeItem(GOOGLE_ACCESS_TOKEN);
     setIsAuthenticated({ status: false });
-    window.location.reload();
+    setUserData({});
+    navigate("/");
+    // window.location.reload();
   };
-  console.log(isAuthenticated);
+  console.log("is he", isAuthenticated);
   return { isAuthenticated, logout, userData };
 };

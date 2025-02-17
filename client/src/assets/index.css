@@ -442,7 +442,7 @@ a,
 .dropdown {
   position: absolute;
   top: 40px;
-  right: 10px;
+  right: 50px;
   width: 250px;
   z-index: 1;
 }

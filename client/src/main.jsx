@@ -7,6 +7,7 @@ import "./assets/animation.css";
 import "./assets/category.css";
 import "./assets/service.css";
 import "./assets/worker.css";
+import "./assets/householder.css";
 
 // react
 import React from "react";
@@ -33,6 +34,7 @@ import RootHouseHolder from "./pages/house-holder/RootHouseHolder";
 import HomeHouseHolder from "./pages/house-holder/HomeHouseHolder";
 import ViewCategoryService from "./pages/house-holder/ViewCategoryService";
 import ViewCategoryServices from "./pages/house-holder/ViewCategoryServices";
+import LoginAdmin from "./pages/LoginAdmin";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +45,11 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/admin",
+    element: <LoginAdmin />,
     errorElement: <NotFoundPage />,
   },
   {

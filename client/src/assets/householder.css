@@ -1,0 +1,53 @@
+.app-container.householder {
+  display: flex;
+  flex-direction: column;
+  background: #dde6ed;
+  gap: 0px;
+}
+nav.householder {
+  background-color: #0e0d0d;
+  overflow: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 50px;
+  color: white;
+}
+
+nav.householder .right-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+nav.householder .links a:hover {
+  color: rgb(65, 137, 155);
+}
+
+nav.householder .links a:active {
+  color: white;
+}
+
+nav.householder ul.links {
+  display: flex;
+  list-style: none;
+  gap: 10px;
+}
+nav.householder .links a {
+  text-decoration: none;
+  color: white;
+  font-size: 15px;
+  font-weight: 400;
+}
+.fa.fa-caret-down {
+  color: white;
+}
+.fa.fa-caret-down:hover {
+  color: rgb(65, 137, 155);
+}
+.fa.fa-caret-down:active {
+  color: white;
+}
+
+.toggle-btn-householder {
+  display: none;
+}
