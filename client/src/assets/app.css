@@ -239,17 +239,25 @@ a.grid {
   display: flex;
   gap: 2px;
 }
-.grid-service-body ul {
+.grid-service-body ul,
+.house-ul ul {
   list-style: none;
 }
-.grid-service-body li {
+.grid-service-body li,
+.house-ul li {
   font-size: 12px;
   display: flex;
   align-items: center;
   gap: 5px;
 }
+.house-ul li {
+  font-size: 15px;
+  color: black;
+}
 .grid-service-body li i,
-.grid-service-body li span {
+.house-ul li i,
+.grid-service-body li span,
+.house-ul li span {
   display: block;
 }
 .grid-service-body .service-list--left {

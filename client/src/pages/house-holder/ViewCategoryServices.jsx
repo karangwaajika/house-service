@@ -41,6 +41,7 @@ function ViewCategoryServices() {
         data={serviceData}
         isLoading={serviceIsLoading}
         category_name={accessName}
+        category_id = {accessId}
       />
     </div>
   );

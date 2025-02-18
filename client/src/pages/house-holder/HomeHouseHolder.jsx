@@ -43,6 +43,7 @@ function HomeHouseHolder() {
         data={serviceData}
         isLoading={serviceIsLoading}
         category_name={categoryId.name}
+        category_id={categoryId.id}
       />
     </div>
   );

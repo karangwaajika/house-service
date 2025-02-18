@@ -3,8 +3,10 @@ import picture from "/images/download (1).jpeg";
 import Button from "../components/ui/Button";
 import loaderPicture from "/images/loading-3.gif";
 import { addComma } from "@/utils/addComma.mjs";
+import { useNavigate } from "react-router-dom";
 
-function ServicesList({ data, isLoading, category_name }) {
+function ServicesList({ data, isLoading, category_name, category_id }) {
+  const navigate = useNavigate();
   return (
     <div className="services-list">
       <div className="services--header">
@@ -68,14 +70,24 @@ function ServicesList({ data, isLoading, category_name }) {
                       proffesional for this domain. Sorry for any incovenience
                     </div>
                   )}
-
-                  <div
-                    className={
-                      item.workers.length > 0 ? "btn-grid" : "btn-grid avoid"
-                    }
-                  >
-                    Book Now
-                  </div>
+                  {item.workers.length > 0 ? (
+                    <div
+                      onClick={() =>
+                        navigate(
+                          `/house-holder/service/?category_id=${category_id}&category_name=${item.category_name}&service_id=${
+                            item.id
+                          }`
+                        )
+                      }
+                      className={
+                        item.workers.length > 0 ? "btn-grid" : "btn-grid avoid"
+                      }
+                    >
+                      Book Now
+                    </div>
+                  ) : (
+                    <div className={"btn-grid avoid"}>Book Now</div>
+                  )}
                 </div>
               </div>
             );

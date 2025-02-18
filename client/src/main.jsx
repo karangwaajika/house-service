@@ -119,7 +119,7 @@ const router = createBrowserRouter([
           },
           {
             element: <ViewCategoryService />,
-            path: "/house-holder/service/:id",
+            path: "/house-holder/service/",
           },
         ],
       },
