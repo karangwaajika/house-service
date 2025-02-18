@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useFetchAll from "@/hooks/useFetchAll";
 import { useParams } from "react-router-dom";
 import ServiceCategory from "@/components/house-holder/ServiceCategoryH";
-import ServicesList from "@/components/ServicesList";
+import BookCategory from "@/components/house-holder/BookCategory";
 import WorkerProfile from "@/components/house-holder/WorkerProfile";
 
 function ViewCategoryService() {
@@ -44,8 +44,8 @@ function ViewCategoryService() {
         category_id={accessCategoryId}
       />
       <div className="book--content">
-        <WorkerProfile data={serviceData.workers}/>
-        <div className="book-category"></div>
+        <WorkerProfile data={serviceData.workers} />
+        <BookCategory data={categoryData} />
       </div>
     </div>
   );
