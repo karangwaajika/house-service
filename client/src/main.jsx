@@ -115,7 +115,7 @@ const router = createBrowserRouter([
           },
           {
             element: <ViewCategoryServices />,
-            path: "/house-holder/service-category/:id",
+            path: "/house-holder/service-category/",
           },
           {
             element: <ViewCategoryService />,
