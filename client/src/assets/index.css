@@ -63,7 +63,7 @@
   border: 1px solid #ff3547;
   color: #ff3547;
 }
-.error-field--register{
+.error-field--register {
   border: 1px solid green;
   color: #faa7ae;
 }
@@ -251,6 +251,26 @@ button.btn-google {
   width: 30px;
   height: 18px;
 }
+button.btn-booking {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  align-items: center;
+  background: #0c3d8b;
+  color: white;
+  height: 38px;
+  font-size: 15px;
+  border-radius: 5px;
+}
+.booking-icon {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+}
 
 /* card */
 .card {
@@ -338,7 +358,7 @@ button.btn-google {
   justify-content: space-between;
   gap: 10px;
 }
-.form-col{
+.form-col {
   display: flex;
   flex-direction: column;
   gap: 2px;

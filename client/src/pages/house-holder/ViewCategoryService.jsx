@@ -32,7 +32,15 @@ function ViewCategoryService() {
     message: serviceMessage,
     clearMessage: serviceClearMessage,
   } = useFetchAll(`/api/services/${accessServiceId}`);
-  console.log(serviceData);
+
+  // services data
+  const {
+    data: servicesData,
+    isLoading: servicesIsLoading,
+    message: servicesMessage,
+    clearMessage: servicesClearMessage,
+  } = useFetchAll(`/api/services/filter/?category=${accessCategoryId}`);
+  console.log("s",servicesData)
 
   return (
     <div className="house--content">
@@ -45,7 +53,7 @@ function ViewCategoryService() {
       />
       <div className="book--content">
         <WorkerProfile data={serviceData.workers} />
-        <BookCategory data={categoryData} />
+        <BookCategory data={categoryData} services={servicesData} service_id={accessServiceId} />
       </div>
     </div>
   );
