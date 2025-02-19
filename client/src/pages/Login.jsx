@@ -6,9 +6,14 @@ import FlashMessage from "../components/ui/FlashMessage";
 function Login() {
   const queryParams = new URLSearchParams(window.location.search);
   const [error, setError] = useState(queryParams.get("error"));
-  const [message, setMessage] = useState(
-    "Error while logging in with Google, please try again!"
-  );
+  const [auth, setAuth] = useState(queryParams.get("auth"));
+  let msg = "";
+  if (error) {
+    msg = "Error while logging in with Google, please try again!";
+  } else {
+    msg = "You need to login first to book!";
+  }
+  const [message, setMessage] = useState(msg);
   const clearMessage = () => {
     setMessage();
   };
@@ -18,14 +23,35 @@ function Login() {
       <div className="intro">
         <div className="mask--login">
           <HomePageNav />
-          
+
           {error && (
-            <div style={{ display:"flex", justifyContent:"center", alignItems:"center"}}>
-            <FlashMessage
-              message={message}
-              isSuccess={false}
-              clearMessage={clearMessage}
-            />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <FlashMessage
+                message={message}
+                isSuccess={false}
+                clearMessage={clearMessage}
+              />
+            </div>
+          )}
+          {auth && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <FlashMessage
+                message={message}
+                isSuccess={false}
+                clearMessage={clearMessage}
+              />
             </div>
           )}
 

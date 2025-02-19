@@ -112,7 +112,7 @@ export const useProtectPage = () => {
     localStorage.removeItem(ACCESS_TOKEN);
     localStorage.removeItem(GOOGLE_ACCESS_TOKEN);
     setIsAuthenticated({ status: false });
-    setUserData({});
+    
     navigate("/");
     // window.location.reload();
   };

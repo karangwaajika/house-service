@@ -1,3 +1,4 @@
+import ServicesListHome from "@/components/ServiceListHome";
 import React, { useState } from "react";
 import HomePageNav from "../components/HomePageNav";
 import HomeText from "../components/HomeText";
@@ -47,7 +48,7 @@ function Home() {
         handleClicked={handleClicked}
         isClicked={isClicked}
       />
-      <ServicesList
+      <ServicesListHome
         data={serviceData}
         isLoading={serviceIsLoading}
         category_name={categoryId.name}
