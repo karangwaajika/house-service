@@ -22,7 +22,7 @@ function GoogleRedirectHandler() {
         .get("http://127.0.0.1:8000/api/auth/user/")
         .then((response) => {
           console.log("User data", response.data);
-          navigate("/dashboard/home");
+          navigate("/house-holder");
           window.location.reload();
         })
         .catch((error) => {
