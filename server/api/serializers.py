@@ -122,6 +122,6 @@ class ServiceSerializer(serializers.ModelSerializer):
             "workers",
         )
         extra_kwargs = {
-            "category": {"write_only": True},
+            # "category": {"write_only": True},
             "created_at": {"read_only": True},
         }

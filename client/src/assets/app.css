@@ -280,6 +280,7 @@ a.grid {
   text-align: center;
   margin-left: auto;
   font-size: 12px;
+  text-decoration: none;
 }
 /* .btn-grid:hover {
   background-color: #3882f6;

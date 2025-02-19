@@ -71,20 +71,21 @@ function ServicesList({ data, isLoading, category_name, category_id }) {
                     </div>
                   )}
                   {item.workers.length > 0 ? (
-                    <div
-                      onClick={() =>
-                        navigate(
-                          `/house-holder/service/?category_id=${category_id}&category_name=${item.category_name}&service_id=${
-                            item.id
-                          }`
-                        )
-                      }
+                    <a
+                      // onClick={() =>
+                      //   navigate(
+                      //     `/house-holder/service/?category_id=${item.category}&category_name=${item.category_name}&service_id=${
+                      //       item.id
+                      //     }`
+                      //   )
+                      // }
+                      href={`/house-holder/service/?category_id=${item.category}&category_name=${item.category_name}&service_id=${item.id}`}
                       className={
                         item.workers.length > 0 ? "btn-grid" : "btn-grid avoid"
                       }
                     >
                       Book Now
-                    </div>
+                    </a>
                   ) : (
                     <div className={"btn-grid avoid"}>Book Now</div>
                   )}
