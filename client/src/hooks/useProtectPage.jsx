@@ -45,6 +45,7 @@ export const useProtectPage = () => {
         }
       } else {
         setIsAuthenticated({ status: false });
+        navigate("/")
       }
     };
     auth().catch(() => setIsAuthenticated({ status: false }));
