@@ -4,9 +4,14 @@ import Button from "../components/ui/Button";
 import loaderPicture from "/images/loading-3.gif";
 import { addComma } from "@/utils/addComma.mjs";
 import { useNavigate } from "react-router-dom";
+import { axiosHeader } from "@/utils/axiosHeader";
 
 function ServicesListHome({ data, isLoading, category_name, category_id }) {
+  let is_login = false;
   const navigate = useNavigate();
+  if (axiosHeader.jwt || axiosHeader.google) {
+    is_login = true;
+  }
   return (
     <div className="services-list">
       <div className="services--header">
@@ -72,10 +77,10 @@ function ServicesListHome({ data, isLoading, category_name, category_id }) {
                   )}
                   {item.workers.length > 0 ? (
                     <div
-                      onClick={() =>
-                        navigate(
-                          `/login/?auth=false`
-                        )
+                      onClick={
+                        is_login
+                          ? () => navigate(`/house-holder/service/?category_id=${item.category}&category_name=${item.category_name}&service_id=${item.id}`)
+                          : () => navigate(`/login/?auth=false`)
                       }
                       className={
                         item.workers.length > 0 ? "btn-grid" : "btn-grid avoid"
