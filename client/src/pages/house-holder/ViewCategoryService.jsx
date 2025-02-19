@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import ServiceCategory from "@/components/house-holder/ServiceCategoryH";
 import BookCategory from "@/components/house-holder/BookCategory";
 import WorkerProfile from "@/components/house-holder/WorkerProfile";
+import BookModal from "@/components/house-holder/BookModal";
 
 function ViewCategoryService() {
   const params = useParams();
@@ -40,7 +41,19 @@ function ViewCategoryService() {
     message: servicesMessage,
     clearMessage: servicesClearMessage,
   } = useFetchAll(`/api/services/filter/?category=${accessCategoryId}`);
-  console.log("s",servicesData)
+  console.log("s", servicesData);
+
+  // handle modals
+  const [animation, setAnimation] = useState("animated slideInRight");
+
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleModal = () => {
+    setAnimation(openModal ? "animated slideOutRight" : "animated slideInRight");
+    setTimeout(() => {
+      setOpenModal((oldModalState) => !oldModalState);
+    }, 1000);
+  };
 
   return (
     <div className="house--content">
@@ -53,8 +66,16 @@ function ViewCategoryService() {
       />
       <div className="book--content">
         <WorkerProfile data={serviceData.workers} />
-        <BookCategory data={categoryData} services={servicesData} service_id={accessServiceId} />
+        <BookCategory
+          data={categoryData}
+          services={servicesData}
+          service_id={accessServiceId}
+          handleModal={handleModal}
+        />
       </div>
+      {openModal && (
+        <BookModal animate={animation} handleCloseModal={handleModal} />
+      )}
     </div>
   );
 }

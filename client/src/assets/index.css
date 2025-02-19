@@ -265,6 +265,16 @@ button.btn-booking {
   font-size: 15px;
   border-radius: 5px;
 }
+.btn-booking:hover {
+  background: #ffff;
+  color: black;
+  border: 1px solid black;
+}
+.btn-booking:active {
+  background: #0c3d8b;
+  color: white;
+  border: none;
+}
 .booking-icon {
   display: block;
   width: 30px;

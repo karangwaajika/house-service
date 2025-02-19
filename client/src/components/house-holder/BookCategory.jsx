@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import picture from "/images/book2.png";
 import { useNavigate } from "react-router-dom";
 
-function BookCategory({ data, services, service_id }) {
+function BookCategory({ data, services, service_id, handleModal }) {
   const navigate = useNavigate();
   return (
     <div className="book--category">
@@ -26,7 +26,7 @@ function BookCategory({ data, services, service_id }) {
       </div>
 
       <div className="right">
-        <button type="button" className="btn-booking">
+        <button type="button" className="btn-booking" onClick={handleModal}>
           <img
             src={picture}
             alt="Google icon"
