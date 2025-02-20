@@ -144,7 +144,7 @@ class BookingSerializer(serializers.ModelSerializer):
             "client",
             "date",
             "time",
-            "is_approved",
+            "status",
             "created_at",
             "service_name",
             "worker_name",
@@ -152,5 +152,4 @@ class BookingSerializer(serializers.ModelSerializer):
         )
         extra_kwargs = {
             "created_at": {"read_only": True},
-            "is_approved": {"read_only": True},
         }

@@ -270,6 +270,26 @@ class CreateBookingAPIView(generics.CreateAPIView):
     serializer_class = BookingSerializer
     permission_classes = [AllowAny]
 
+    def post(self, request, *args, **kwargs):
+        client_id = request.data.get("client")
+        service_id = request.data.get("service")
+        worker_id = request.data.get("worker")
+        date = request.data.get("date")
+        time = request.data.get("time")
+        try:
+            booking = Booking.objects.get(
+                date=date, service=service_id, worker=worker_id, client=client_id
+            )
+            if booking.time == time:
+                return JsonResponse({"error": ["You have already booked"]}, status=status.HTTP_400_BAD_REQUEST)
+            elif booking.status == "1" or booking.status == "2":
+                return JsonResponse({"error": ["You have already booked"]}, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return super().post(request, *args, **kwargs)
+
+        except Booking.DoesNotExist:
+            return super().post(request, *args, **kwargs)
+
 
 class BookingList(generics.ListAPIView):
     queryset = Booking.objects.all()

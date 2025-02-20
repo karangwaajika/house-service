@@ -55,6 +55,10 @@ class Worker(models.Model):
 
 
 class Booking(models.Model):
+    class BookingStatus(models.TextChoices):
+        PENDING = "1", "Pending"
+        APPROVED = "2", "Approved"
+        DENIED = "3", "Denied"
     service = models.ForeignKey(
         Service, on_delete=models.CASCADE, related_name="bookings", default=None
     )
@@ -66,7 +70,7 @@ class Booking(models.Model):
     )
     date = models.DateField(null=True)
     time = models.CharField(max_length=30, default=None)
-    is_approved = models.BooleanField(default=False)
+    status = models.CharField(default="1",choices=BookingStatus.choices, max_length=30)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
