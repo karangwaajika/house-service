@@ -121,6 +121,11 @@ button.btn-primary {
   border: 1px solid #526db2;
   color: #ffffff;
 }
+button.btn-primary-book {
+  background: rgb(26, 102, 216);
+  border: 1px solid rgb(26, 102, 216);
+  color: #ffffff;
+}
 button.btn-primary-outline {
   background: #ffffff;
   border: 1px solid #4285f4;
@@ -175,6 +180,9 @@ button.btn-danger {
   background: #ff3547;
   border: 1px solid #ff3547;
   color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 button.btn-danger-outline {
   background: #ffffff;
