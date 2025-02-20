@@ -198,13 +198,14 @@ class ServiceListNoPagination(generics.ListAPIView):
     permission_classes = [AllowAny]
     pagination_class = None
 
+
 class ServiceListFilter(generics.ListAPIView):
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
     permission_classes = [AllowAny]
     filter_backends = [DjangoFilterBackend]
     pagination_class = None
-    filterset_fields = ["category"]    
+    filterset_fields = ["category"]
 
 
 class ServiceDetails(generics.RetrieveAPIView):
@@ -262,3 +263,31 @@ class WorkerDelete(generics.RetrieveDestroyAPIView):
     serializer_class = WorkerSerializer
     permission_classes = [AllowAny]
     lookup_url_kwarg = "worker_id"
+
+
+class CreateBookingAPIView(generics.CreateAPIView):
+    model = Booking
+    serializer_class = BookingSerializer
+    permission_classes = [AllowAny]
+
+
+class BookingList(generics.ListAPIView):
+    queryset = Booking.objects.all()
+    serializer_class = BookingSerializer
+    permission_classes = [AllowAny]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ["service__name", "worker__name"]
+
+
+class BookingUpdate(generics.RetrieveUpdateAPIView):
+    queryset = Booking.objects.all()
+    serializer_class = BookingSerializer
+    permission_classes = [AllowAny]
+    lookup_url_kwarg = "booking_id"
+
+
+class BookingDelete(generics.RetrieveDestroyAPIView):
+    queryset = Booking.objects.all()
+    serializer_class = BookingSerializer
+    permission_classes = [AllowAny]
+    lookup_url_kwarg = "booking_id"

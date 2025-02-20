@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -51,3 +52,23 @@ class Worker(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Booking(models.Model):
+    service = models.ForeignKey(
+        Service, on_delete=models.CASCADE, related_name="bookings", default=None
+    )
+    worker = models.ForeignKey(
+        Worker, on_delete=models.CASCADE, related_name="bookings", default=None
+    )
+    client = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="bookings", default=None
+    )
+    date = models.DateField(null=True)
+    time = models.TimeField(null=True)
+    is_approved = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.date

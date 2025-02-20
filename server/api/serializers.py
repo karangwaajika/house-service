@@ -125,3 +125,32 @@ class ServiceSerializer(serializers.ModelSerializer):
             # "category": {"write_only": True},
             "created_at": {"read_only": True},
         }
+
+
+class BookingSerializer(serializers.ModelSerializer):
+    service = Service
+    service_name = serializers.ReadOnlyField(source="service.name")
+    worker = Worker
+    worker_name = serializers.ReadOnlyField(source="worker.email")
+    client = User
+    client_email = serializers.ReadOnlyField(source="client.email")
+
+    class Meta:
+        model = Booking
+        fields = (
+            "id",
+            "service",
+            "worker",
+            "client",
+            "date",
+            "time",
+            "is_approved",
+            "created_at",
+            "service_name",
+            "worker_name",
+            "client_email",
+        )
+        extra_kwargs = {
+            "created_at": {"read_only": True},
+            "is_approved": {"read_only": True},
+        }

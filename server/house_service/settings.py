@@ -124,7 +124,9 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
-
+FORMAT_MODULE_PATH = [
+    "house_service.formats",
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/

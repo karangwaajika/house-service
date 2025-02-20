@@ -26,4 +26,8 @@ urlpatterns = [
     path("workers/<int:worker_id>", WorkerDetails.as_view(), name="view_worker"),
     path("workers/delete/<int:worker_id>", WorkerDelete.as_view(), name="delete_worker"),
     path("workers/update/<int:worker_id>", WorkerUpdate.as_view(), name="update_worker"),
+    path("bookings/create/", CreateBookingAPIView.as_view(), name="add_booking"),
+    path("bookings/update/<int:booking_id>", BookingUpdate.as_view(), name="update_booking"),
+    path("bookings/delete/<int:booking_id>", BookingDelete.as_view(), name="delete_booking"),
+    path("bookings/", BookingList.as_view(), name="view_bookings"),
 ]
