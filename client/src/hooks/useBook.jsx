@@ -16,7 +16,6 @@ export default function useBook(service_id, client_id,worker_id, date) {
     date: date,
     time: null,
   });
-  console.log("here", form);
   const submitForm = (e) => {
     setIsLoading(true);
     axios.defaults.headers.common["Authorization"] = `Bearer ${

@@ -21,8 +21,6 @@ export const useProtectPage = () => {
     const auth = async () => {
       const token = localStorage.getItem(ACCESS_TOKEN);
       const googleAccessToken = localStorage.getItem(GOOGLE_ACCESS_TOKEN);
-      console.log("Access_token", token);
-      console.log("Google_access_token", googleAccessToken);
 
       if (token) {
         const decoded = jwtDecode(token);
@@ -36,7 +34,6 @@ export const useProtectPage = () => {
         }
       } else if (googleAccessToken) {
         const isGoogleTokenValid = await validateGoogleToken(googleAccessToken);
-        console.log("google toke is valid", isGoogleTokenValid);
         if (isGoogleTokenValid) {
           setIsAuthenticated({ status: true });
           getUserInfo();
@@ -67,7 +64,6 @@ export const useProtectPage = () => {
         setIsAuthenticated({ status: false });
       }
     } catch (error) {
-      console.error("error refreshing token", error);
       setIsAuthenticated({ status: false });
     }
   };
@@ -86,10 +82,8 @@ export const useProtectPage = () => {
           },
         }
       );
-      console.log("Validated res", res.data);
       return res.data.valid;
     } catch (error) {
-      console.error("error validating google", error);
       return false;
     }
   };
@@ -101,12 +95,9 @@ export const useProtectPage = () => {
     axios
       .get(axiosHeader.url + "/api/auth/user/")
       .then((res) => {
-        console.log("user", res.data);
-        console.log(res);
         setUserData(res.data);
       })
       .catch((err) => {
-        console.error(err);
       });
   };
   const logout = () => {
@@ -117,6 +108,5 @@ export const useProtectPage = () => {
     navigate("/");
     // window.location.reload();
   };
-  console.log("is he", isAuthenticated);
   return { isAuthenticated, logout, userData };
 };

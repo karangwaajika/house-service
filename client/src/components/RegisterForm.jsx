@@ -48,7 +48,6 @@ export default function RegisterForm() {
     };
     const validatedFields = fieldValidation(inputFields);
     setFieldError(validatedFields);
-    console.log(Object.keys(validatedFields).length);
     if (Object.keys(validatedFields).length == 0) {
       submitForm();
     }
@@ -64,7 +63,6 @@ export default function RegisterForm() {
         first_name: form.first_name,
       })
       .then((res) => {
-        console.log(res);
         setMessage({
           success: true,
           message: "Registered successfuly, now you can login",

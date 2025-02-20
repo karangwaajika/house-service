@@ -18,14 +18,11 @@ export default function useFetchPagination(url, reload, search) {
     axios.defaults.headers.common["Authorization"] = `Bearer ${
       axiosHeader.jwt ? axiosHeader.jwt : axiosHeader.google
     }`;
-    console.log("NURL", axiosHeader.url + url);
     axios
       .get(axiosHeader.url + url, {
         cancelToken: cancelToken.token,
       })
       .then((res) => {
-        console.log(res.data);
-        console.log(res.data.results);
         setData(res.data.results);
         let next_page = null;
         let prev_page = null;

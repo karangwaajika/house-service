@@ -9,18 +9,11 @@ function ViewCategoryServices() {
   const queryParams = new URLSearchParams(window.location.search);
     const accessId = queryParams.get("id");
     const accessName = queryParams.get("name");
-    console.log("id",accessId)
-    console.log("name",accessName)
   const { data, isLoading, message, clearMessage } = useFetchAll(
     "/api/categories/no_pagination/"
   );
   const [categoryId, setCategoryId] = useState({ id: accessId });
   let url = `/api/services/filter/?category=${accessId}`;
-  // if (categoryId.id) {
-  //   url = `/api/services/filter/?category=${categoryId.id}`;
-  // } else {
-  //   url = `/api/services/no_pagination/`;
-  // }
   const {
     data: serviceData,
     isLoading: serviceIsLoading,

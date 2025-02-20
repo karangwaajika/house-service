@@ -15,7 +15,6 @@ export default function useUpdatePhoto(closeModal, categoryIndex, categoryId) {
   // handle form input error
   const [fieldError, setFieldError] = useState({});
   const validateSubmitForm = async (submit_type, photoId) => {
-    console.log(file);
     const validatedFields = {};
     if (!file) {
       validatedFields["file" + photoId] = "you didn't upload any file";
@@ -33,7 +32,6 @@ export default function useUpdatePhoto(closeModal, categoryIndex, categoryId) {
   const submitForm = (photoId) => {
     // close the modal when button clicked
     closeModal(categoryIndex, "photos");
-    console.log("file upload", file);
     // display loading icon
     update.setIsLoading(true);
     axios.defaults.headers.common["Authorization"] = `Bearer ${
@@ -97,7 +95,6 @@ export default function useUpdatePhoto(closeModal, categoryIndex, categoryId) {
   const submitAddPhoto = () => {
     // close the modal when button clicked
     closeModal(categoryIndex, "photos");
-    console.log("file upload", file);
     // display loading icon
     update.setIsLoading(true);
     axios.defaults.headers.common["Authorization"] = `Bearer ${

@@ -43,7 +43,6 @@ function ViewCategoryService() {
     message: servicesMessage,
     clearMessage: servicesClearMessage,
   } = useFetchAll(`/api/services/filter/?category=${accessCategoryId}`);
-  console.log("s", servicesData);
 
   // handle modals
   const [animation, setAnimation] = useState("animated slideInRight");

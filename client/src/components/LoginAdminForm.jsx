@@ -44,7 +44,6 @@ export default function LoginAdminForm() {
       navigate("/dashboard/home");
       window.location.reload();
     } catch (error) {
-      console.error(error);
       if (error.response) {
         if (error.response.status == 401) {
           setMessage({ success: false, message: "Invalid credentials" });

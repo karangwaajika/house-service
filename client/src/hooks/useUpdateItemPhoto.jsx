@@ -45,7 +45,6 @@ export default function useUpdateItemPhoto(
   const submitService = () => {
     // close the modal when button clicked
     closeModal(itemIndex, "photo");
-    console.log("file upload", file);
     // display loading icon
     update.setIsLoading(true);
     axios.defaults.headers.common["Authorization"] = `Bearer ${
@@ -105,7 +104,6 @@ export default function useUpdateItemPhoto(
   const submitWorker = () => {
     // close the modal when button clicked
     closeModal(itemIndex, "photo");
-    console.log("file upload", file);
     // display loading icon
     update.setIsLoading(true);
     axios.defaults.headers.common["Authorization"] = `Bearer ${
@@ -165,7 +163,6 @@ export default function useUpdateItemPhoto(
   const submitAddPhoto = () => {
     // close the modal when button clicked
     closeModal(categoryIndex, "photos");
-    console.log("file upload", file);
     // display loading icon
     update.setIsLoading(true);
     axios.defaults.headers.common["Authorization"] = `Bearer ${

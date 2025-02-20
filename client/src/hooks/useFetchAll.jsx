@@ -14,17 +14,11 @@ export default function useFetchAll(url) {
   useEffect(() => {
     const cancelToken = axios.CancelToken.source();
     setIsLoading(true);
-    // axios.defaults.headers.common["Authorization"] = `Bearer ${
-    //   axiosHeader.jwt ? axiosHeader.jwt : axiosHeader.google
-    // }`;
-    // console.log("NURL", axiosHeader.url + url);
     axios
       .get(axiosHeader.url + url, {
         cancelToken: cancelToken.token,
       })
       .then((res) => {
-        console.log(res.data);
-        console.log(res.data.results);
         setData(res.data);
       })
       .catch((err) => {

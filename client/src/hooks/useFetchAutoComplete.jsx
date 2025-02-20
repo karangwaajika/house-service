@@ -26,7 +26,6 @@ export default function useFetchAutoComplete(url, search, refreshData) {
         }
       )
       .then((res) => {
-        console.log(res.data)
         setData(res.data);
       })
       .catch((err) => {

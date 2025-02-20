@@ -46,7 +46,6 @@ function AddWorker() {
     };
     const validatedFields = fieldValidation(inputFields);
     setFieldError(validatedFields);
-    console.log(Object.keys(validatedFields).length);
     if (Object.keys(validatedFields).length == 0) {
       submitForm();
     }
@@ -78,7 +77,6 @@ function AddWorker() {
     axios
       .post(axiosHeader.url + "/api/workers/create/", data, config)
       .then((res) => {
-        console.log(res);
 
         setMessage({
           success: true,

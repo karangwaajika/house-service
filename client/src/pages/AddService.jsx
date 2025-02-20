@@ -39,7 +39,6 @@ function AddService() {
     };
     const validatedFields = fieldValidation(inputFields);
     setFieldError(validatedFields);
-    console.log(Object.keys(validatedFields).length);
     if (Object.keys(validatedFields).length == 0) {
       submitForm();
     }
@@ -67,8 +66,6 @@ function AddService() {
     axios
       .post(axiosHeader.url + "/api/services/create/", data, config)
       .then((res) => {
-        console.log(res);
-
         setMessage({
           success: true,
           message: "Service inserted successfuly",

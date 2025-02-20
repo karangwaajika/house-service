@@ -3,7 +3,6 @@ import { addComma } from "@/utils/addComma.mjs";
 
 function WorkerProfile({ data }) {
   // const [workers, setWorkers] = useState(data.workers)
-  console.log(data && data[0]);
   let price = data ? data[0].price : "";
   return (
     <div className="worker-profile">

@@ -37,7 +37,6 @@ function AddCategoy() {
     };
     const validatedFields = fieldValidation(inputFields);
     setFieldError(validatedFields);
-    console.log(Object.keys(validatedFields).length);
     if (Object.keys(validatedFields).length == 0) {
       submitForm();
     }
@@ -67,8 +66,6 @@ function AddCategoy() {
     axios
       .post(axiosHeader.url + "/api/categories/create/", data, config)
       .then((res) => {
-        console.log(res);
-
         setMessage({
           success: true,
           message: "Category inserted successfuly",

@@ -20,8 +20,6 @@ export default function useFetchAllTwo(url) {
         cancelToken: cancelToken.token,
       })
       .then((res) => {
-        console.log(res.data);
-        console.log(res.data.results);
         setData(res.data);
       })
       .catch((err) => {

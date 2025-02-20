@@ -27,7 +27,6 @@ function HomeHouseHolder() {
   const handleClicked = (id, name) => {
     setIsClicked({ id: id, status: true });
     setCategoryId({ id: id, name: name });
-    console.log("clicked", id);
   };
   return (
     <div className="house-content">
