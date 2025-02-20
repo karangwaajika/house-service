@@ -1,14 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 import dayjs from "dayjs";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import Button from "../ui/Button";
-
-function BookModal({ animate, handleCloseModal }) {
-  const [value, setValue] = useState(dayjs(Date.now()));
-  console.log(value.format("YYYY-MM-DD"));
+import useBook from "@/hooks/useBook";
+import loadingImg from "/images/loading-3.gif";
+import ButtonLoading from "../ui/ButtonLoading";
+import FlashMessage from "../ui/FlashMessage";
+// for any validation I will have to retrieve book from parent then pass it here to check
+// not all only for specific service we are in.
+function BookModal({
+  animate,
+  handleCloseModal,
+  client_id,
+  service_id,
+  workers,
+}) {
+  let worker_id = workers && workers[0].id;
   const closeModal = (e) => {
     if (e.target.className == `modal-house ${animate}`) {
       handleCloseModal();
@@ -31,10 +41,39 @@ function BookModal({ animate, handleCloseModal }) {
     "04:30 PM",
     "05:00 PM",
   ];
+  const [value, setValue] = useState(dayjs(Date.now()));
+  // const [date, setDate] = useState(value.format("YYYY-MM-DD"))
+
+  let date = value.format("YYYY-MM-DD");
+
+  const { submitForm, message, isLoading, setForm, clearMessage } = useBook(
+    service_id,
+    client_id,
+    worker_id,
+    date
+  );
+  const handleDate = (valueDate) => {
+    setValue(valueDate);
+
+    setForm((oldForm) => {
+      return {
+        ...oldForm,
+        date: valueDate.format("YYYY-MM-DD"),
+      };
+    });
+  };
+
   const [clicked, setClicked] = useState({ status: false, id: null });
   const handleClicked = (index) => {
     setClicked({ status: true, id: index });
+    setForm((oldForm) => {
+      return {
+        ...oldForm,
+        time: timeSlot[index],
+      };
+    });
   };
+
   return (
     <div className={`modal-house ${animate}`} onClick={closeModal}>
       <div className="modal-house-contents">
@@ -42,6 +81,15 @@ function BookModal({ animate, handleCloseModal }) {
           <h3>Book a service </h3>
           <div className="modal-close-button" onClick={handleCloseModal}>
             <i className="fa fa-rectangle-xmark"></i>
+          </div>
+          <div className="message-booking">
+            {message && (
+              <FlashMessage
+                message={message.message}
+                isSuccess={message.success}
+                clearMessage={clearMessage}
+              />
+            )}
           </div>
         </div>
         <span>Select Date and Time slot to book a service</span>
@@ -52,7 +100,7 @@ function BookModal({ animate, handleCloseModal }) {
             <DemoItem>
               <DateCalendar
                 value={value}
-                onChange={(newValue) => setValue(newValue)}
+                onChange={(newValue) => handleDate(newValue)}
                 sx={{ border: 1, borderColor: "black", borderRadius: 3 }}
               />
             </DemoItem>
@@ -79,6 +127,11 @@ function BookModal({ animate, handleCloseModal }) {
             );
           })}
         </div>
+        {isLoading && (
+          <div className="loader--booking">
+            <img src={loadingImg} width={100} height={100} />
+          </div>
+        )}
         <div className="buttons">
           <Button
             className="btn-danger"
@@ -87,11 +140,13 @@ function BookModal({ animate, handleCloseModal }) {
             width={100}
             onClick={handleCloseModal}
           />
+
           <Button
             className="btn-primary-book"
             text="Book"
             height={30}
             width={100}
+            onClick={submitForm}
           />
         </div>
       </div>

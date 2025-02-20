@@ -80,6 +80,14 @@ button.btn-loading {
   min-width: 100%;
   padding: 0px;
 }
+/* button */
+button.btn-loading.book {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0px;
+  width: 100px;
+}
 .btn-icon {
   border: 1px solid #808080;
   border-radius: 1px;
@@ -456,6 +464,19 @@ button.btn-booking {
   left: 10%;
 }
 .loader--category img {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 1;
+  border-radius: 80%;
+}
+.loader--booking {
+  width: 10%;
+  position: absolute;
+  top: 93%;
+  left: 87%;
+}
+.loader--booking img {
   width: 100%;
   height: auto;
   display: block;

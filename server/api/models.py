@@ -65,7 +65,7 @@ class Booking(models.Model):
         User, on_delete=models.CASCADE, related_name="bookings", default=None
     )
     date = models.DateField(null=True)
-    time = models.TimeField(null=True)
+    time = models.CharField(max_length=30, default=None)
     is_approved = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

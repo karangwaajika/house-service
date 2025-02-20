@@ -260,3 +260,7 @@ ul.house-right li {
   border: 1px solid rgb(201, 205, 211);
   cursor: not-allowed;
 }
+.message-booking {
+  position: absolute;
+  top: 5%;
+}
