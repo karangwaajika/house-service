@@ -19,6 +19,7 @@ from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.pagination import LimitOffsetPagination, PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
+from rest_framework.views import APIView
 
 
 # social account
@@ -281,9 +282,15 @@ class CreateBookingAPIView(generics.CreateAPIView):
                 date=date, service=service_id, worker=worker_id, client=client_id
             )
             if booking.time == time:
-                return JsonResponse({"error": ["You have already booked"]}, status=status.HTTP_400_BAD_REQUEST)
+                return JsonResponse(
+                    {"error": ["You have already booked"]},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
             elif booking.status == "1" or booking.status == "2":
-                return JsonResponse({"error": ["You have already booked"]}, status=status.HTTP_400_BAD_REQUEST)
+                return JsonResponse(
+                    {"error": ["You have already booked"]},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
             else:
                 return super().post(request, *args, **kwargs)
 
@@ -311,3 +318,30 @@ class BookingDelete(generics.RetrieveDestroyAPIView):
     serializer_class = BookingSerializer
     permission_classes = [AllowAny]
     lookup_url_kwarg = "booking_id"
+
+
+class GetBooking(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request, format=None):
+        data = request.query_params
+        print(data)
+        service_id = data.get("service_id")
+        client_id = data.get("client_id")
+        worker_id = data.get("worker_id")
+        date = data.get("date")
+       
+        try:
+            booking = Booking.objects.get(
+                date=date, service=service_id, worker=worker_id, client=client_id
+            )
+            booking_time = booking.time
+
+            return JsonResponse(
+                {"time": booking_time, "status": True}, status=status.HTTP_200_OK
+            )
+
+        except Booking.DoesNotExist:
+            return JsonResponse(
+                {"time": None, "status": False}, status=status.HTTP_200_OK
+            )

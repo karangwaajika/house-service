@@ -9,6 +9,7 @@ import useBook from "@/hooks/useBook";
 import loadingImg from "/images/loading-3.gif";
 import ButtonLoading from "../ui/ButtonLoading";
 import FlashMessage from "../ui/FlashMessage";
+import useFetchAll from "@/hooks/useFetchAll";
 // for any validation I will have to retrieve book from parent then pass it here to check
 // not all only for specific service we are in.
 function BookModal({
@@ -73,7 +74,10 @@ function BookModal({
       };
     });
   };
-
+  const {data:timeData} = useFetchAll(
+    `/api/bookings/get/?service_id=${service_id}&date=${date}&client_id=${client_id}&worker_id=${worker_id}`
+  );
+  const bookedTime = timeData && timeData.time
   return (
     <div className={`modal-house ${animate}`} onClick={closeModal}>
       <div className="modal-house-contents">
@@ -110,7 +114,7 @@ function BookModal({
         <div className="time--container">
           {timeSlot.map((item, i) => {
             let className = "time--slot";
-            if (item == "03:00 PM") {
+            if (item == bookedTime) {
               className = "time--slot active";
             }
             if (clicked.status && i == clicked.id) {
