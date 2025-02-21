@@ -54,7 +54,7 @@ function PendingBookings() {
         </div>
 
         <i
-          className="btn-icon fa fa-plus"
+          className="btn-icon fa fa-eye"
           onClick={() => navigate("/dashboard/pending-bookings")}
         ></i>
       </div>

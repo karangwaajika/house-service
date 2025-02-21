@@ -36,6 +36,8 @@ import ViewCategoryService from "./pages/house-holder/ViewCategoryService";
 import ViewCategoryServices from "./pages/house-holder/ViewCategoryServices";
 import LoginAdmin from "./pages/LoginAdmin";
 import PendingBookings from "./pages/PendingBookings";
+import ApprovalBookings from "./pages/ApprovalBookings";
+import DenyBooking from "./pages/DenyBooking";
 
 const router = createBrowserRouter([
   {
@@ -102,6 +104,14 @@ const router = createBrowserRouter([
             path: "/dashboard/pending-bookings",
             element: <PendingBookings />,
           },
+          {
+            element: <ApprovalBookings />,
+            path: "/dashboard/approved-bookings",
+          },
+          {
+            element: <DenyBooking />,
+            path: "/dashboard/denied-bookings",
+          },
         ],
       },
     ],
@@ -116,7 +126,7 @@ const router = createBrowserRouter([
           {
             element: <HomeHouseHolder />,
             path: "/house-holder/",
-            index:true
+            index: true,
           },
           {
             element: <ViewCategoryServices />,
