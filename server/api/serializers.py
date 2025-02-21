@@ -131,9 +131,12 @@ class BookingSerializer(serializers.ModelSerializer):
     service = Service
     service_name = serializers.ReadOnlyField(source="service.name")
     worker = Worker
-    worker_name = serializers.ReadOnlyField(source="worker.email")
+    worker_email = serializers.ReadOnlyField(source="worker.email")
+    worker_name = serializers.ReadOnlyField(source="worker.name")
     client = User
     client_email = serializers.ReadOnlyField(source="client.email")
+    client_firstname = serializers.ReadOnlyField(source="client.first_name")
+    client_lastname = serializers.ReadOnlyField(source="client.last_name")
 
     class Meta:
         model = Booking
@@ -148,7 +151,10 @@ class BookingSerializer(serializers.ModelSerializer):
             "created_at",
             "service_name",
             "worker_name",
+            "worker_email",
             "client_email",
+            "client_firstname",
+            "client_lastname",
         )
         extra_kwargs = {
             "created_at": {"read_only": True},

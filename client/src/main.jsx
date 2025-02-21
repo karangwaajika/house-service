@@ -35,6 +35,7 @@ import HomeHouseHolder from "./pages/house-holder/HomeHouseHolder";
 import ViewCategoryService from "./pages/house-holder/ViewCategoryService";
 import ViewCategoryServices from "./pages/house-holder/ViewCategoryServices";
 import LoginAdmin from "./pages/LoginAdmin";
+import PendingBookings from "./pages/PendingBookings";
 
 const router = createBrowserRouter([
   {
@@ -96,6 +97,10 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/view-worker",
             element: <ViewWorker />,
+          },
+          {
+            path: "/dashboard/pending-bookings",
+            element: <PendingBookings />,
           },
         ],
       },
