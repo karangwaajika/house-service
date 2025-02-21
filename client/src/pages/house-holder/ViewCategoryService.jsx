@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import useFetchAll from "@/hooks/useFetchAll";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import ServiceCategory from "@/components/house-holder/ServiceCategoryH";
 import BookCategory from "@/components/house-holder/BookCategory";
 import WorkerProfile from "@/components/house-holder/WorkerProfile";
@@ -14,6 +14,9 @@ function ViewCategoryService() {
   const accessCategoryName = queryParams.get("category_name");
   const accessServiceId = queryParams.get("service_id");
   const contextData = useContext(userContext);
+  if (!(accessCategoryId && accessServiceId)) {
+    return <Navigate to="/house-holder/" replace />;
+  }
 
   // all categories
   const { data, isLoading, message, clearMessage } = useFetchAll(
@@ -82,7 +85,7 @@ function ViewCategoryService() {
           handleCloseModal={handleModal}
           service_id={accessServiceId}
           client_id={contextData.userData.id && contextData.userData.id}
-          workers = {serviceData.workers}
+          workers={serviceData.workers}
         />
       )}
     </div>

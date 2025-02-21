@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import useFetchAll from "@/hooks/useFetchAll";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import ServiceCategory from "@/components/house-holder/ServiceCategoryH";
 import ServicesList from "@/components/ServicesList";
 
 function ViewCategoryServices() {
   const params = useParams();
   const queryParams = new URLSearchParams(window.location.search);
-    const accessId = queryParams.get("id");
-    const accessName = queryParams.get("name");
+  const accessId = queryParams.get("id");
+  const accessName = queryParams.get("name");
+  if (!accessId) {
+    return <Navigate to="/house-holder/" replace />;
+  }
   const { data, isLoading, message, clearMessage } = useFetchAll(
     "/api/categories/no_pagination/"
   );
@@ -34,7 +37,7 @@ function ViewCategoryServices() {
         data={serviceData}
         isLoading={serviceIsLoading}
         category_name={accessName}
-        category_id = {accessId}
+        category_id={accessId}
       />
     </div>
   );
