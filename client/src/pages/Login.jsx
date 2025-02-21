@@ -11,7 +11,7 @@ function Login() {
   if (error) {
     msg = "Error while logging in with Google, please try again!";
   } else {
-    msg = "You need to login first to book!";
+    msg = "You need to login first to book an appointment!";
   }
   const [message, setMessage] = useState(msg);
   const clearMessage = () => {
