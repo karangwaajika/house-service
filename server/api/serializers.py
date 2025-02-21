@@ -133,6 +133,7 @@ class BookingSerializer(serializers.ModelSerializer):
     worker = Worker
     worker_email = serializers.ReadOnlyField(source="worker.email")
     worker_name = serializers.ReadOnlyField(source="worker.name")
+    worker_price = serializers.ReadOnlyField(source="worker.price")
     client = User
     client_email = serializers.ReadOnlyField(source="client.email")
     client_firstname = serializers.ReadOnlyField(source="client.first_name")
@@ -152,6 +153,7 @@ class BookingSerializer(serializers.ModelSerializer):
             "service_name",
             "worker_name",
             "worker_email",
+            "worker_price",
             "client_email",
             "client_firstname",
             "client_lastname",

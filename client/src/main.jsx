@@ -38,6 +38,7 @@ import LoginAdmin from "./pages/LoginAdmin";
 import PendingBookings from "./pages/PendingBookings";
 import ApprovalBookings from "./pages/ApprovalBookings";
 import DenyBooking from "./pages/DenyBooking";
+import MyBookings from "./pages/house-holder/MyBookings";
 
 const router = createBrowserRouter([
   {
@@ -135,6 +136,10 @@ const router = createBrowserRouter([
           {
             element: <ViewCategoryService />,
             path: "/house-holder/service/",
+          },
+          {
+            element: <MyBookings />,
+            path: "/house-holder/my-bookings",
           },
         ],
       },

@@ -8,15 +8,14 @@ export default function ApproveBookingModal({
   animate,
   status,
 }) {
-  const booking =
-    allBookings.length > 0
-      ? allBookings[bookingIndex]
-      : {
-          client_firstname: "",
-          service_name: "",
-          date: "",
-          time: "",
-        };
+  const booking = allBookings[bookingIndex]
+    ? allBookings[bookingIndex]
+    : {
+        client_firstname: "",
+        service_name: "",
+        date: "",
+        time: "",
+      };
 
   const { submitForm } = useApproveBooking(booking, closeModal, bookingIndex);
 
@@ -51,7 +50,11 @@ export default function ApproveBookingModal({
           </div>
           <div className="info">
             <span style={{ fontWeight: "bold" }}>date</span>
-            <span>{booking.date && booking.date + " at " + booking.time && booking.time}</span>
+            <span>
+              {booking.date &&
+                booking.date + " at " + booking.time &&
+                booking.time}
+            </span>
           </div>
         </div>
         <div className="modal-footer">

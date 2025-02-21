@@ -319,6 +319,21 @@ class BookingStatusList(generics.ListAPIView):
         if status is not None:
             self.queryset = self.queryset.filter(status=status)
         return self.queryset
+    
+    
+class BookingClientList(generics.ListAPIView):
+    queryset = Booking.objects.all()
+    serializer_class = BookingSerializer
+    permission_classes = [AllowAny]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ["service__name", "worker__name"]
+    
+    def get_queryset(self):
+       
+        client = self.request.query_params.get('client')
+        if client is not None:
+            self.queryset = self.queryset.filter(client=client)
+        return self.queryset
 
 
 class BookingUpdate(generics.RetrieveUpdateAPIView):
