@@ -8,6 +8,7 @@ import FlashMessage from "../components/ui/FlashMessage";
 import PaginationLinks from "../components/ui/PaginationLinks";
 import loaderPicture from "/images/loading-3.gif";
 import { pendingBookingContext } from "@/pages/Dashboard";
+import ApproveBookingModal from "@/components/ApproveBookingModal";
 
 function PendingBookings() {
   const booking = useContext(pendingBookingContext);
@@ -17,30 +18,19 @@ function PendingBookings() {
   const [animation, setAnimation] = useState("animated fadeIn");
   const [clickedRow, setClickedRow] = useState(null);
 
-  const [openEditModal, setOpenEditModal] = useState(false);
-  const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const [openPhotosModal, setOpenPhotosModal] = useState(false);
+  const [openApproveModal, setOpenApproveModal] = useState(false);
 
-  const handleModal = (index, typeOfModal) => {
+  const [status, setStatus] = useState("");
+
+  const handleModal = (index, status= "") => {
     // get the targeted item id
     setClickedRow(index);
+    setStatus(status);
 
-    if (typeOfModal == "edit") {
-      setAnimation(openEditModal ? "animated fadeOut" : "animated fadeIn");
-      setTimeout(() => {
-        setOpenEditModal((oldModalState) => !oldModalState);
-      }, 1000);
-    } else if (typeOfModal == "delete") {
-      setAnimation(openDeleteModal ? "animated fadeOut" : "animated fadeIn");
-      setTimeout(() => {
-        setOpenDeleteModal((oldModalState) => !oldModalState);
-      }, 1000);
-    } else {
-      setAnimation(openPhotosModal ? "animated fadeOut" : "animated fadeIn");
-      setTimeout(() => {
-        setOpenPhotosModal((oldModalState) => !oldModalState);
-      }, 1000);
-    }
+    setAnimation(openApproveModal ? "animated fadeOut" : "animated fadeIn");
+    setTimeout(() => {
+      setOpenApproveModal((oldModalState) => !oldModalState);
+    }, 1000);
   };
 
   return (
@@ -75,16 +65,21 @@ function PendingBookings() {
           clearMessage={booking.clearMessage}
         />
       )}
-      <BookingTable
-        bookings={booking.data}
-        openEditModal={handleModal}
-        openDeleteModal={handleModal}
-        openPhotosModal={handleModal}
-      />
+      <BookingTable bookings={booking.data} openApproveModal={handleModal} />
       {booking.isLoading && (
         <div className="loader">
           <img src={loaderPicture} width={100} height={100} />
         </div>
+      )}
+
+      {openApproveModal && (
+        <ApproveBookingModal
+          allBookings={booking.data}
+          bookingIndex={clickedRow}
+          closeModal={handleModal}
+          animate={animation}
+          status={status}
+        />
       )}
 
       <PaginationLinks

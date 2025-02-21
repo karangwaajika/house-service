@@ -311,8 +311,14 @@ class BookingStatusList(generics.ListAPIView):
     serializer_class = BookingSerializer
     permission_classes = [AllowAny]
     filter_backends = [filters.SearchFilter]
-    lookup_url_kwarg = "status"
     search_fields = ["service__name", "worker__name"]
+    
+    def get_queryset(self):
+       
+        status = self.request.query_params.get('status')
+        if status is not None:
+            self.queryset = self.queryset.filter(status=status)
+        return self.queryset
 
 
 class BookingUpdate(generics.RetrieveUpdateAPIView):

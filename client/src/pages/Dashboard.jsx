@@ -14,9 +14,9 @@ function Dashboard() {
   const [reload, setReload] = useState(false);
   let url = "";
   if (search) {
-    url = `/api/bookings/1/?search=${search}&?page=${page}`;
+    url = `/api/booking/?status=1&search=${search}&page=${page}`;
   } else {
-    url = `/api/bookings/1/?page=${page}`;
+    url = `/api/booking/?status=1&page=${page}`;
   }
   const {
     data,

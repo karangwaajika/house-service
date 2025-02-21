@@ -22,7 +22,7 @@ function ViewService() {
 
   let url = "";
   if (search) {
-    url = `/api/services/?search=${search}&?page=${page}`;
+    url = `/api/services/?search=${search}&page=${page}`;
   } else {
     url = `/api/services/?page=${page}`;
   }

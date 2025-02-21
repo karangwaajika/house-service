@@ -404,8 +404,16 @@ button.btn-booking {
   color: #3c5df1;
 }
 .fa-pen-to-square,
+.fa-square-check,
+.fa-square-xmark,
 .fa-trash-can {
   cursor: pointer;
+}
+.fa-square-check:active {
+  color: white;
+}
+.fa-square-xmark:active {
+  color: white;
 }
 .fa-pen-to-square:active {
   color: white;

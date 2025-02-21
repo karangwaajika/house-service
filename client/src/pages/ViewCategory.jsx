@@ -20,7 +20,7 @@ function ViewCategory() {
 
   let url = "";
   if (search) {
-    url = `/api/categories/?search=${search}&?page=${page}`;
+    url = `/api/categories/?search=${search}&page=${page}`;
   } else {
     url = `/api/categories/?page=${page}`;
   }

@@ -1,11 +1,6 @@
 import { formatToDateString, convertToDateTime } from "../utils/dateFormat.mjs";
 import { addComma } from "../utils/addComma.mjs";
-export default function BookingTable({
-  bookings,
-  openEditModal,
-  openDeleteModal,
-  openPhotosModal,
-}) {
+export default function BookingTable({ bookings, openApproveModal }) {
   return (
     <table className="dashboard-content-table">
       {/* <caption>categorie/Coffe List</caption> */}
@@ -25,19 +20,27 @@ export default function BookingTable({
             return (
               <tr key={index + 1}>
                 <td data-cell="#">{index + 1}.</td>
-                <td data-cell="Name">{booking.client_firstname}-{booking.client_lastname}</td>
+                <td data-cell="Name">
+                  {booking.client_firstname}-{booking.client_lastname}
+                </td>
                 <td data-cell="service">{booking.service_name}</td>
-                <td data-cell="service">{booking.worker_name} [<span style={{fontSize:"11px"}}>{booking.worker_email}</span>]</td>
+                <td data-cell="service">
+                  {booking.worker_name} [
+                  <span style={{ fontSize: "11px" }}>
+                    {booking.worker_email}
+                  </span>
+                  ]
+                </td>
                 <td data-cell="Date">{booking.date + " at " + booking.time}</td>
                 <td data-cell="Action">
                   <div className="action-btns">
                     <i
-                      className="fa fa-pen-to-square text-primary"
-                      onClick={() => openEditModal(index, "edit")}
+                      className="fa fa-square-check text-primary"
+                      onClick={() => openApproveModal(index, "approve")}
                     ></i>{" "}
                     <i
-                      className="fa fa-trash-can text-danger"
-                      onClick={() => openDeleteModal(index, "delete")}
+                      className="fa fa-square-xmark text-danger"
+                      onClick={() => openApproveModal(index, "denied")}
                     ></i>
                   </div>
                 </td>
