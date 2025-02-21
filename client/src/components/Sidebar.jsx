@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { useProtectPage } from "../hooks/useProtectPage";
 import logoPic from "/images/logo.png";
+import { pendingBookingContext } from "@/pages/Dashboard";
 
 function Sidebar() {
-  const { logout,userData } = useProtectPage();
+  const booking = useContext(pendingBookingContext);
+  const { logout, userData } = useProtectPage();
   const [openCategory, setOpenCategory] = useState(false);
   const [openService, setOpenService] = useState(false);
   const [openWorkers, setOpenWorkers] = useState(false);
@@ -139,26 +141,43 @@ function Sidebar() {
           </div>
           <div className="sidebar-content">
             <NavLink
-              to="#"
+              to="/dashboard/pending-bookings"
               className={
                 openBookings
                   ? "item-sub open animated slideInDown"
                   : "animated slideInUp item-sub"
               }
             >
-              <i className="fa-regular fa-square-plus icon"></i>
-              Add
+              <i className="fa-solid fa-spinner icon"></i>
+              Pending
+              <i className="fa-solid fa-bell">
+                {" "}
+                <span className="bell">
+                  {booking.data && booking.data.length}
+                </span>
+              </i>
             </NavLink>
             <NavLink
-              to="#"
+              to="/dashboard/approved-bookings"
               className={
                 openBookings
                   ? "item-sub open animated slideInDown"
                   : "animated slideInUp item-sub"
               }
             >
-              <i className="fa-regular fa-eye icon"></i>
-              View
+              <i className="fa-regular fa-square-check icon"></i>
+              Approved
+            </NavLink>
+            <NavLink
+              to="/dashboard/denied-bookings"
+              className={
+                openBookings
+                  ? "item-sub open animated slideInDown"
+                  : "animated slideInUp item-sub"
+              }
+            >
+              <i className="fa-regular fa-rectangle-xmark icon"></i>
+              Denied
             </NavLink>
           </div>
         </div>
@@ -235,7 +254,10 @@ function Sidebar() {
                   : "animated slideInUp item-sub"
               }
             >
-              <i className="fa-solid fa-right-from-bracket icon" onClick={logout}></i>
+              <i
+                className="fa-solid fa-right-from-bracket icon"
+                onClick={logout}
+              ></i>
               logout
             </div>
           </div>

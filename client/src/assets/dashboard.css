@@ -182,6 +182,7 @@
   align-items: center;
   justify-content: center;
   transition: 0.5s ease-in-out;
+  position: relative;
 }
 .notify .icon {
   font-size: 20px;
@@ -293,4 +294,25 @@
 .header--content {
   color: #27374d;
   font-weight: 800;
+}
+.bell{
+  background-color: rgb(241, 112, 112);
+  color: white;
+  border-radius: 5px;
+  font-size: 10px;
+  padding: 3px;
+  font-weight: 100;
+  position: absolute;
+  top: 0px;
+}
+.bell-notify{
+  background-color: rgb(240, 90, 90);
+  color: white;
+  border-radius: 5px;
+  font-size: 10px;
+  padding: 3px;
+  font-weight: 100;
+  position: absolute;
+  top: 3px;
+  right: 5px;
 }

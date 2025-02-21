@@ -1,19 +1,59 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { createContext, useState } from "react";
 import { useProtectPage } from "../hooks/useProtectPage";
+import useFetchPagination from "@/hooks/useFetchPagination";
 
-export const userContext = createContext();
+export const pendingBookingContext = createContext();
 
 function Dashboard() {
+  const navigate = useNavigate();
+  const [search, setSearch] = useState(null);
+  const [page, setPage] = useState(1);
+  const [reload, setReload] = useState(false);
+  let url = "";
+  if (search) {
+    url = `/api/bookings/1/?search=${search}&?page=${page}`;
+  } else {
+    url = `/api/bookings/1/?page=${page}`;
+  }
+  const {
+    data,
+    links,
+    isLoading,
+    message,
+    setData,
+    setLinks,
+    setMessage,
+    setIsLoading,
+    clearMessage,
+  } = useFetchPagination(url, reload, search);
 
   return (
     <div className="dashboard">
-      <userContext.Provider value={123}>
+      <pendingBookingContext.Provider
+        value={{
+          data,
+          links,
+          isLoading,
+          message,
+          setData,
+          setLinks,
+          setMessage,
+          setIsLoading,
+          clearMessage,
+          setReload,
+          reload,
+          search,
+          setSearch,
+          page,
+          setPage,
+        }}
+      >
         <Sidebar />
         <Outlet />
-      </userContext.Provider>
+      </pendingBookingContext.Provider>
     </div>
   );
 }

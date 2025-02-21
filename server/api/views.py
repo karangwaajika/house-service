@@ -306,6 +306,15 @@ class BookingList(generics.ListAPIView):
     search_fields = ["service__name", "worker__name"]
 
 
+class BookingStatusList(generics.ListAPIView):
+    queryset = Booking.objects.all()
+    serializer_class = BookingSerializer
+    permission_classes = [AllowAny]
+    filter_backends = [filters.SearchFilter]
+    lookup_url_kwarg = "status"
+    search_fields = ["service__name", "worker__name"]
+
+
 class BookingUpdate(generics.RetrieveUpdateAPIView):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
@@ -330,7 +339,7 @@ class GetBooking(APIView):
         client_id = data.get("client_id")
         worker_id = data.get("worker_id")
         date = data.get("date")
-       
+
         try:
             booking = Booking.objects.get(
                 date=date, service=service_id, worker=worker_id, client=client_id
