@@ -107,7 +107,10 @@ if (arg.file !== undefined) {
       errorsValidation.phone = "phone is required";
     } else if (arg.phone.toString().length < 9) {
       errorsValidation.phone = "digits are incomplete";
-    } else if (!/^[0-9 +]+$/.test(arg.phone)) {
+    }else if (arg.phone.toString().length > 10) {
+      errorsValidation.phone = "please provide exactly ten digits";
+    }
+    else if (!/^[0-9 +]+$/.test(arg.phone)) {
       errorsValidation.phone = "Use numbers only";
     }
   }

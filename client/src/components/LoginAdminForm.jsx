@@ -76,7 +76,7 @@ export default function LoginAdminForm() {
   return (
     <div className="login-form">
       <div className="card-admin">
-        <div className="card-header">Sign in</div>
+        <div className="card-header">Sign in Form @Admin</div>
         {message && (
           <FlashMessage
             message={message.message}
@@ -125,7 +125,12 @@ export default function LoginAdminForm() {
                 />
               )}
             </div>
-            <div></div>
+            <div className="admin-form">
+              <span className="admin-text">
+                This is an admin login form, if you are having trouble as admin,
+                make sure to create a superadmin account
+              </span>
+            </div>
           </form>
         </div>
       </div>

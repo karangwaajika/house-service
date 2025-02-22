@@ -292,3 +292,12 @@ a.grid {
   color: black;
   border: 1px solid black;
 }
+.admin-form{
+  width: 300px;
+  display: flex;
+  justify-content: flex-end;
+}
+.admin-text{
+  font-size: 12px;
+  text-align: right;
+}

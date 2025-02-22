@@ -23,6 +23,13 @@ export default function HomePageNav() {
           </li>
         </ul>
       </div>
+      <div className="right-info">
+        <ul className="links">
+          <li>
+            <a href="/login"><i className="fa fa-sign-in-alt"></i> SignIn/SignUp</a>
+          </li>
+        </ul>
+      </div>
     </nav>
   );
 }
