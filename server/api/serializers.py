@@ -150,6 +150,7 @@ class BookingSerializer(serializers.ModelSerializer):
             "time",
             "status",
             "created_at",
+            "updated_at",
             "service_name",
             "worker_name",
             "worker_email",

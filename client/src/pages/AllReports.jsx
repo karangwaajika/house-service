@@ -14,26 +14,37 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
+import BookingReportTable from "@/components/BookingReportTable";
 
 export const serviceContext = createContext();
 
 function AllReports() {
   const navigate = useNavigate();
   const [search, setSearch] = useState(null);
-  const [page, setPage] = useState(1);
   const [reload, setReload] = useState(false);
+  const [page, setPage] = useState(1);
+  const [dates, setDates] = useState({ fromDate: "", toDate: "" });
 
   const [value, setValue] = React.useState([
-    dayjs("2022-04-17"),
-    dayjs("2022-04-21"),
+    dayjs(Date.now()),
+    dayjs(Date.now()),
   ]);
 
-  let url = "";
-  if (search) {
-    url = `/api/services/?search=${search}&page=${page}`;
-  } else {
-    url = `/api/services/?page=${page}`;
-  }
+  const handleDate = (valueDate) => {
+    setValue(valueDate);
+    setReload((old) => !old);
+    setDates((oldForm) => {
+      return {
+        ...oldForm,
+        fromDate: valueDate[0].format("YYYY-MM-DD"),
+        toDate: valueDate[1].format("YYYY-MM-DD"),
+      };
+    });
+  };
+
+  let url = `/api/bookings/date/?page=${page}&from_date=${value[0].format(
+    "YYYY-MM-DD"
+  )}&to_date=${value[1].format("YYYY-MM-DD")}`;
 
   const {
     data,
@@ -52,14 +63,14 @@ function AllReports() {
       <ContentHeader />
       <div className="hr"></div>
       <div className="header--content">
-        <span>List Service Category</span>
+        <span>Generate Date Range Report</span>
       </div>
       <div className="view-category-header">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DemoContainer components={["DateRangePicker"]}>
             <DateRangePicker
               value={value}
-              onChange={(newValue) => setValue(newValue)}
+              onChange={(newValue) => handleDate(newValue)}
               localeText={{ start: "From", end: "To" }}
               slotProps={{ textField: { size: "small" } }}
             />
@@ -77,7 +88,7 @@ function AllReports() {
           clearMessage={clearMessage}
         />
       )}
-      <ServiceTable services={data} />
+      <BookingReportTable bookings={data} />
       {isLoading && (
         <div className="loader">
           <img src={loaderPicture} width={100} height={100} />

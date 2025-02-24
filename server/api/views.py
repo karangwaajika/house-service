@@ -334,6 +334,20 @@ class BookingClientList(generics.ListAPIView):
         if client is not None:
             self.queryset = self.queryset.filter(client=client)
         return self.queryset
+    
+    
+class BookingRangeDate(generics.ListAPIView):
+    queryset = Booking.objects.all()
+    serializer_class = BookingSerializer
+    permission_classes = [AllowAny]
+    
+    def get_queryset(self):
+       
+        from_date = self.request.query_params.get('from_date')
+        to_date = self.request.query_params.get('to_date')
+        if from_date is not None:
+            self.queryset = self.queryset.filter(created_at__date__range=(from_date, to_date))
+        return self.queryset
 
 
 class BookingUpdate(generics.RetrieveUpdateAPIView):

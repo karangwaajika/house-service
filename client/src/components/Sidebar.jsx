@@ -200,8 +200,8 @@ function Sidebar() {
                   : "animated slideInUp item-sub"
               }
             >
-              <i className="fa-regular fa-square-plus icon"></i>
-              Add
+              <i className="fa-regular fa-calendar icon"></i>
+              Date Range
             </NavLink>
             <NavLink
               to="/dashboard/service-reports"
