@@ -204,15 +204,15 @@ function Sidebar() {
               Date Range
             </NavLink>
             <NavLink
-              to="/dashboard/service-reports"
+              to="/dashboard/filter-reports"
               className={
                 openReports
                   ? "item-sub open animated slideInDown"
                   : "animated slideInUp item-sub"
               }
             >
-              <i className="fa-regular fa-eye icon"></i>
-              View
+              <i className="fa-solid fa-filter icon"></i>
+              Filter
             </NavLink>
           </div>
         </div>

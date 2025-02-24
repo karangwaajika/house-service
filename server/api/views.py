@@ -340,6 +340,8 @@ class BookingRangeDate(generics.ListAPIView):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
     permission_classes = [AllowAny]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ["service__name", "worker__name"]
     
     def get_queryset(self):
        

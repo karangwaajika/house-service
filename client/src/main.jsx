@@ -41,6 +41,7 @@ import ApprovalBookings from "./pages/ApprovalBookings";
 import DenyBooking from "./pages/DenyBooking";
 import MyBookings from "./pages/house-holder/MyBookings";
 import AllReports from "./pages/AllReports";
+import FilterReports from "./pages/FilterReports";
 
 const router = createBrowserRouter([
   {
@@ -118,6 +119,10 @@ const router = createBrowserRouter([
           {
             element: <AllReports />,
             path: "/dashboard/all-reports",
+          },
+          {
+            element: <FilterReports />,
+            path: "/dashboard/filter-reports",
           },
         ],
       },

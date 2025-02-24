@@ -21,7 +21,7 @@ export default function InputField({
         className={`input-group ${errorfield && "error-field"} input-report`}
         style={{ height: height, width: inputWidth }}
       >
-        <span className="input-icon">
+        <span className="input-icon" style={{display:"flex",alignItems:"center"}}>
           <i className={icon}></i>
         </span>
         <input
@@ -34,7 +34,7 @@ export default function InputField({
           className="input-field"
           readOnly={readOnly}
         />
-        <span className="input-text">{label}</span>
+        <span className="input-text" style={{display:"flex",alignItems:"center"}}>{label}</span>
       </div>
     </>
   );
