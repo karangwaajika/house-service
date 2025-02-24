@@ -6,6 +6,8 @@ import Card from "../components/Card";
 import logoImage from "/images/logo.png";
 import { useProtectPage } from "../hooks/useProtectPage";
 
+import { BarChart } from "@mui/x-charts/BarChart";
+
 function DashboardHome() {
   const { userData } = useProtectPage();
   return (
@@ -15,12 +17,12 @@ function DashboardHome() {
         <div className="side-graph">
           <Card />
           <div className="graph">
-            <div className="">
-              <img src={logoImage} alt="" />
-              <h3 style={{ color: "#526d82", textAlign: "center" }}>
-                House service
-              </h3>
-            </div>
+            <BarChart
+              xAxis={[{ scaleType: 'band', data: ['group A', 'group B', 'group C'] }]}
+              series={[{ data: [4, 3, 5] }, { data: [1, 6, 3] }, { data: [2, 5, 6] }]}
+              width={680}
+              height={350}
+            />
           </div>
         </div>
         <Profile />

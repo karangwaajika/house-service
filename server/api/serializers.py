@@ -61,6 +61,7 @@ class ServiceCategorySerializer(serializers.ModelSerializer):
         ),
         write_only=True,
     )
+    total_bookings = serializers.IntegerField()
 
     class Meta:
         model = ServiceCategory
@@ -109,6 +110,8 @@ class ServiceSerializer(serializers.ModelSerializer):
     category = ServiceCategory
     category_name = serializers.ReadOnlyField(source="category.name")
     workers = WorkerSerializer(read_only=True, many=True)
+    # total_bookings = serializers.IntegerField()
+    # amount_bookings = serializers.IntegerField()
 
     class Meta:
         model = Service
@@ -120,6 +123,8 @@ class ServiceSerializer(serializers.ModelSerializer):
             "category_name",
             "created_at",
             "workers",
+            # "total_bookings",
+            # "amount_bookings",
         )
         extra_kwargs = {
             # "category": {"write_only": True},

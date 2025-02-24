@@ -34,4 +34,6 @@ urlpatterns = [
     path("bookings/get/", GetBooking.as_view(), name="get_bookings"),
     path("bookings/client/", BookingClientList.as_view(), name="get_client_bookings"),
     path("bookings/date/", BookingRangeDate.as_view(), name="get_date_bookings"),
+    path("services/bookings/", ServiceBookings.as_view(), name="get_service_bookings"),
+    path("categories/bookings/", CategoryBookings.as_view(), name="get_categories_bookings"),
 ]

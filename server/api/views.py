@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Count, Sum
 
 # json
 import json
@@ -312,43 +313,45 @@ class BookingStatusList(generics.ListAPIView):
     permission_classes = [AllowAny]
     filter_backends = [filters.SearchFilter]
     search_fields = ["service__name", "worker__name"]
-    
+
     def get_queryset(self):
-       
-        status = self.request.query_params.get('status')
+
+        status = self.request.query_params.get("status")
         if status is not None:
             self.queryset = self.queryset.filter(status=status)
         return self.queryset
-    
-    
+
+
 class BookingClientList(generics.ListAPIView):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
     permission_classes = [AllowAny]
     filter_backends = [filters.SearchFilter]
     search_fields = ["service__name", "worker__name"]
-    
+
     def get_queryset(self):
-       
-        client = self.request.query_params.get('client')
+
+        client = self.request.query_params.get("client")
         if client is not None:
             self.queryset = self.queryset.filter(client=client)
         return self.queryset
-    
-    
+
+
 class BookingRangeDate(generics.ListAPIView):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
     permission_classes = [AllowAny]
     filter_backends = [filters.SearchFilter]
     search_fields = ["service__name", "worker__name"]
-    
+
     def get_queryset(self):
-       
-        from_date = self.request.query_params.get('from_date')
-        to_date = self.request.query_params.get('to_date')
+
+        from_date = self.request.query_params.get("from_date")
+        to_date = self.request.query_params.get("to_date")
         if from_date is not None:
-            self.queryset = self.queryset.filter(created_at__date__range=(from_date, to_date))
+            self.queryset = self.queryset.filter(
+                created_at__date__range=(from_date, to_date)
+            )
         return self.queryset
 
 
@@ -391,3 +394,33 @@ class GetBooking(APIView):
             return JsonResponse(
                 {"time": None, "status": False}, status=status.HTTP_200_OK
             )
+
+
+class ServiceBookings(generics.ListAPIView):
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer
+    permission_classes = [AllowAny]
+    pagination_class = None
+
+    # def get_queryset(self):
+        
+    #     return Service.objects.annotate(
+    #         total_bookings=Count('service_bookings'),
+    #         amount_bookings = Sum('service_bookings__worker__price')
+    #     )
+        
+        
+class CategoryBookings(generics.ListAPIView):
+    queryset = ServiceCategory.objects.all()
+    serializer_class = ServiceCategorySerializer
+    permission_classes = [AllowAny]
+    pagination_class = None
+
+    def get_queryset(self):
+        
+        return ServiceCategory.objects.annotate(
+            total_bookings=Count('services__service_bookings'),
+            # amount_bookings = Sum('service_bookings__worker__price')
+        )
+
+""" NB categories will work for bar, so if i chose to use annonate it has to be on every api model"""

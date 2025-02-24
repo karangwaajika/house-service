@@ -60,13 +60,13 @@ class Booking(models.Model):
         APPROVED = "2", "Approved"
         DENIED = "3", "Denied"
     service = models.ForeignKey(
-        Service, on_delete=models.CASCADE, related_name="bookings", default=None
+        Service, on_delete=models.CASCADE, related_name="service_bookings", default=None
     )
     worker = models.ForeignKey(
-        Worker, on_delete=models.CASCADE, related_name="bookings", default=None
+        Worker, on_delete=models.CASCADE, related_name="worker_bookings", default=None
     )
     client = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="bookings", default=None
+        User, on_delete=models.CASCADE, related_name="client_bookings", default=None
     )
     date = models.DateField(null=True)
     time = models.CharField(max_length=30, default=None)

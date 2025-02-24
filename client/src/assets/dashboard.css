@@ -241,21 +241,21 @@
 .card-home {
   flex: 1;
   background: #dde6ed;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 60px;
+  gap: 30px;
   transition: 0.5s ease-in-out;
-  height: 230px;
+
 }
 
 .card-home:hover {
   transform: scale(1.04);
   cursor: pointer;
 }
-.card--cover {
+/* .card--cover {
   background: #fff;
   font-size: 3rem;
   display: flex;
@@ -274,7 +274,7 @@
   color: #526d82;
   border-radius: 10px;
   font-size: 10px;
-}
+} */
 /* ########## end home dashboard */
 
 /* common Dashboard content */
