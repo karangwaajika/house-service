@@ -8,6 +8,7 @@ import "./assets/category.css";
 import "./assets/service.css";
 import "./assets/worker.css";
 import "./assets/householder.css";
+import "./assets/reports.css";
 
 // react
 import React from "react";
@@ -39,6 +40,7 @@ import PendingBookings from "./pages/PendingBookings";
 import ApprovalBookings from "./pages/ApprovalBookings";
 import DenyBooking from "./pages/DenyBooking";
 import MyBookings from "./pages/house-holder/MyBookings";
+import AllReports from "./pages/AllReports";
 
 const router = createBrowserRouter([
   {
@@ -112,6 +114,10 @@ const router = createBrowserRouter([
           {
             element: <DenyBooking />,
             path: "/dashboard/denied-bookings",
+          },
+          {
+            element: <AllReports />,
+            path: "/dashboard/all-reports",
           },
         ],
       },

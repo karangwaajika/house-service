@@ -193,7 +193,7 @@ function Sidebar() {
           </div>
           <div className="sidebar-content">
             <NavLink
-              to="#"
+              to="/dashboard/all-reports"
               className={
                 openReports
                   ? "item-sub open animated slideInDown"
@@ -204,7 +204,7 @@ function Sidebar() {
               Add
             </NavLink>
             <NavLink
-              to="#"
+              to="/dashboard/service-reports"
               className={
                 openReports
                   ? "item-sub open animated slideInDown"

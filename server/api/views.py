@@ -363,7 +363,7 @@ class GetBooking(APIView):
 
         try:
             booking = Booking.objects.get(
-                date=date, service=service_id, worker=worker_id, client=client_id
+                date=date, service=service_id, worker=worker_id
             )
             booking_time = booking.time
 

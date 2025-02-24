@@ -1,0 +1,8 @@
+.reports .view-category-header{
+  align-items: baseline;
+}
+.fa.report-icon{
+    height: 30px;
+    background-color: rgb(34, 122, 34);
+    color: white;
+}
